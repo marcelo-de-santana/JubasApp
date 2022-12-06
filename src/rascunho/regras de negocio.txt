@@ -1,0 +1,93 @@
+﻿Serão desenvolvidos dois sistemas um deles é web e outro mobile, o desenvolvimento web seguirá utilizará todas as ferramentas descristas anteriormente. O projeto mobile será produzido com a seguinte estrutura:
+
+JavaScript
+Uma linguagem de programação criada pela Mozilla Foundation, possui uma estrutura orientada a protótipos  e fracamente tipada.
+
+Visual Studio Code
+Editor de texto da Microsoft, explicitado anteriormente.
+
+React Native 
+O React Native é um framework JavaScript criado pela Meta (antigo Facebook) para  desenvolvimento de aplicaçoes para dispositivos móveis simulando o desenvolvimento nativo, desta forma priorizando a performance do sistema. A escolha da ferramenta foi motivada pela opção de compilar o projeto para a plataforma Android ou IOS sem que seja necessário alterar a estrutura do código, desta forma proporcionando economia ao sistema que sera desenvolvido.
+
+O Front-end tratará da interface gráfica da aplicação e o back-end da lógica, validação, rotas e atividades junto ao banco de dados.
+
+NodeJS
+O Node é o motor do JavaScript, ele se assemelha a uma máquina virtual do Java, por meio dele é possível rodar a linguagem diretamente do computador sem a necessidade de um navegador web.
+
+Mysql
+O banco Mysql será utilizado também, a escolha foi usar a mesma base de dados para ambos sistemas, já que os dois softwares devem conversar entre si.
+Atualmente o serviço do banco de dados está rodando no servidor da db4free.net.
+
+Bibliotecas Extras
+
+Express JS – biblioteca Node que possibilita a integração do banco de dados e demais aplicações do back-end rodando em paralelo com o react-native.
+=>Para realizar o tráfego de dados não críptografados entre backend e frontend foi desabilitado o "android:usesCleartextTraffic ".
+
+
+Mysql – biblioteca Node que recebe os parametros para requisição ao banco de dados
+
+dotenv – biblioteca  Node que possibilita que variáveis de ambiente fiquem ocultas no repositório onde o código será publicado, trazendo assim maior segurança ao banco de  dados.
+
+Nodemon – biblioteca Node que faz o backend permanecer em estado de execução junto com o Express JS.
+
+React Navigation – biblioteca React Native responsável por realizar a navegação entre telas da aplicação. 
+
+YUP - schema Js para  validar dados de formuário
+
+FORMIK - Biblioteca para React e ReactNative que trabalha as validações e excessões de dados em formuários
+Formik é uma biblioteca React e React Native de código aberto que nos permite lidar com formulários:
+O Formik realiza o monitoramento de todos os components presentes no formulário
+
+https://blog.logrocket.com/using-input-masks-react-native/
+react-native-text-input-mask - biblioteca para mascarar dados de telefone e outros valores específicos do Brasil
+#TRATAR CRIPTOGRAFIA DE SENHAS
+#É NECESSÁRIO TRATAR ERROS DO FORMATO DE DATAS
+
+Regras de Negócio
+Preenchimento do Cadastro
+	Nome, E-mail, Senha, Confirmação de senha, Telefone de contato, CPF, Data de nascimento
+
+
+Preenchimento de Login
+	E-mail, Senha
+	
+=> Rota alternativa 
+	Esqueci minha Senha
+	e-mail => envia nova senha para e-mail
+
+Tela de Agenda
+	 Tela apresentada após o Login do cliente, nela é possível visualizar todos os barbeiros disponíveis junto com os horários abertos para atendimento e os já agendados.
+
+Tela de Agenda => Fluxo Principal
+	O cliente escolhe o barbeiro e será redirecionado para a página correspondente para finalizar o agendamento, nela será apresentado o dia, horários e os detalhes referentes a cancelamento e pagamento, assim como os procedimentos para chegada ao estabelecimento(tempo de antecedência).
+
+Fluxo Alternativo => o cliente pode voltar para a página anterior
+
+Tela de Agenda => Finalizar Agendamento => Fluxo Principal
+	Cliente Seleciona o horário, seleciona o tipo de serviço (corte de cabelo, barba, hidratação, aplicação de pasta, progressiva, ...), é apresentado o valor total dos serviços, o cliente confirma o agendamento, recebe uma notificação via e-mail e sms, por fim é redirecionado para  a tela de agenda com seu horário já preenchido.
+
+Fluxo alternativo =>
+	o cliente retorna para a tela de agenda.
+	Ou o cliente sai do app.
+
+
+Cliente pressiona o botão de Menu => Fluxo Principal
+	Opções Home, Meus dados, minhas compras, meus cupons, Tabela de Preços.
+
+
+#PASSOS PARA PENSAR A APLICAÇÃO
+	=> APLICAÇÃO SEPARADA EM MÓDULOS, CADA MÓDULO PODERÁ SER EXIBIDO DE ACORDO COM A PERMISSÃO DE USUÁRIO, ADM TERÁ TODOS OS PRIVILÉGIOS E MÓDULOS DISPONÍVEIS,
+	=> OS CLIENTES APENAS OS REFERENTES À COMPRAS, AGENDAMENTO, ALTERAÇÃO DE CADASTRO.
+=> BARBEIROS APENAS OS MÓDULOS DE AGENDAMENTO SENDO POSSÍVEL DESMARCAR OS HORÁRIOS E ENVIAR DETALHES AOS CLIENTES, SELECIONAR QUAIS HORÁRIOS FICARÃO INDISPONÍVEIS.
+
+=> ALTERAR STACK NAVIGATOR PARA DRAWER NAVIGATOR
+
+web
+projetobarber
+barbeshop_admin
+
+/barbearia/admin => admin@jubasbarbearia.com => 12345678
+
+mob
+barbearia
+jubas_admin
