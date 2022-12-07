@@ -64,7 +64,7 @@ buck-out/
 /vendor/bundle/
 
 # environment
-.env
+src/config/environment.js
 
 #BANCO DE DADOS
 *.sql
