@@ -3,8 +3,8 @@ import { Text ,View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import Login from './pages/Login/';
-import Schedule from './pages/Schedule/';
+import Login from './pages/Login';
+import Schedule from './pages/Schedule';
 import SignUp from './pages/SignUp';
 
 const Stack = createNativeStackNavigator();

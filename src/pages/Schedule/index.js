@@ -9,13 +9,12 @@ import {
 } from 'react-native';
 import styles from './styles';
 import Title from "../../components/Title";
-import {server} from "../../config/environment"
-import { response } from 'express';
-import { json } from 'body-parser';
+
 
 export default function Schedule(){
   const [barbers,setBarbers] = useState([]);
-  
+
+
   /**
    * Função responsável por retornar todos os barbeiros
    * @returns barbeiros
@@ -28,7 +27,8 @@ export default function Schedule(){
   },[])
 
   console.log(barbers)
-
+  
+  
   return(
     <SafeAreaView style={styles.container}>
       <Title/>

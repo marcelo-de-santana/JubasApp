@@ -48,3 +48,19 @@ export default function agenda (){
   )
 
 }
+
+
+
+
+  /**
+   * Função responsável por retornar todos os barbeiros
+   * @returns barbeiros
+   */
+  useEffect(()=>{
+    fetch(`${server.host}:${server.port}/barbers`)
+      .then((response)=>response.json())
+      .then((json)=>(setBarbers(json)))
+      .catch(()=>(alert('Impossível carregar a agenda!')))
+  },[])
+
+  console.log(barbers)
