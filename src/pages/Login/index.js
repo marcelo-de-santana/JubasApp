@@ -4,7 +4,7 @@ import TextAlert from "../../components/TextAlert"
 import styles from './styles';
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import {server} from "../../config/environment";
+import server from "../../config/environment";
 
 export default function Login({navigation}){
 
@@ -15,10 +15,9 @@ export default function Login({navigation}){
      */
     async function validateLogin(values){
         try {
-            const response = await fetch(`${server.host}:${server.port}/check-in`,{
+            const response = await fetch(`${server.host}:${server.port}/client/check-in`,{
                 method:"POST",
                 headers:{
-                    Accept : 'application/json',
                     'Content-Type':'application/json'
                 },
                 body: JSON.stringify({
