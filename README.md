@@ -32,9 +32,9 @@ Latest updates available on [Figma](https://www.figma.com/file/5ilvDi7rBbEM8hG74
 
 Platform | **IOS** & **Android**
 :--- | :---: 
-Login Screen    | 
-Sing-up Screen  | 
-Schedule Screen |
+Login       | <img src="https://github.com/marcelo-de-santana/jubas-app/blob/master/src/screens/Login.png?raw=true" height="700"/> 
+Sing-up     | <img src="https://github.com/marcelo-de-santana/jubas-app/blob/master/src/screens/Sing-up.png?raw=true" height="700"/>
+Schedule    | <img src="https://github.com/marcelo-de-santana/jubas-app/blob/master/src/screens/Schedule.png?raw=true" height="700"/>
 
 ### About
 Completion of course work of the Information Systems Graduation
