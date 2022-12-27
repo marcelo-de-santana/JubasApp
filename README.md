@@ -13,13 +13,13 @@ The backend of the project is available at [jubas-backend](https://github.com/ma
     npm install
     
 #### Run Metro
-    npx react-native start
+    npm start
     
 #### Run Android
-    npx react-native run-android
+    npm run android
     
 #### Run IOS
-    npx react-native run-ios
+    npm run ios
     
 ### Tech and Libraries
 - [React Native](https://reactnative.dev/)
