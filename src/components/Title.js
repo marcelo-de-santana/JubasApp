@@ -13,9 +13,11 @@ const styles = StyleSheet.create({
 	h1:{
 		textAlign:"center",
 		fontSize: 20,
+		color:"white"
 	},
 	h2:{
 		textAlign:"center",
 		fontSize: 12,
+		color:"white"
 	}
 })
