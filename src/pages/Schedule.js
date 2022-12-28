@@ -26,11 +26,31 @@ export default function Schedule() {
       .catch(() => (alert('Impossível carregar a agenda!')))
   }, [])
 
-  console.log(barbers)
+
+  console.log(barbers.map(item => { return item.name }))
   return (
     <SafeAreaView style={styles.container}>
       <Title />
-      <Text>{}</Text>
+      <SectionList
+        sections={barbers}
+
+        renderItem={({item}) => {
+          <View>
+            <Text>{item.name}</Text>
+          </View>
+        }}
+
+        renderSectionHeader={({barbers}) => {
+          <View>
+            <Text>
+              {barbers.name}
+            </Text>
+          </View>
+        }}
+
+        keyExtractor={ (item) => item.id}
+      />
+
     </SafeAreaView>
   );
 }
@@ -41,6 +61,6 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === "android" ? 10 : 0,
     width: "100%",
     height: "auto",
-    backgroundColor:"#423e3c",
+    backgroundColor: "#423e3c",
   }
 })
