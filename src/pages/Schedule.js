@@ -3,8 +3,7 @@ import {
   Button,
   Platform,
   SafeAreaView,
-  SectionList,
-  StatusBar,
+  ScroolView,
   StyleSheet,
   Text,
   View,
@@ -22,25 +21,32 @@ export default function Schedule() {
       .catch(() => (alert('Impossível carregar a agenda!')))
   }, [])
 
+  function getSchedule(data) {
+    return data.map(item => (
+      (item.available_times != '') ?
+      <View key={item.id} style={{ paddingBottom: 10}}>
+
+        <Text style={{ color: "white", fontSize: 20, paddingLeft: 15, paddingBottom: 4 }}>{item.name}</Text>
+
+        <View style={{ backgroundColor: "grey", borderRadius: 10, flexDirection: "row", flexWrap: 'wrap', marginHorizontal: 10, padding: 12 }}>
+
+        {item.available_times.map((v) => (
+                <Text key={v} style={{ color: "white", fontSize: 20, paddingHorizontal: 4 }}>{v.substr(0, 5)}</Text>
+              ))} 
+        </View>
+      </View>
+      :
+      ''
+    )
+    )
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Title />
-        
-        {scheduleData.map((item) => (
-        <View key={item.id} style={{paddingBottom:10}}>
-        
-          <Text style={{color:"white",fontSize:20, paddingLeft:15,paddingBottom:4}}>{item.name}</Text>
-        
-          <View key={item.id} style={{backgroundColor:"grey",borderRadius:10,flexDirection:"row",flexWrap:'wrap',marginHorizontal:10,padding:12}}>
-            
-            {item.available_times.map((h,i) => (
-              <Text key={i} style={{color:"white",fontSize:20,paddingHorizontal:4}}>{h.substr(0,5)}</Text>
-            ))}
-          
-          </View>
-        
-        </View>
-        ))}
+
+      {getSchedule(scheduleData)}
+      
     </SafeAreaView>
   );
 }
@@ -52,8 +58,9 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "auto",
     backgroundColor: "#423e3c",
+    
   },
-  times:{
+  times: {
 
   }
 })
