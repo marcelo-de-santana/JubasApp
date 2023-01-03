@@ -9,10 +9,11 @@ import {
   View,
 } from 'react-native';
 import Title from '../components/Title';
-import env from "../../env.json"
+import env from "../../env.json";
+import BarberList from '../components/BarberList';
 
 export default function Schedule() {
-  const [scheduleData, setScheduleData] = useState([]);
+  const [scheduleData, setScheduleData] = useState(null);
 
   useEffect(() => {
     fetch(`${env.host}/schedule/`)
@@ -20,33 +21,11 @@ export default function Schedule() {
       .then((json) => (setScheduleData(json)))
       .catch(() => (alert('Impossível carregar a agenda!')))
   }, [])
-
-  function getSchedule(data) {
-    return data.map(item => (
-      (item.available_times != '') ?
-      <View key={item.id} style={{ paddingBottom: 10}}>
-
-        <Text style={{ color: "white", fontSize: 20, paddingLeft: 15, paddingBottom: 4 }}>{item.name}</Text>
-
-        <View style={{ backgroundColor: "grey", borderRadius: 10, flexDirection: "row", flexWrap: 'wrap', marginHorizontal: 10, padding: 12 }}>
-
-        {item.available_times.map((v) => (
-                <Text key={v} style={{ color: "white", fontSize: 20, paddingHorizontal: 4 }}>{v.substr(0, 5)}</Text>
-              ))} 
-        </View>
-      </View>
-      :
-      ''
-    )
-    )
-  }
-
+  
   return (
     <SafeAreaView style={styles.container}>
       <Title />
-
-      {getSchedule(scheduleData)}
-      
+      <BarberList data={scheduleData}/>
     </SafeAreaView>
   );
 }

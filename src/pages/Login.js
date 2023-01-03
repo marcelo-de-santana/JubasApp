@@ -56,7 +56,7 @@ export default function Login({ navigation }) {
                 <Pressable onPress={Keyboard.dismiss} style={styles.container}>
                     <View style={styles.header}>
                         <Text style={styles.headerText}>Juba's Barbearia</Text>
-                        <Image style={styles.logo} source={require('../assets/img/logoMarca.jpg')} />
+                        <Image style={styles.logo} source={require('../assets/images/logoMarca.jpg')} />
                         {errorMessage != null ? <Text style={styles.errorMsg}>{errorMessage}</Text> : ''}
                     </View>
 
