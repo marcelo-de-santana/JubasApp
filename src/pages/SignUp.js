@@ -155,10 +155,11 @@ export default function SignUp({ navigation }) {
 
 const styles = StyleSheet.create({
     container: {
+        paddingTop: Platform.OS === "android" ? 10 : 0,
         flex: 1,
         width: "100%",
         height: "100%",
-        //backgroundColor:"#423e3c"
+        backgroundColor:"#423e3c"
     },
     boxForm: {
         alignItems: "center",

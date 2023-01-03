@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
         flex: 1,
         width: "100%",
         height: "auto",
-        //backgroundColor:"#423e3c",
+        backgroundColor:"#423e3c",
 
     },
     header: {
