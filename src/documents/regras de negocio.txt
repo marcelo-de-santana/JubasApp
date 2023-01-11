@@ -91,7 +91,3 @@ barbeshop_admin
 mob
 barbearia
 jubas_admin
-
-#ALTERAR LAYOUT DE AGENDA
-O protótipo de agendamento não é performativo, visto que os horários estão sendo renderizados junto com os barbeiros, impossibilitando o uso de ScroolView,
-para tal problema é necessário que seja feita uma auteração, ao clicar no nome/icone do barbeiro, o usuário seja direcionado para a página de horários disponíveis.

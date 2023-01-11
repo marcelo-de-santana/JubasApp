@@ -16,10 +16,10 @@ export default function Schedule() {
   const [scheduleData, setScheduleData] = useState(null);
 
   useEffect(() => {
-    fetch(`${env.host}/schedule/`)
+      fetch(`${env.host}/schedule/`)
       .then((response) => response.json())
       .then((json) => (setScheduleData(json)))
-      .catch(() => (alert('Impossível carregar a agenda!')))
+      .catch(() => (console.log('Não foi possível carregar a agenda!')))
   }, [])
   
   return (

@@ -18,7 +18,7 @@ export default function Login({ navigation }) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                email: values.email,
+                cpf: values.cpf,
                 password: values.password
             })
         });
@@ -34,7 +34,7 @@ export default function Login({ navigation }) {
 
     //VALIDAÇÃO DE INPUTS
     const schema = Yup.object().shape({
-        email: Yup.string().email(' ')
+        cpf: Yup.string().max(14, ({ max }) => `Máximo de ${max} caractéres`)
             .required('*Campo obrigatório'),
         password: Yup.string().min(8, ({ min }) => `Mínimo de ${min} dígitos`)
             .required('*Campo obrigatório'),
@@ -44,7 +44,7 @@ export default function Login({ navigation }) {
     const { handleChange, handleBlur, handleSubmit, values, errors, touched } = useFormik({
         validationSchema: schema,
         initialValues: {
-            email: '',
+            cpf: '',
             password: ''
         },
         onSubmit: (values) => validateLogin(values)
@@ -56,41 +56,39 @@ export default function Login({ navigation }) {
                 <Pressable onPress={Keyboard.dismiss} style={styles.container}>
                     <View style={styles.header}>
                         <Text style={styles.headerText}>Juba's Barbearia</Text>
-                        <Image style={styles.logo} source={require('../assets/images/logoMarca.jpg')} />
-                        {errorMessage != null ? <Text style={styles.errorMsg}>{errorMessage}</Text> : ''}
+                        <Image style={styles.logo} source={require('../assets/images/logoMarca.png')} />
                     </View>
 
                     <View style={styles.body}>
-                        <View style={styles.inputBox}>
+                        {errorMessage != null ? <Text style={styles.errorMsg}>{errorMessage}</Text> : ''}
 
-                            <Text style={styles.label}>Digite seu E-mail</Text>
-                            <TextInput style={styles.input} keyboardType='email-address' placeholder='jubadeleao@exemplo.com'
-                                onChangeText={handleChange('email')}
-                                onBlur={handleBlur('email')}
-                                value={values.email} />
-                            {touched.email && errors.email ? <TextAlert error={errors.email} /> : ''}
-                        </View>
+                        <Text style={styles.label}>Digite seu CPF</Text>
+                        <TextInput style={styles.input} keyboardType='numeric' placeholder='123.456.789-10'
+                            placeholderTextColor="#161c2660"
+                            onChangeText={handleChange('cpf')}
+                            onBlur={handleBlur('cpf')}
+                            value={values.cpf} />
+                        {touched.cpf && errors.cpf ? <TextAlert error={errors.cpf} /> : ''}
 
-                        <View style={styles.inputBox}>
 
-                            <Text style={styles.label}>Digite sua senha</Text>
-                            <TextInput style={styles.input} secureTextEntry={true} placeholder='**********'
-                                onChangeText={handleChange('password')}
-                                onBlur={handleBlur('password')}
-                                value={values.password} />
-                            {touched.password && errors.password ? <TextAlert error={errors.password} /> : ''}
+                        <Text style={styles.label}>Digite sua senha</Text>
+                        <TextInput style={styles.input} secureTextEntry={true} placeholder='**********'
+                            placeholderTextColor="#161c2660"
+                            onChangeText={handleChange('password')}
+                            onBlur={handleBlur('password')}
+                            value={values.password} />
+                        {touched.password && errors.password ? <TextAlert error={errors.password} /> : ''}
 
-                            <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                                <Text style={styles.buttonText}>Entrar</Text>
-                            </TouchableOpacity>
+                        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+                            <Text style={styles.buttonText}>Entrar</Text>
+                        </TouchableOpacity>
 
-                        </View>
                     </View>
 
                     <View style={styles.footer}>
 
-                        <TouchableOpacity style={styles.buttonPassword} onPress={() => navigation.navigate('Schedule')}>
-                            <Text>Esqueci minha senha</Text>
+                        <TouchableOpacity onPress={() => navigation.navigate('Schedule')}>
+                            <Text style={styles.textButtonPassword}>Esqueci minha senha</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
                             <Text style={styles.buttonRegister}>Não possui uma conta? Cadastre-se</Text>
@@ -107,72 +105,72 @@ export default function Login({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        width: "100%",
-        height: "auto",
-        backgroundColor:"#423e3c",
+        backgroundColor: '#f2f2f2',
 
     },
     header: {
         alignItems: "center",
         marginTop: 80,
-        marginBottom: 20,
     },
     headerText: {
+        color: "#161c26",
         fontSize: 20,
-        marginBottom: 20,
     },
     logo: {
-        width: 100,
+        backgroundColor: "#ccced9",
+        borderRadius: 4,
+        marginTop: 20,
         height: 150,
+        width: 120,
     },
     body: {
-        height: 220,
-    },
-    inputBox: {
         alignItems: "center",
-        height: 85,
-    },
-    label: {
-        fontSize: 14,
-        marginBottom: 3,
-        width: "80%",
-    },
-    input: {
-        width: "80%",
-        height: 40,
-        borderWidth: 0.8,
-        borderRadius: 6,
-        padding: 10,
+        marginTop: 24,
     },
     errorMsg: {
         fontSize: 12,
-        color: 'red',
-        paddingTop: 10,
+        color: '#f81c1c',
         textAlign: "center",
-        width: "80%"
     },
-    button: {
-        backgroundColor: "#5EA28B",
-        borderRadius: 6,
-        height: 40,
-        justifyContent: "center",
+    label: {
+        color: "#161c26",
+        fontSize: 14,
         marginTop: 15,
         width: "80%",
     },
+    input: {
+        backgroundColor: "#ccced9",
+        borderWidth: 0.8,
+        borderRadius: 6,
+        color: "#161c26",
+        height: 40,
+        padding: 10,
+        width: "80%",
+    },
+    button: {
+        backgroundColor: "#3c4659",
+        borderRadius: 6,
+        height: 40,
+        justifyContent: "center",
+        marginTop: 20,
+        width: "80%",
+    },
     buttonText: {
-        color: "#ffffff",
+        color: "#f2f2f2",
         fontSize: 18,
         textAlign: "center",
     },
     footer: {
-        height: 230,
+        alignItems: 'center',
+        height: 200,
+        marginTop: 25,
+        justifyContent: 'space-between'
     },
-    buttonPassword: {
-        alignItems: "center",
-        marginBottom: 15,
+    textButtonPassword: {
+        color: '#161c26',
     },
     buttonRegister: {
-        textAlign: "center",
+        color: '#161c26',
     },
 
 })

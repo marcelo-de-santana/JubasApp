@@ -84,6 +84,7 @@ export default function SignUp({ navigation }) {
                         <TextInput style={styles.input}
                             keyboardType="decimal-pad"
                             placeholder="000.000.000-00"
+                            placeholderTextColor="#161c2660"
                             onChangeText={handleChange('cpf')}
                             onBlur={handleBlur('cpf')}
                             touched={touched.cpf} />
@@ -94,6 +95,7 @@ export default function SignUp({ navigation }) {
                         <TextInput style={styles.input}
                             keyboardType="default"
                             placeholder="Juba de Leão"
+                            placeholderTextColor="#161c2660"
                             onChangeText={handleChange('name')}
                             onBlur={handleBlur('name')}
                             touched={touched.name} />
@@ -103,6 +105,7 @@ export default function SignUp({ navigation }) {
                         <TextInput style={styles.input}
                             keyboardType="email-address"
                             placeholder="jubasdeleao@exemplo.com"
+                            placeholderTextColor="#161c2660"
                             onChangeText={handleChange('email')}
                             onBlur={handleBlur('email')}
                             touched={touched.email} />
@@ -113,6 +116,7 @@ export default function SignUp({ navigation }) {
                             keyboardType="numeric"
                             placeholder="01/01/2001"
                             onChangeText={handleChange('birthday')}
+                            placeholderTextColor="#161c2660"
                             onBlur={handleBlur('birthday')}
                             touched={touched.birthday} />
                         {touched.birthday && !errors.birthday ? <Text style={styles.phoneAlert}>Campo opcional</Text> : <TextAlert error={errors.birthday} />}
@@ -121,6 +125,7 @@ export default function SignUp({ navigation }) {
                         <TextInput style={styles.input}
                             keyboardType="number-pad"
                             placeholder="(61) 99999-9999"
+                            placeholderTextColor="#161c2660"
                             onBlur={handleBlur('phoneNumber')}
                             onChangeText={handleChange('phoneNumber')} />
                         {touched.phoneNumber && errors.phoneNumber ? <TextAlert error={errors.phoneNumber} /> : ''}
@@ -129,6 +134,7 @@ export default function SignUp({ navigation }) {
                         <TextInput style={styles.input}
                             keyboardType="default"
                             placeholder="********"
+                            placeholderTextColor="#161c2660"
                             secureTextEntry={true}
                             onChangeText={handleChange('password')}
                             touched={touched.password} />
@@ -138,6 +144,7 @@ export default function SignUp({ navigation }) {
                         <TextInput style={styles.input}
                             keyboardType="default"
                             placeholder="********"
+                            placeholderTextColor="#161c2660"
                             secureTextEntry={true}
                             onChangeText={handleChange('checkPass')}
                             touched={touched.checkPass} />
@@ -159,16 +166,18 @@ const styles = StyleSheet.create({
         flex: 1,
         width: "100%",
         height: "100%",
-        backgroundColor:"#423e3c"
+        backgroundColor:"#f2f2f2"
     },
     boxForm: {
         alignItems: "center",
     },
     label: {
+        color:'#161c26',
         width: "80%",
         paddingTop: 5
     },
     input: {
+        backgroundColor:'#ccced9',
         borderRadius: 6,
         borderWidth: 1,
         height: 40,
@@ -178,9 +187,10 @@ const styles = StyleSheet.create({
     phoneAlert: {
         width: "80%",
         fontSize: 12,
+        color:'#161c26'
     },
     button: {
-        backgroundColor: "#5ea28b",
+        backgroundColor: "#161c26",
         borderRadius: 6,
         height: 40,
         justifyContent: "center",
@@ -189,7 +199,7 @@ const styles = StyleSheet.create({
     },
     textButton: {
         textAlign: "center",
-        color: "#ffffff",
+        color: "#f2f2f2",
         fontSize: 18
     },
 })
