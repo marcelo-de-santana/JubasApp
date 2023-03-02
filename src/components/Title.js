@@ -5,7 +5,7 @@ export default function Title(){
 	return(
       <View style={{height:60}}>
         <Text style={styles.h1}>Juba's Barbearia</Text>
-        <Text style={styles.h2}>Confira os horários disponíveis</Text>
+        {/**<Text style={styles.h2}>Confira os horários disponíveis</Text>**/}
       </View>
 	)}
 
@@ -13,11 +13,11 @@ const styles = StyleSheet.create({
 	h1:{
 		textAlign:"center",
 		fontSize: 20,
-		color:"white"
+		color:"#161c26"
 	},
 	h2:{
 		textAlign:"center",
 		fontSize: 12,
-		color:"white"
+		color:"#161c26"
 	}
 })
