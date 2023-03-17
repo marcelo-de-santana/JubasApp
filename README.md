@@ -2,7 +2,7 @@
 This is a React Native app responsible for managing all the services performed within Juba's barbershop.
 
 ### Setting up the Environment
-The system was created with React Native CLI. Please refer to the official documentation for more details on how to set up the development environment. The backend of the project is available at jubas-backend.
+The system was created with **React Native CLI**. Please refer to the official documentation for more details on how to set up the development environment. The backend of the project is available at jubas-backend.
 
 ### Running the Application
 To run the application, follow these steps:
