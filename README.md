@@ -30,7 +30,7 @@ npm run ios
 ### Technologies and Libraries Used
 - [React Native](https://reactnative.dev/)
 - [React Navigation](https://reactnavigation.org/)
-- [Formik:](https://formik.org/) Form manager
+- [Formik:](https://formik.org/) form manager
 - [Yup:](https://www.npmjs.com/package/yup) validation manager
 
 ### Screen Prototypes
