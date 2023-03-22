@@ -42,7 +42,7 @@ export default function BarberList({ data }) {
 			:
 
 			<View style={{ alignItems: "center", height: "70%", justifyContent: "center" }}>
-				<Text style={{ fontSize: 18, fontWeight: "bold" }}>Agenda Indiponível</Text>
+				<Text style={{ fontSize: 18, fontWeight: "bold", color:"#000000" }}>Agenda Indiponível</Text>
 			</View>
 
 	)
@@ -51,16 +51,17 @@ export default function BarberList({ data }) {
 
 const styles = StyleSheet.create({
 	boxHeader: {
+		marginTop:5,
 		paddingBottom: 10
 	},
 	textHeader: {
-		color: "white",
-		fontSize: 20,
+		color: "#000000",
+		fontSize: 14,
 		paddingLeft: 15,
 		paddingBottom: 4
 	},
 	timesBox: {
-		backgroundColor: "grey",
+		backgroundColor: "#9ba7bf",
 		borderRadius: 10,
 		flexDirection: "row",
 		flexWrap: 'wrap',

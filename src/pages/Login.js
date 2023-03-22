@@ -31,7 +31,6 @@ export default function Login({ navigation }) {
         }
     }
 
-
     //VALIDAÇÃO DE INPUTS
     const schema = Yup.object().shape({
         cpf: Yup.string().max(14, ({ max }) => `Máximo de ${max} caractéres`)
@@ -156,7 +155,7 @@ const styles = StyleSheet.create({
         width: "80%",
     },
     buttonText: {
-        color: "#f2f2f2",
+        color: "#ffffff",
         fontSize: 18,
         textAlign: "center",
     },
