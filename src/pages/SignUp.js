@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
         color:'#161c26'
     },
     button: {
-        backgroundColor: "#161c26",
+        backgroundColor: "#3c4659",
         borderRadius: 6,
         height: 40,
         justifyContent: "center",
@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
     },
     textButton: {
         textAlign: "center",
-        color: "#f2f2f2",
+        color: "#ffffff",
         fontSize: 18
     },
 })

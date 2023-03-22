@@ -32,11 +32,9 @@ export default function Schedule() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingTop: Platform.OS === "android" ? 10 : 0,
     width: "100%",
     height: "auto",
-    backgroundColor: "#423e3c",
+    backgroundColor: "#f2f2f2",
     
   },
   times: {
