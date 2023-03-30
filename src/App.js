@@ -1,11 +1,12 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
+import 'react-native-gesture-handler';
 import Login from './pages/Login';
 import Schedule from './pages/Schedule';
 import SignUp from './pages/SignUp';
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 export default function App(){
   return (
