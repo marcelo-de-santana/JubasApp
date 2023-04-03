@@ -1,9 +1,9 @@
 import React from "react";
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function BarberList({ data }) {
   const timeResponse = (id, name, time) => {
-    alert(`Você está sendo redirecionado para a página de confirmação. Deseja marcar um atendimento com ${name} às ${new Date(time).toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})}?
+    alert(`Você está sendo redirecionado para a página de confirmação. Deseja marcar um atendimento com ${name} às ${new Date(time).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}?
  Lembre-se que o tempo de tolerância é de 10 minutos, não se atrase!`);
   };
 
@@ -24,13 +24,18 @@ export default function BarberList({ data }) {
                     onPress={() => timeResponse(item.id, item.name, aTimes)}
                     disabled={isTimeUnavailable}
                   >
-                    <Text style={textStyle}>{new Date(aTimes).toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})}</Text>
+                    <Text style={textStyle}>{new Date(aTimes).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</Text>
                   </TouchableOpacity>
                 );
               })}
             </View>
           </View>
         ))}
+        <View style={{alignItems:'center'}}>
+          <TouchableOpacity style={styles.button} onPress={() => alert('Botão não definido')}>
+            <Text style={styles.textButton}>Agendar Horário</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     );
   }
@@ -80,5 +85,18 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     color: "#000000",
+  },
+  button: {
+    backgroundColor: "#3c4659",
+    borderRadius: 6,
+    height: 40,
+    justifyContent: "center",
+    marginTop: 20,
+    width: "80%",
+  },
+  textButton: {
+    textAlign: "center",
+    color: "#ffffff",
+    fontSize: 18
   },
 });
