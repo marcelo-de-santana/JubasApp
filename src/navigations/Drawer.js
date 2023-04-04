@@ -6,6 +6,8 @@ import MyAccount from '../pages/MyAccount';
 import About from '../pages/About';
 import MyShopping from '../pages/MyShopping';
 import UnderConstruction from '../pages/UnderConstruction';
+import PriceList from '../pages/PriceList';
+import MyEmployees from '../pages/MyEmployees';
 
 const Drawer = createDrawerNavigator();
 
@@ -57,7 +59,7 @@ export default function DrawerScreens() {
 					},
 				}}
 			/>
-			<Drawer.Screen name="Tabela de preços" component={UnderConstruction}
+			<Drawer.Screen name="Tabela de preços" component={PriceList}
 				options={{
 					headerTintColor: '#ffffff',
 					headerStyle: {
@@ -73,7 +75,7 @@ export default function DrawerScreens() {
 					},
 				}}
 			/>
-			<Drawer.Screen name="Gerenciar barbeiros" component={UnderConstruction}
+			<Drawer.Screen name="Gerenciar barbeiros" component={MyEmployees}
 				options={{
 					headerTintColor: '#ffffff',
 					headerStyle: {
