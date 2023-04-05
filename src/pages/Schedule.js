@@ -24,8 +24,7 @@ export default function Schedule() {
   
   return (
     <SafeAreaView style={styles.container}>
-      <Title />
-      <BarberList data={scheduleData}/>
+   	 <BarberList data={scheduleData}/>
     </SafeAreaView>
   );
 }
