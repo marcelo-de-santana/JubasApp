@@ -1,16 +1,14 @@
-import React from 'react';
-import {View,Text,StyleSheet} from 'react-native';
+import {Text} from "react-native";
 
-export default function About(){
-	return(
-		<View>
-			<Text style={styles.textBody}>Somos um estabelecimento que atende o público masculino</Text>
-		</View>
-)}
+import UnderConstruction from "./UnderConstruction";
 
 
-const styles = StyleSheet.create({
-	textBody:{
-		color:'#000000'
-	}
-})
+export default function About() {
+	return (
+		<>
+
+		<UnderConstruction />
+
+		</>
+	)
+}

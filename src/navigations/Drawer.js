@@ -1,6 +1,5 @@
 
 import { createDrawerNavigator } from '@react-navigation/drawer'
-import Login from '../pages/Login';
 import Schedule from '../pages/Schedule';
 import MyAccount from '../pages/MyAccount';
 import About from '../pages/About';

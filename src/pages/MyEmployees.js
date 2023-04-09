@@ -16,12 +16,24 @@ export default function MyEmployees() {
         return (
             <>
                 {data.map(item => (
-                    <>
-                        <Text style={{ color: '#000000' }}>
+                    <View style={{
+                        marginTop:10,
+                        padding: 10,
+                        backgroundColor: '#9ba7bf',
+                        borderRadius: 10,
+                        marginHorizontal: 10,
+
+                    }}>
+                        <Text key={item.id} style={{
+                            color: "#ffffff",
+                            fontSize: 14,
+                            paddingLeft: 15,
+                            paddingBottom: 4
+                        }}>
                             {item.nome}
 
                         </Text>
-                    </>
+                    </View>
 
                 ))}
 

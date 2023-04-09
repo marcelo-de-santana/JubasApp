@@ -1,14 +1,7 @@
-import React from "react";
-import {View,Text} from "react-native";
+import UnderConstruction from "./UnderConstruction";
 
 export default function MyShopping(){
     return(
-        <View>
-            <Text style={{textAlign:"center"}}>
-                Listagem do Carrinho de compras.
-
-            </Text>
-        </View>
-
+        <UnderConstruction />
     )
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Keyboard, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import TextAlert from "../components/TextAlert";
 import env from "../../env.json"
@@ -6,6 +6,14 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { birthday, phoneNumber } from "../utils/validations";
 export default function MyAccount({ navigation }) {
+    const [dataClient, setDataClient] = useState(null)
+
+    useEffect(() => {
+        fetch(`${env.host}/client/1/edit`)
+            .then(response => response.json())
+            .then(json => setDataClient(json))
+            .catch((error) => console.log(error))
+    }, [])
 
     /**
      * Método responsável por buscar os dados e realizar o cadastro do cliente
