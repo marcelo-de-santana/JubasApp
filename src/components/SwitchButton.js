@@ -3,8 +3,9 @@ import {View, Switch, StyleSheet} from 'react-native';
 
 export default function SwitchButton() {
   const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-
+  function toggleSwitch () {
+    setIsEnabled(previousState => !previousState);
+  }
   return (
     <View>
       <Switch

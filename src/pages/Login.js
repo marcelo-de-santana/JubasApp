@@ -4,6 +4,8 @@ import TextAlert from "../components/TextAlert"
 import env from "../../env.json"
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import * as validation from "../utils/validations"
+import * as regx from "../utils/regularExpressions"
 
 export default function Login({ navigation }) {
     const [errorMessage, setErrorMessage] = useState(null);
@@ -33,9 +35,14 @@ export default function Login({ navigation }) {
 
     //VALIDAÇÃO DE INPUTS
     const schema = Yup.object().shape({
-        cpf: Yup.string().max(14, ({ max }) => `Máximo de ${max} caractéres`)
+        cpf: Yup.string()
+            .matches(regx.cpfNumber, '*Campo obrigatório')
+            .min(14, '*Campo obrigatório')
+            .max(14, '*Campo obrigatório')
             .required('*Campo obrigatório'),
-        password: Yup.string().min(8, ({ min }) => `Mínimo de ${min} dígitos`)
+        password: Yup.string()
+            .min(8, ({ min }) => `Mínimo de ${min} caractéres`)
+            .max(20, ({ max }) => `No máximo ${max} caractéres`)
             .required('*Campo obrigatório'),
     });
 
@@ -64,15 +71,18 @@ export default function Login({ navigation }) {
                         <Text style={styles.label}>Digite seu CPF</Text>
                         <TextInput style={styles.input} keyboardType='numeric' placeholder='123.456.789-10'
                             placeholderTextColor="#161c2660"
+                            maxLength={14}
+                            value={validation.cpf(values.cpf)}
                             onChangeText={handleChange('cpf')}
                             onBlur={handleBlur('cpf')}
-                            value={values.cpf} />
+                        />
                         {touched.cpf && errors.cpf ? <TextAlert error={errors.cpf} /> : ''}
 
 
                         <Text style={styles.label}>Digite sua senha</Text>
                         <TextInput style={styles.input} secureTextEntry={true} placeholder='**********'
                             placeholderTextColor="#161c2660"
+                            maxLength={20}
                             onChangeText={handleChange('password')}
                             onBlur={handleBlur('password')}
                             value={values.password} />

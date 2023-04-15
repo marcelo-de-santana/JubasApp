@@ -1,12 +1,13 @@
-import React from "react";
-import { Keyboard, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Keyboard, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import TextAlert from "../components/TextAlert";
 import env from "../../env.json"
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { birthday, phoneNumber } from "../utils/validations";
+import * as regx from "../utils/regularExpressions";
+import * as mask from "../utils/validations"
 
-export default function SignUp({ navigation }) {
+export default function MyAccount({ navigation }) {
     /**
      * Método responsável por buscar os dados e realizar o cadastro do cliente
      */
@@ -19,38 +20,43 @@ export default function SignUp({ navigation }) {
             },
             body: JSON.stringify(values)
         });
-        
+    
         const json = await response.json();
 
-        if(response.status == 201){
+        if (response.status == 201) {
             navigation.navigate('Login')
             alert(json.message)
         } else {
             alert(json.message)
         }
-        
+
     }
 
     //YUP -- MENSAGENS DE VALIDAÇÃO
     const schema = Yup.object().shape({
         cpf: Yup.string()
-            .max(14, ({ max }) => `Máximo de ${max} caractéres`)
+            .matches(regx.cpfNumber, '*Campo obrigatório')
+            .min(14, '*Campo obrigatório')
+            .max(14, '*Campo obrigatório')
             .required('*Campo obrigatório'),
         name: Yup.string()
-            .min(2, ({ min }) => `Mínimo de ${min} caractéres`)
-            .max(20, ({ max }) => `No máximo ${max} caractéres`)
+            .min(7, '*Campo obrigatório')
+            .max(50, ({ max }) => `Máximo de ${max} caractéres`)
             .required('*Campo obrigatório'),
         email: Yup.string()
-            .email('Formato incorreto')
+            .email('*Campo obrigatório')
+            .max(50, ({ max }) => `Máximo de ${max} caractéres`)
             .required('*Campo obrigatório'),
         birthday: Yup.string()
-            .matches(birthday, '*Formato dd/mm/aaaa'),
+            .min(10, "*Campo obrigatório")
+            .matches(regx.birthday, '*Formato dd/mm/aaaa'),
         phoneNumber: Yup.string()
-            .matches(phoneNumber, "*Formato (99) 99999-9999")
+            .min(14, "*Campo obrigatório")
+            .max(15, '*Campo obrigatório')
             .required('*Campo obrigatório'),
         password: Yup.string()
             .min(8, ({ min }) => `Mínimo de ${min} caractéres`)
-            .max(16, ({ max }) => `No máximo ${max} caractéres`)
+            .max(20, ({ max }) => `No máximo ${max} caractéres`)
             .required('*Campo obrigatório'),
         checkPass: Yup.string()
             .oneOf([Yup.ref('password'), null], '*As senhas devem ser iguais')
@@ -74,7 +80,7 @@ export default function SignUp({ navigation }) {
     });
 
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <ScrollView style>
                 <Pressable onPress={Keyboard.dismiss} style={styles.container}>
 
@@ -85,9 +91,13 @@ export default function SignUp({ navigation }) {
                             keyboardType="decimal-pad"
                             placeholder="000.000.000-00"
                             placeholderTextColor="#161c2660"
+                            maxLength={14}
+                            value={mask.cpf(values.cpf)}
                             onChangeText={handleChange('cpf')}
-                            onBlur={handleBlur('cpf')}
-                            touched={touched.cpf} />
+                            touched={touched.cpf}
+
+                        />
+
                         {touched.cpf && errors.cpf ? <TextAlert error={errors.cpf} /> : ''}
 
 
@@ -96,6 +106,8 @@ export default function SignUp({ navigation }) {
                             keyboardType="default"
                             placeholder="Juba de Leão"
                             placeholderTextColor="#161c2660"
+                            maxLength={50}
+                            value={values.name.replace(/[0-9+-]+/, '')}
                             onChangeText={handleChange('name')}
                             onBlur={handleBlur('name')}
                             touched={touched.name} />
@@ -106,6 +118,7 @@ export default function SignUp({ navigation }) {
                             keyboardType="email-address"
                             placeholder="jubasdeleao@exemplo.com"
                             placeholderTextColor="#161c2660"
+                            maxLength={50}
                             onChangeText={handleChange('email')}
                             onBlur={handleBlur('email')}
                             touched={touched.email} />
@@ -117,15 +130,19 @@ export default function SignUp({ navigation }) {
                             placeholder="01/01/2001"
                             onChangeText={handleChange('birthday')}
                             placeholderTextColor="#161c2660"
+                            maxLength={10}
+                            value={mask.birthday(values.birthday)}
                             onBlur={handleBlur('birthday')}
                             touched={touched.birthday} />
-                        {touched.birthday && !errors.birthday ? <Text style={styles.phoneAlert}>Campo opcional</Text> : <TextAlert error={errors.birthday} />}
+                        {touched.birthday && errors.birthday ? <TextAlert error={errors.birthday} /> : ''}
 
                         <Text style={styles.label}>Telefone</Text>
                         <TextInput style={styles.input}
                             keyboardType="number-pad"
                             placeholder="(61) 99999-9999"
                             placeholderTextColor="#161c2660"
+                            maxLength={15}
+                            value={mask.phone(values.phoneNumber)}
                             onBlur={handleBlur('phoneNumber')}
                             onChangeText={handleChange('phoneNumber')} />
                         {touched.phoneNumber && errors.phoneNumber ? <TextAlert error={errors.phoneNumber} /> : ''}
@@ -135,6 +152,7 @@ export default function SignUp({ navigation }) {
                             keyboardType="default"
                             placeholder="********"
                             placeholderTextColor="#161c2660"
+                            maxLength={20}
                             secureTextEntry={true}
                             onChangeText={handleChange('password')}
                             touched={touched.password} />
@@ -145,49 +163,47 @@ export default function SignUp({ navigation }) {
                             keyboardType="default"
                             placeholder="********"
                             placeholderTextColor="#161c2660"
+                            maxLength={20}
                             secureTextEntry={true}
                             onChangeText={handleChange('checkPass')}
                             touched={touched.checkPass} />
                         {touched.checkPass && errors.checkPass ? <TextAlert error={errors.checkPass} /> : ''}
 
                         <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                            <Text style={styles.textButton}>Cadastrar</Text>
+                            <Text style={styles.textButton}>Confirmar</Text>
                         </TouchableOpacity>
                     </View>
                 </Pressable>
             </ScrollView>
-        </SafeAreaView>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: Platform.OS === "android" ? 10 : 0,
+        paddingTop: Platform.OS === "android" ? 0 : 10,
+        marginVertical: 10,
+        marginHorizontal: 20,
         flex: 1,
-        width: "100%",
-        height: "100%",
-        backgroundColor:"#f2f2f2"
+        backgroundColor: "#f2f2f2"
     },
     boxForm: {
-        alignItems: "center",
     },
     label: {
-        color:'#161c26',
-        width: "80%",
+        color: '#161c26',
         paddingTop: 5
     },
     input: {
-        backgroundColor:'#ccced9',
+        backgroundColor: '#ccced9',
         borderRadius: 6,
         borderWidth: 1,
         height: 40,
         paddingLeft: 10,
-        width: "80%",
     },
     phoneAlert: {
-        width: "80%",
+
         fontSize: 12,
-        color:'#161c26'
+        color: '#161c26'
     },
     button: {
         backgroundColor: "#3c4659",
@@ -195,7 +211,6 @@ const styles = StyleSheet.create({
         height: 40,
         justifyContent: "center",
         marginTop: 20,
-        width: "80%",
     },
     textButton: {
         textAlign: "center",
