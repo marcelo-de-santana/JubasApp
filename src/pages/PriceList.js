@@ -3,6 +3,7 @@ import { FlatList, StyleSheet, Text, View } from "react-native";
 import env from "../../env.json";
 import LoadingScreen from "../components/LoadingScreen";
 import SwitchButton from "../components/SwitchButton";
+import UnderConstruction from "./UnderConstruction"
 
 export default function PriceList() {
     const [priceListData, setPriceListData] = useState(null);
@@ -14,36 +15,42 @@ export default function PriceList() {
             .catch(err => console.log(err))
     }, [])
 
-    return (
-        <FlatList
-            data={priceListData}
-            keyExtractor={(item) => item.category_id.toString()}
-            ListEmptyComponent={<View style={styles.emptyListContainer}>
-            <LoadingScreen />
-          </View>}
-            renderItem={({ item }) => (
+    if (priceListData?.length == 0) {
+        return (
+            <FlatList
+                data={priceListData}
+                keyExtractor={(item) => item.category_id.toString()}
+                ListEmptyComponent={<View style={styles.emptyListContainer}>
+                    <LoadingScreen />
+                </View>}
+                renderItem={({ item }) => (
 
-                <View style={styles.categoryContainer}>
-                    <Text style={styles.categoryTitle}>{item.category_name}</Text>
+                    <View style={styles.categoryContainer}>
+                        <Text style={styles.categoryTitle}>{item.category_name}</Text>
 
-                    <View style={styles.servicesContainer}>
+                        <View style={styles.servicesContainer}>
 
-                        {item.name_services.map((service) => (
-                            <View style={{flexDirection:"row",justifyContent:"space-between",}}>
-                            <Text key={service.service_id} style={styles.serviceTitle}>
-                                {service.service_name}
-                            </Text>
-                            <SwitchButton/>
-                            </View>
-                        ))}
-                        
+                            {item.name_services.map((service) => (
+                                <View style={{ flexDirection: "row", justifyContent: "space-between", }}>
+                                    <Text key={service.service_id} style={styles.serviceTitle}>
+                                        {service.service_name}
+                                    </Text>
+                                    <SwitchButton />
+                                </View>
+                            ))}
+
+                        </View>
+
                     </View>
 
-                </View>
-
-            )}
-        />
-    )
+                )}
+            />
+        )
+    } else {
+        return (
+            <UnderConstruction />
+        )
+    }
 }
 
 const styles = StyleSheet.create({
@@ -52,7 +59,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
     },
     categoryTitle: {
-        color:'#000000',
+        color: '#000000',
         fontSize: 14,
         paddingLeft: 5,
         marginBottom: 4,
@@ -70,5 +77,5 @@ const styles = StyleSheet.create({
     },
     emptyListContainer: {
         marginTop: "82%",
-      },
+    },
 })

@@ -12,6 +12,7 @@ export default function MyAccount({ navigation }) {
      * Método responsável por buscar os dados e realizar o cadastro do cliente
      */
     async function registerUser(values) {
+
         const response = await fetch(`${env.host}/client/sign-up`, {
             method: 'POST',
             headers: {
@@ -51,6 +52,7 @@ export default function MyAccount({ navigation }) {
             .min(10, "*Campo obrigatório")
             .matches(regx.birthday, '*Formato dd/mm/aaaa'),
         phoneNumber: Yup.string()
+            .matches(regx.phoneNumber, "*Campo obrigatório")
             .min(14, "*Campo obrigatório")
             .max(15, '*Campo obrigatório')
             .required('*Campo obrigatório'),

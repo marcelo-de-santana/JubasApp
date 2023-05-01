@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Image, Keyboard, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import TextAlert from "../components/TextAlert"
 import env from "../../env.json"
@@ -14,7 +14,7 @@ export default function Login({ navigation }) {
      * Método responsável por validar o acesso do usuário
      */
     async function validateLogin(values) {
-        const response = await fetch(`${env.host}/client/check-in`, {
+        const response = await fetch(`${env.host}/users/sign-in`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
