@@ -62,7 +62,7 @@ export default function Schedule({ navigation }) {
         <View style={styles.footerBox}>
           <Text style={styles.scrollInfo}>Role para visualizar mais horários</Text>
           <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('PriceList')}>
-            <Text style={styles.textButton}>Agendar por Serviço</Text>
+            <Text style={styles.textButton}>Agendar atendimento</Text>
           </TouchableOpacity>
         </View>
 
@@ -78,9 +78,8 @@ export default function Schedule({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    flex: 1,
     marginVertical: 10,
+    marginHorizontal:10,
     backgroundColor: "#f2f2f2",
   },
   boxHeader: {
@@ -89,7 +88,7 @@ const styles = StyleSheet.create({
   textHeader: {
     color: "#000000",
     fontSize: 16,
-    paddingLeft: 15,
+    paddingLeft: 5,
     paddingBottom: 4,
   },
   timesBox: {
@@ -97,7 +96,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     flexDirection: "row",
     flexWrap: "wrap",
-    marginHorizontal: 10,
+
     padding: 12,
   },
   textATimes: {
@@ -114,6 +113,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   scrollInfo: {
+    textAlign:'center',
     color: '#3c4659',
     marginBottom:10,
   },

@@ -7,6 +7,8 @@ import DrawerScreens from './Drawer';
 import About from '../pages/About';
 import Appointment from '../pages/Appointment';
 import PriceList from '../pages/PriceList';
+import EmployeesDetails from '../pages/EmployeesDetails'
+import BarberHourForm from '../pages/BarberHourForm';
 
 const Stack = createStackNavigator();
 
@@ -22,7 +24,8 @@ export default function StackScreens() {
 							backgroundColor: "#3c4659"
 						},
 						headerTintColor: '#ffffff'
-					}} />
+					}}
+				/>
 				<Stack.Screen name="Schedule" component={DrawerScreens} options={{ headerShown: false }} />
 				<Stack.Screen name="Appointment" component={Appointment}
 					options={{
@@ -31,7 +34,8 @@ export default function StackScreens() {
 							backgroundColor: "#3c4659"
 						},
 						headerTintColor: '#ffffff'
-					}} />
+					}}
+				/>
 				<Stack.Screen name="PriceList" component={PriceList}
 					options={{
 						title: 'Lista de Serviços',
@@ -39,8 +43,19 @@ export default function StackScreens() {
 							backgroundColor: "#3c4659"
 						},
 						headerTintColor: '#ffffff'
-					}} />
+					}}
+				/>
 				<Stack.Screen name="About" component={About} />
+				<Stack.Screen name="EmployeesTimes" component={EmployeesDetails}
+					options={{
+						title: 'Horários',
+						headerStyle: {
+							backgroundColor: "#3c4659"
+						},
+						headerTintColor: '#ffffff'
+					}}
+				/>
+				<Stack.Screen name="EmployeesTimeForm" component={BarberHourForm}/>
 			</Stack.Navigator>
 
 		</NavigationContainer>
