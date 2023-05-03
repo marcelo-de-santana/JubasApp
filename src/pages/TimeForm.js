@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Keyboard, Pressable, StyleSheet, View, Text, TouchableOpacity, ScrollView } from "react-native";
-import { TextInput } from "react-native-gesture-handler";
+import { Keyboard, Pressable, StyleSheet, View, Text, TouchableOpacity, ScrollView ,Switch, TextInput} from "react-native";
 
-export default function BarberHourForm(props) {
+
+export default function TimeForm(props) {
     const [data, setData] = useState(props.route.params)
 
-    const options = [
+    const weekday = [
         {
             day_id: 1,
             weekday: 'Monday'
@@ -39,18 +39,22 @@ export default function BarberHourForm(props) {
                         <Text style={styles.label}>{data.barber_name}</Text>
                         <View style={styles.boxForm}>
 
-                            <Text style={styles.label}>Dia da semana</Text>
-                            
-                            {options.map((i) => (
+                            <Text style={styles.label}>Quais dias deseja cadastrar?</Text>
+
+                            {weekday.map((i) => (
                                 <TouchableOpacity>
-                                <View>
-                                    <Text>{i.weekday}</Text>
-                                    
+                                    <View
+                                    >
+                                        <Text>{i.weekday}</Text>
+                                        <Switch
+                                            value={(data.weekday == i.weekday)? false : true}
+                                            
+                                        />
                                     </View>
                                 </TouchableOpacity>
 
                             ))}
-
+                            {/*
                             <Text style={styles.label}>Entrada</Text>
                             <TextInput style={styles.input}
                                 keyboardType="decimal-pad"
@@ -91,7 +95,7 @@ export default function BarberHourForm(props) {
                                 value={''}
                                 onChangeText={''}
                             />
-
+                            */}
                         </View>
                     </Pressable>
                 </ScrollView>

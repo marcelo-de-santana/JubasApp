@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, TouchableOpacity, ScrollView } from "react-native";
 
-export default function EmployeesDetails(props) {
+export default function MyEmployeesTimes(props) {
     const [data, setData] = useState(props.route.params);
 
     return (
@@ -38,7 +38,7 @@ export default function EmployeesDetails(props) {
                 </View>
             </ScrollView>
             <TouchableOpacity style={styles.insertButton}
-                onPress={() => {props.navigation.navigate('EmployeesTimeForm',data)}}
+                onPress={() => {props.navigation.navigate('TimeForm',data)}}
             >
                 <Text style={styles.textInsertButton}>Inserir</Text>
             </TouchableOpacity>

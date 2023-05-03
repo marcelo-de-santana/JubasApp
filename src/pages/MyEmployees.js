@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, ScrollView } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, ScrollView, View } from "react-native";
 import env from "../../env.json";
 import LoadScreen from "../components/LoadingScreen"
 
@@ -13,30 +13,30 @@ export default function MyEmployees({ navigation }) {
             .catch(error => console.log(error))
     }, [])
 
-    try {
-
-        if (data?.length > 0) {
-            return (
-                <ScrollView style={styles.scrollBox}>
-                    {data.map((value) => (
+    if (data != null) {
+        return (
+            <ScrollView style={styles.scrollBox}>
+                {data.map((value) => (
+                    <View key={value.barber_id}>
                         <TouchableOpacity
                             style={styles.buttonBox}
-                            onPress={() => navigation.navigate('EmployeesTimes', value)}
+                            onPress={() => navigation.navigate('MyEmployeesTimes', value)}
                         >
                             <Text style={styles.text}>
                                 {value.barber_name}
                             </Text>
                         </TouchableOpacity>
-                    ))}
-                </ScrollView>
-            );
-        }
+                    </View>
+                ))}
+            </ScrollView>
+        );
+    } else {
         return (
             <LoadScreen />
         );
-    } catch (error) {
-        console.log(error)
     }
+
+
 }
 
 const styles = StyleSheet.create({
