@@ -1,60 +1,61 @@
-import React, { useState } from "react";
-import { Keyboard, Pressable, StyleSheet, View, Text, TouchableOpacity, ScrollView ,Switch, TextInput} from "react-native";
-
+import React, { useEffect, useState } from "react";
+import { Keyboard, Pressable, StyleSheet, View, Text, TouchableOpacity, ScrollView, Switch, TextInput } from "react-native";
+import LoadingScreen from "../components/LoadingScreen"
+import env from "../../env.json"
 
 export default function TimeForm(props) {
     const [data, setData] = useState(props.route.params)
+    const [week, setWeek] = useState(null)
+    const [statusButton, setStatusButton] = useState(null)
 
-    const weekday = [
-        {
-            day_id: 1,
-            weekday: 'Monday'
-        },
-        {
-            day_id: 2,
-            weekday: 'Tuesday'
-        },
-        {
-            day_id: 3,
-            weekday: 'Wednesday'
-        },
-        {
-            day_id: 4,
-            weekday: 'Thursday'
-        },
-        {
-            day_id: 5,
-            weekday: 'Friday'
-        }
-    ]
+    useEffect(() => {
+        fetch(`${env.host}/barber/week`)
+            .then(response => response.json())
+            .then(json => setWeek(json)),
+            () => {
+                if (week != null) {
+                    week.forEach((value, index) => (
+                        setStatusButton[index] = false
+                    ))
+                }
+
+            }
+    }, [])
+
+
 
     try {
-        return (
+        if (data != null) {
+            return (
 
 
-            <View style={styles.container}>
-                <ScrollView style>
-                    <Pressable onPress={Keyboard.dismiss} style={styles.container}>
+                <View style={styles.container}>
+                    <ScrollView style={styles.scroll}>
+                        <Pressable onPress={Keyboard.dismiss}>
 
-                        <Text style={styles.label}>{data.barber_name}</Text>
-                        <View style={styles.boxForm}>
+                            <Text style={styles.textTitle}>{data.barber_name}</Text>
+                            <View style={styles.boxForm}>
 
-                            <Text style={styles.label}>Quais dias deseja cadastrar?</Text>
+                                <Text style={styles.label}>Quais dias deseja cadastrar?</Text>
 
-                            {weekday.map((i) => (
-                                <TouchableOpacity>
-                                    <View
-                                    >
-                                        <Text>{i.weekday}</Text>
-                                        <Switch
-                                            value={(data.weekday == i.weekday)? false : true}
-                                            
-                                        />
-                                    </View>
-                                </TouchableOpacity>
+                                {week.map((item, index) => (
+                                    <>
+                                        <TouchableOpacity
+                                            onPress={() => { setStatusButton[index](!statusButton[index]) }}
+                                        >
+                                            <View>
+                                                <Text>{item.day}</Text>
+                                                <Switch
+                                                    value={statusButton}
+                                                    onChange={() => { setStatusButton(!statusButton) }}
+                                                    disabled={(data.times.find(value => (item.day == value.weekday))) ? true : false}
 
-                            ))}
-                            {/*
+                                                />
+                                            </View>
+                                        </TouchableOpacity>
+                                    </>
+                                ))}
+                                {/*
                             <Text style={styles.label}>Entrada</Text>
                             <TextInput style={styles.input}
                                 keyboardType="decimal-pad"
@@ -96,11 +97,16 @@ export default function TimeForm(props) {
                                 onChangeText={''}
                             />
                             */}
-                        </View>
-                    </Pressable>
-                </ScrollView>
-            </View>
-        );
+                            </View>
+                        </Pressable>
+                    </ScrollView>
+                </View>
+            );
+        } else {
+            return (
+                <LoadingScreen />
+            )
+        }
     } catch (error) {
         console.log(error)
     }
@@ -109,16 +115,15 @@ export default function TimeForm(props) {
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         marginVertical: 10,
         marginHorizontal: 20,
-        flex: 1,
-        backgroundColor: "#f2f2f2"
     },
-    boxForm: {
+    scroll: {
     },
-    label: {
-        color: '#161c26',
-        paddingTop: 5
+    textTitle: {
+        color: "#000000",
+        fontSize: 18,
     },
     input: {
         backgroundColor: '#ccced9',

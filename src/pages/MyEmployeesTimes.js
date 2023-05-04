@@ -8,37 +8,45 @@ export default function MyEmployeesTimes(props) {
         <View style={styles.container}>
             <ScrollView style={styles.scroll}>
                 <Text style={styles.textTitle}>{data.barber_name}</Text>
-                <View style={styles.boxTimes}>
-                    <View style={styles.boxHeader}>
-                        <Text style={styles.textHeader}>{data.weekday}</Text>
-                        <TouchableOpacity><Text style={styles.textHeader}>Editar</Text></TouchableOpacity>
+                <>
+                {data.times.map(item => (
+                    <View style={styles.boxTimes}>
+                        <View style={styles.boxHeader}>
+                            <Text style={styles.textHeader}>{item.weekday}</Text>
+                            <TouchableOpacity
+                                onPress={() => {alert('')}}
+                            >
+                                <Text style={styles.textHeader}>Editar</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.boxDetails}>
+                            <Text style={styles.textDetails}>
+                                Entrada{'\n'}
+                                {item.start_time.slice(0, -3)}
+                            </Text>
+                            <Text style={styles.textDetails}>
+                                E. Inter.{'\n'}
+                                {item.start_interval.slice(0, -3)}
+                            </Text>
+                            <Text style={styles.textDetails}>
+                                R. Inter.{'\n'}
+                                {item.end_interval.slice(0, -3)}
+                            </Text>
+                            <Text style={styles.textDetails}>
+                                Saída{'\n'}
+                                {item.end_time.slice(0, -3)}
+                            </Text>
+                            <Text style={styles.textDetails}>
+                                Status{'\n'}
+                                {item.status == 1 ? 'Ativo' : 'Inativo'}
+                            </Text>
+                        </View>
                     </View>
-                    <View style={styles.boxDetails}>
-                        <Text style={styles.textDetails}>
-                            Entrada{'\n'}
-                            {data.start_time.slice(0, -3)}
-                        </Text>
-                        <Text style={styles.textDetails}>
-                            E. Inter.{'\n'}
-                            {data.start_interval.slice(0, -3)}
-                        </Text>
-                        <Text style={styles.textDetails}>
-                            R. Inter.{'\n'}
-                            {data.end_interval.slice(0, -3)}
-                        </Text>
-                        <Text style={styles.textDetails}>
-                            Saída{'\n'}
-                            {data.end_time.slice(0, -3)}
-                        </Text>
-                        <Text style={styles.textDetails}>
-                            Status{'\n'}
-                            {data.status == 1 ? 'Ativo' : 'Inativo'}
-                        </Text>
-                    </View>
-                </View>
+                ))}
+                </>
             </ScrollView>
             <TouchableOpacity style={styles.insertButton}
-                onPress={() => {props.navigation.navigate('TimeForm',data)}}
+                onPress={() => { props.navigation.navigate('TimeForm', data) }}
             >
                 <Text style={styles.textInsertButton}>Inserir</Text>
             </TouchableOpacity>
@@ -52,7 +60,7 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         marginHorizontal: 10,
     },
-    scroll:{
+    scroll: {
         height: '90%'
     },
     textTitle: {
@@ -86,13 +94,13 @@ const styles = StyleSheet.create({
         fontSize: 14,
         textAlign: 'center'
     },
-    insertButton:{
+    insertButton: {
         backgroundColor: "#3c4659",
         borderRadius: 6,
         height: 40,
         justifyContent: "center",
     },
-    textInsertButton:{
+    textInsertButton: {
         color: '#ffffff',
         fontSize: 18,
         textAlign: 'center'
