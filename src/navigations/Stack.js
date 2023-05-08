@@ -9,6 +9,7 @@ import Appointment from '../pages/Appointment';
 import PriceList from '../pages/PriceList';
 import MyEmployeesTimes from '../pages/MyEmployeesTimes'
 import TimeForm from '../pages/TimeForm';
+import DailyForm from '../pages/DailyForm';
 
 const Stack = createStackNavigator();
 
@@ -55,7 +56,25 @@ export default function StackScreens() {
 						headerTintColor: '#ffffff'
 					}}
 				/>
-				<Stack.Screen name="TimeForm" component={TimeForm}/>
+				<Stack.Screen name="TimeForm" component={TimeForm}
+					options={{
+						title: 'Inserir horários',
+						headerStyle: {
+							backgroundColor: "#3c4659"
+						},
+						headerTintColor: '#ffffff'
+					}}
+				/>
+				<Stack.Screen name="DailyForm" component={DailyForm}
+					options={{
+						title: 'Inserir horários',
+						headerStyle: {
+							backgroundColor: "#3c4659"
+						},
+						headerTintColor: '#ffffff'
+					}}>
+				</Stack.Screen>
+
 			</Stack.Navigator>
 
 		</NavigationContainer>

@@ -86,7 +86,7 @@ export default function MyAccount({ navigation }) {
             <ScrollView style>
                 <Pressable onPress={Keyboard.dismiss} style={styles.container}>
 
-                    <View style={styles.boxForm}>
+                    <View>
 
                         <Text style={styles.label}>CPF</Text>
                         <TextInput style={styles.input}
@@ -188,8 +188,6 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         flex: 1,
         backgroundColor: "#f2f2f2"
-    },
-    boxForm: {
     },
     label: {
         color: '#161c26',

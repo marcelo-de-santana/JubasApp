@@ -20,7 +20,7 @@ export default function MyEmployees({ navigation }) {
                     <View key={value.barber_id}>
                         <TouchableOpacity
                             style={styles.buttonBox}
-                            onPress={() => navigation.navigate('MyEmployeesTimes', value)}
+                            onPress={() => navigation.push('MyEmployeesTimes', value)}
                         >
                             <Text style={styles.text}>
                                 {value.barber_name}

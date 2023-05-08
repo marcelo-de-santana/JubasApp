@@ -54,7 +54,7 @@ export default function MyEmployeesTimes(props) {
 
                 </ScrollView>
                 <TouchableOpacity style={styles.insertButton}
-                    onPress={() => { props.navigation.navigate('TimeForm', data) }}
+                    onPress={() => { props.navigation.push('TimeForm', data) }}
                 >
                     <Text style={styles.textInsertButton}>Inserir</Text>
                 </TouchableOpacity>

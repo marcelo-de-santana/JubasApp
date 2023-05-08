@@ -5,7 +5,7 @@ import env from "../../env.json"
 
 export default function TimeForm(props) {
     const [data, setData] = useState(props.route.params)
-    const [week, setWeek] = useState()
+    const [week, setWeek] = useState(null)
     const [statusTimeButton, setStatusTimeButton] = useState({})
 
     useEffect(() => {
@@ -39,9 +39,7 @@ export default function TimeForm(props) {
                 <ScrollView style={styles.scroll}>
                     <Pressable onPress={Keyboard.dismiss}>
 
-                        <Text style={styles.textTitle}>{data.barber_name}</Text>
-
-                        <Text style={styles.label}>Quais dias deseja cadastrar?</Text>
+                        <Text style={styles.textTitle}>Quais dias deseja cadastrar?</Text>
 
                         {(week != null) ?
                             <SelectionForm />
@@ -49,51 +47,9 @@ export default function TimeForm(props) {
                             <LoadingScreen />
                         }
 
-                        <TouchableOpacity style={styles.button}>
+                        <TouchableOpacity style={styles.button} onPress={() => {props.navigation.push('DailyForm',{barber_id:data['barber_id'],times:statusTimeButton},) }}>
                             <Text style={styles.textButton}>Confirmar</Text>
                         </TouchableOpacity>
-                        {/*
-                            <Text style={styles.label}>Entrada</Text>
-                            <TextInput style={styles.input}
-                                keyboardType="decimal-pad"
-                                placeholderTextColor="#161c2660"
-                                maxLength={8}
-                                value={''}
-                                onChangeText={''}
-                            />
-                            <Text style={styles.label}>Entrada Intervalo</Text>
-                            <TextInput style={styles.input}
-                                keyboardType="decimal-pad"
-                                placeholderTextColor="#161c2660"
-                                maxLength={8}
-                                value={''}
-                                onChangeText={''}
-                            />
-                            <Text style={styles.label}>Retorno Intervalo</Text>
-                            <TextInput style={styles.input}
-                                keyboardType="decimal-pad"
-                                placeholderTextColor="#161c2660"
-                                maxLength={8}
-                                value={''}
-                                onChangeText={''}
-                            />
-                            <Text style={styles.label}>Saída</Text>
-                            <TextInput style={styles.input}
-                                keyboardType="decimal-pad"
-                                placeholderTextColor="#161c2660"
-                                maxLength={8}
-                                value={''}
-                                onChangeText={''}
-                            />
-                            <Text style={styles.label}>Status</Text>
-                            <TextInput style={styles.input}
-                                keyboardType="decimal-pad"
-                                placeholderTextColor="#161c2660"
-                                maxLength={8}
-                                value={''}
-                                onChangeText={''}
-                            />
-                            */}
 
                     </Pressable>
                 </ScrollView>
