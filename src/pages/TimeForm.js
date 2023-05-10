@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
     },
     textWeek: {
         fontSize: 16,
+        color:'#3c4659'
     },
     input: {
         backgroundColor: '#ccced9',

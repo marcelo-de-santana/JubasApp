@@ -1,11 +1,40 @@
 import React, { useEffect, useState } from "react";
 import { Keyboard, Pressable, StyleSheet, View, Text, TouchableOpacity, ScrollView, Switch, TextInput } from "react-native";
+import TextAlert from "../components/TextAlert"
 import env from "../../env.json";
+import * as validations from "../utils/validations";
+import * as regx from "../utils/regularExpressions"
 
 export default function DailyForm(props) {
 
     const [data, setData] = useState(props.route.params)
-    const [stateTimes, setStateTimes] = useState({ status: false })
+    const [timeValues, setTimeValues] = useState({
+        start_time: '07:00',
+        end_time: '17:00',
+        start_interval: '11:00',
+        end_interval: '12:00',
+        status: false
+    })
+
+    const [statusTime, setStatusTime] = useState({
+        start_time: true,
+        end_time: true,
+        start_interval: true,
+        end_interval: true,
+    })
+
+    function verifyData() {
+        for (let key in timeValues) {
+            setStatusTime(prev => ({ ...prev, [key]: regx.time.test(timeValues[key]) }))
+        }
+
+        let times = (Object.values(statusTime))
+        console.log(statusTime)
+        if (times.includes(false)) {
+            return
+        }
+        sendData()
+    }
 
     async function sendData() {
         let params = []
@@ -13,11 +42,11 @@ export default function DailyForm(props) {
             params.push({
                 barber_id: data.barber_id,
                 weekday: id,
-                start_time: stateTimes.start_time,
-                end_time: stateTimes.end_time,
-                start_interval: stateTimes.start_interval,
-                end_interval: stateTimes.end_interval,
-                status: Number(stateTimes.status)
+                start_time: timeValues.start_time,
+                end_time: timeValues.end_time,
+                start_interval: timeValues.start_interval,
+                end_interval: timeValues.end_interval,
+                status: Number(timeValues.status)
             })
         }
         const response = await fetch(`${env.host}/barber/service-hour`, {
@@ -29,10 +58,10 @@ export default function DailyForm(props) {
             body: JSON.stringify(params)
         })
         const json = await response.json()
-        if(response.status != 200){
+        if (response.status != 200) {
             alert(json.message)
-        } 
-        
+        }
+
     }
 
 
@@ -46,41 +75,50 @@ export default function DailyForm(props) {
                         placeholderTextColor="#161c2660"
                         placeholder="07:00"
                         maxLength={5}
-                        value={stateTimes['start_time']}
-                        onChangeText={value => { setStateTimes(prev => ({ ...prev, start_time: value })) }}
+                        value={validations.time(timeValues['start_time'])}
+                        onChangeText={value => { setTimeValues(prev => ({ ...prev, start_time: value })) }}
                     />
+                    {(!statusTime?.start_time) ? <TextAlert error={'*Campo obrigatório'} /> : ''}
+
+
                     <Text style={styles.label}>Entrada Intervalo</Text>
                     <TextInput style={styles.input}
                         keyboardType="decimal-pad"
                         placeholderTextColor="#161c2660"
                         placeholder="11:00"
                         maxLength={5}
-                        value={stateTimes['start_interval']}
-                        onChangeText={value => setStateTimes(prev => ({ ...prev, start_intervalo: value }))}
+                        value={validations.time(timeValues['start_interval'])}
+                        onChangeText={value => { setTimeValues(prev => ({ ...prev, start_interval: value })) }}
                     />
+                    {(!statusTime?.start_interval) ? <TextAlert error={'*Campo obrigatório'} /> : ''}
+
                     <Text style={styles.label}>Retorno Intervalo</Text>
                     <TextInput style={styles.input}
                         keyboardType="decimal-pad"
                         placeholderTextColor="#161c2660"
                         placeholder="12:00"
                         maxLength={5}
-                        value={stateTimes['end_interval']}
-                        onChangeText={value => setStateTimes(prev => ({ ...prev, end_interval: value }))}
+                        value={validations.time(timeValues['end_interval'])}
+                        onChangeText={value => setTimeValues(prev => ({ ...prev, end_interval: value }))}
                     />
+                    {(!statusTime?.end_interval) ? <TextAlert error={'*Campo obrigatório'} /> : ''}
+
                     <Text style={styles.label}>Saída</Text>
                     <TextInput style={styles.input}
                         keyboardType="decimal-pad"
                         placeholderTextColor="#161c2660"
                         placeholder="16:00"
                         maxLength={5}
-                        value={stateTimes['end_time']}
-                        onChangeText={value => setStateTimes(prev => ({ ...prev, end_time: value }))}
+                        value={validations.time(timeValues['end_time'])}
+                        onChangeText={value => setTimeValues(prev => ({ ...prev, end_time: value }))}
                     />
+                    {(!statusTime?.end_time) ? <TextAlert error={'*Campo obrigatório'} /> : ''}
+
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10, marginBottom: 40 }}>
                         <Text style={styles.label}>Status</Text>
-                        <Switch value={stateTimes.status} onChange={() => { setStateTimes(prev => ({ ...prev, status: !stateTimes.status })) }} />
+                        <Switch value={timeValues.status} onChange={() => { setTimeValues(prev => ({ ...prev, status: !timeValues.status })) }} />
                     </View>
-                    <TouchableOpacity style={styles.button} onPress={() => sendData()}>
+                    <TouchableOpacity style={styles.button} onPress={() => verifyData()}>
                         <Text style={styles.textButton}>Confirmar</Text>
                     </TouchableOpacity>
                 </Pressable>

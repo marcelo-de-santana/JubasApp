@@ -59,7 +59,7 @@ export default function Login({ navigation }) {
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView>
-                <Pressable onPress={Keyboard.dismiss} style={styles.container}>
+                <Pressable onPress={Keyboard.dismiss}>
                     <View style={styles.header}>
                         <Text style={styles.headerText}>Juba's Barbearia</Text>
                         <Image style={styles.logo} source={require('../assets/images/logoMarca.png')} />
@@ -115,7 +115,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#f2f2f2',
-
     },
     header: {
         alignItems: "center",
