@@ -7,9 +7,10 @@ import DrawerScreens from './Drawer';
 import About from '../pages/About';
 import Appointment from '../pages/Appointment';
 import PriceList from '../pages/PriceList';
-import MyEmployeesTimes from '../pages/MyEmployeesTimes'
-import TimeForm from '../pages/TimeForm';
-import DailyForm from '../pages/DailyForm';
+import Times from '../pages/MyEmploy/Times';
+import Form from '../pages/MyEmploy/Form';
+import Insert from '../pages/MyEmploy/Insert';
+import Edit from '../pages/MyEmploy/Edit';
 
 const Stack = createStackNavigator();
 
@@ -47,16 +48,17 @@ export default function StackScreens() {
 					}}
 				/>
 				<Stack.Screen name="About" component={About} />
-				<Stack.Screen name="MyEmployeesTimes" component={MyEmployeesTimes}
+
+				<Stack.Screen name="MyEmployeesTimes" component={Times}
 					options={{
-						title: 'Horários',
+						title: 'Horários de atendimento',
 						headerStyle: {
 							backgroundColor: "#3c4659"
 						},
 						headerTintColor: '#ffffff'
 					}}
 				/>
-				<Stack.Screen name="TimeForm" component={TimeForm}
+				<Stack.Screen name="TimeForm" component={Form}
 					options={{
 						title: 'Inserir horários',
 						headerStyle: {
@@ -65,9 +67,18 @@ export default function StackScreens() {
 						headerTintColor: '#ffffff'
 					}}
 				/>
-				<Stack.Screen name="DailyForm" component={DailyForm}
+				<Stack.Screen name="DailyForm" component={Insert}
 					options={{
 						title: 'Inserir horários',
+						headerStyle: {
+							backgroundColor: "#3c4659"
+						},
+						headerTintColor: '#ffffff'
+					}} />
+
+				<Stack.Screen name="EditForm" component={Edit}
+					options={{
+						title: 'Editar horários',
 						headerStyle: {
 							backgroundColor: "#3c4659"
 						},

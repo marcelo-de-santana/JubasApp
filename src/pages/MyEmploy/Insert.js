@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Keyboard, Pressable, StyleSheet, View, Text, TouchableOpacity, ScrollView, Switch, TextInput } from "react-native";
-import TextAlert from "../components/TextAlert"
-import env from "../../env.json";
-import * as validations from "../utils/validations";
-import * as regx from "../utils/regularExpressions"
+import TextAlert from "../../components/TextAlert"
+import env from "../../../env.json";
+import * as validations from "../../utils/validations";
+import * as regx from "../../utils/regularExpressions"
 
-export default function DailyForm(props) {
+export default function Insert(props) {
 
     const [data, setData] = useState(props.route.params)
     const [timeValues, setTimeValues] = useState({
@@ -27,9 +27,7 @@ export default function DailyForm(props) {
         for (let key in timeValues) {
             setStatusTime(prev => ({ ...prev, [key]: regx.time.test(timeValues[key]) }))
         }
-
         let times = (Object.values(statusTime))
-        console.log(statusTime)
         if (times.includes(false)) {
             return
         }
@@ -58,12 +56,13 @@ export default function DailyForm(props) {
             body: JSON.stringify(params)
         })
         const json = await response.json()
-        if (response.status != 200) {
+        if (response.status != 201) {
             alert(json.message)
+        } else {
+            props.navigation.navigate('MyEmployeesTimes',{barber_id: data?.barber_id})
         }
 
     }
-
 
     return (
         <View style={styles.container}>
@@ -75,8 +74,8 @@ export default function DailyForm(props) {
                         placeholderTextColor="#161c2660"
                         placeholder="07:00"
                         maxLength={5}
-                        value={validations.time(timeValues['start_time'])}
-                        onChangeText={value => { setTimeValues(prev => ({ ...prev, start_time: value })) }}
+                        value={timeValues['start_time']}
+                        onChangeText={value => { setTimeValues(prev => ({ ...prev, start_time: validations.time(value) })) }}
                     />
                     {(!statusTime?.start_time) ? <TextAlert error={'*Campo obrigatório'} /> : ''}
 
@@ -87,8 +86,8 @@ export default function DailyForm(props) {
                         placeholderTextColor="#161c2660"
                         placeholder="11:00"
                         maxLength={5}
-                        value={validations.time(timeValues['start_interval'])}
-                        onChangeText={value => { setTimeValues(prev => ({ ...prev, start_interval: value })) }}
+                        value={timeValues['start_interval']}
+                        onChangeText={value => { setTimeValues(prev => ({ ...prev, start_interval: validations.time(value) })) }}
                     />
                     {(!statusTime?.start_interval) ? <TextAlert error={'*Campo obrigatório'} /> : ''}
 
@@ -98,8 +97,8 @@ export default function DailyForm(props) {
                         placeholderTextColor="#161c2660"
                         placeholder="12:00"
                         maxLength={5}
-                        value={validations.time(timeValues['end_interval'])}
-                        onChangeText={value => setTimeValues(prev => ({ ...prev, end_interval: value }))}
+                        value={timeValues['end_interval']}
+                        onChangeText={value => setTimeValues(prev => ({ ...prev, end_interval: validations.time(value) }))}
                     />
                     {(!statusTime?.end_interval) ? <TextAlert error={'*Campo obrigatório'} /> : ''}
 
@@ -109,8 +108,8 @@ export default function DailyForm(props) {
                         placeholderTextColor="#161c2660"
                         placeholder="16:00"
                         maxLength={5}
-                        value={validations.time(timeValues['end_time'])}
-                        onChangeText={value => setTimeValues(prev => ({ ...prev, end_time: value }))}
+                        value={timeValues['end_time']}
+                        onChangeText={value => setTimeValues(prev => ({ ...prev, end_time: validations.time(value) }))}
                     />
                     {(!statusTime?.end_time) ? <TextAlert error={'*Campo obrigatório'} /> : ''}
 
@@ -147,6 +146,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#ccced9',
         borderRadius: 6,
         borderWidth: 1,
+        color:'#000000',
         height: 40,
         paddingLeft: 10,
 

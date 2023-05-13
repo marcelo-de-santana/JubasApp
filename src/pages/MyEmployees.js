@@ -7,7 +7,7 @@ export default function MyEmployees({ navigation }) {
     const [data, setData] = useState(null);
 
     useEffect(() => {
-        fetch(`${env.host}/barber/service-hour`)
+        fetch(`${env.host}/barber/`)
             .then(response => response.json())
             .then(json => setData(json))
             .catch(error => console.log(error))
@@ -16,11 +16,11 @@ export default function MyEmployees({ navigation }) {
     if (data != null) {
         return (
             <ScrollView style={styles.scrollBox}>
-                {data.map((value) => (
-                    <View key={value.barber_id}>
+                {data.map((value,index) => (
+                    <View key={index}>
                         <TouchableOpacity
                             style={styles.buttonBox}
-                            onPress={() => navigation.push('MyEmployeesTimes', value)}
+                            onPress={() => navigation.push('MyEmployeesTimes',{barber_id: value.barber_id})}
                         >
                             <Text style={styles.text}>
                                 {value.barber_name}

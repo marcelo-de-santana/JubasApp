@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Keyboard, Pressable, StyleSheet, View, Text, TouchableOpacity, ScrollView, Switch, TextInput } from "react-native";
-import LoadingScreen from "../components/LoadingScreen"
-import env from "../../env.json"
+import LoadingScreen from "../../components/LoadingScreen"
+import env from "../../../env.json"
 
-export default function TimeForm(props) {
-    const [data, setData] = useState(props.route.params)
+export default function Form(props) {
+    const [data, setData] = useState(null)
     const [week, setWeek] = useState(null)
     const [statusTimeButton, setStatusTimeButton] = useState({})
 
     useEffect(() => {
+        setData(props.route.params)
         fetch(`${env.host}/barber/week`)
             .then(response => response.json())
             .then(json => setWeek(json))
@@ -47,7 +48,7 @@ export default function TimeForm(props) {
                             <LoadingScreen />
                         }
 
-                        <TouchableOpacity style={styles.button} onPress={() => {props.navigation.push('DailyForm',{barber_id:data['barber_id'],times:statusTimeButton},) }}>
+                        <TouchableOpacity style={styles.button} onPress={() => { props.navigation.push('DailyForm', { barber_id: data['barber_id'], times: statusTimeButton },) }}>
                             <Text style={styles.textButton}>Confirmar</Text>
                         </TouchableOpacity>
 
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
     },
     textWeek: {
         fontSize: 16,
-        color:'#3c4659'
+        color: '#3c4659'
     },
     input: {
         backgroundColor: '#ccced9',

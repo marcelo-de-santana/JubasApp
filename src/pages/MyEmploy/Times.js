@@ -1,24 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text, TouchableOpacity, ScrollView } from "react-native";
-import LoadignScreen from "../components/LoadingScreen"
+import env from "../../../env.json";
+import LoadignScreen from "../../components/LoadingScreen"
 
-export default function MyEmployeesTimes(props) {
-    const [data, setData] = useState(props.route.params);
+export default function Times(props) {
+    const [data, setData] = useState(null);
+    useEffect(() => {
+        fetch(`${env.host}/barber/${props.route.params.barber_id}/service-hour`)
+            .then(response => response.json())
+            .then(json => setData(json))
+            .catch(error => console.log(error))
+    }, [])
 
     if (data != null) {
         return (
             <View style={styles.container}>
                 <ScrollView style={styles.scroll}>
 
-                    <Text style={styles.textTitle}>{data.barber_name}</Text>
+                    <Text style={styles.textTitle}>{data[0]?.barber_name}</Text>
 
-                    {data.times.map(item => (
+                    {data[0]?.times.map((item, index) => (
                         <View style={styles.boxTimes} key={item.weekday}>
 
                             <View style={styles.boxHeader}>
                                 <Text style={styles.textHeader}>{item.weekday}</Text>
                                 <TouchableOpacity
-                                    onPress={() => { alert('') }}
+                                    onPress={() => { props.navigation.navigate('EditForm', { time_id: data[0].time_id, dayInfo: data[0].times[index] }) }}
                                 >
                                     <Text style={styles.textHeader}>Editar</Text>
                                 </TouchableOpacity>
@@ -54,8 +61,7 @@ export default function MyEmployeesTimes(props) {
 
                 </ScrollView>
                 <TouchableOpacity style={styles.insertButton}
-                    onPress={() => { props.navigation.push('TimeForm', data) }}
-                >
+                    onPress={() => { props.navigation.push('TimeForm', { barber_id: data[0]?.barber_id, times: data[0]?.times }) }}>
                     <Text style={styles.textInsertButton}>Inserir</Text>
                 </TouchableOpacity>
             </View>

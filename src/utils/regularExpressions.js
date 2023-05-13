@@ -8,4 +8,4 @@ export const birthday = /^(?:(?:31(\/)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/)(?:
 export const cpfNumber = /^(\d{3})\.(\d{3})\.(\d{3})-(\d{2})/;
 
 //REGEX PARA 24 HORAS
-export const time = /^(\d{2}):(\d{2})$/
+export const time = /^(([0-1][0-9])|([2][0-3])):([0-5][0-9])$/
