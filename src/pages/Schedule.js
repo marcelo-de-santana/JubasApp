@@ -7,6 +7,7 @@ import {
   View,
 } from 'react-native';
 import env from "../../env.json";
+import all from "../staticData/schedule/all-times.json"
 import LoadingScreen from '../components/LoadingScreen';
 
 export default function Schedule({ navigation }) {
@@ -18,7 +19,10 @@ export default function Schedule({ navigation }) {
     fetch(`${env.host}/schedule/all-times`)
       .then(response => response.json())
       .then(json => setScheduleData(json))
-      .catch(err => console.log(err))
+      .catch(err => {
+		setScheduleData(all)
+		console.log(err)
+      })
   }
 
   function timeResponse(id, barber_name, time) {

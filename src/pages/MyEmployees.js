@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, ScrollView, View } from "react-native";
 import env from "../../env.json";
+import rt from "../staticData/barber/root.json"
 import LoadScreen from "../components/LoadingScreen"
 
 export default function MyEmployees({ navigation }) {
@@ -10,7 +11,10 @@ export default function MyEmployees({ navigation }) {
         fetch(`${env.host}/barber/`)
             .then(response => response.json())
             .then(json => setData(json))
-            .catch(error => console.log(error))
+            .catch(error => {
+		setData(rt)
+		console.log(error)
+	    })
     }, [])
 
     if (data != null) {
