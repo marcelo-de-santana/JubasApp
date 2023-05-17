@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Keyboard, Pressable, StyleSheet, View, Text, TouchableOpacity, ScrollView, Switch, TextInput } from "react-native";
 import TextAlert from "../../components/TextAlert"
 import env from "../../../env.json";
-import * as validations from "../../utils/validations";
+import validations from "../../utils/inputValidations";
 import * as regx from "../../utils/regularExpressions"
 
 export default function Insert(props) {

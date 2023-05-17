@@ -7,7 +7,6 @@ import {
   View,
 } from 'react-native';
 import env from "../../env.json";
-import all from "../staticData/schedule/all-times.json"
 import LoadingScreen from '../components/LoadingScreen';
 
 export default function Schedule({ navigation }) {

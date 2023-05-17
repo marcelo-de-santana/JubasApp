@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Alert, Keyboard, Pressable, ScrollView, StyleSheet, Switch, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import TextAlert from "../../components/TextAlert";
 import env from "../../../env.json";
-import * as validations from "../../utils/validations";
+import validations from "../../utils/inputValidations";
 import * as regx from "../../utils/regularExpressions";
 
 export default function Edit(props) {

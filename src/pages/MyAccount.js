@@ -5,7 +5,7 @@ import env from "../../env.json"
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import * as regx from "../utils/regularExpressions";
-import * as mask from "../utils/validations"
+import mask from "../utils/inputValidations"
 
 export default function MyAccount({ navigation }) {
     /**

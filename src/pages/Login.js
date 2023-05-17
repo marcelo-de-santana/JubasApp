@@ -4,7 +4,7 @@ import TextAlert from "../components/TextAlert"
 import env from "../../env.json"
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import * as validation from "../utils/validations"
+import validation from "../utils/inputValidations"
 import * as regx from "../utils/regularExpressions"
 
 export default function Login({ navigation }) {

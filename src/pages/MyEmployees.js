@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, ScrollView, View } from "react-native";
 import env from "../../env.json";
-import rt from "../staticData/barber/root.json"
 import LoadScreen from "../components/LoadingScreen"
 
 export default function MyEmployees({ navigation }) {

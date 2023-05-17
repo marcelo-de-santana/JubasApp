@@ -1,4 +1,4 @@
-export function cpf(event) {
+function cpf(event) {
     let value = event
     value = value.replace(/\D/g, '')
     value = value.replace(/^(\d{3})(\d)/, "$1.$2")
@@ -7,7 +7,13 @@ export function cpf(event) {
     return value
 }
 
-export function birthday(event){
+function name(event) {
+    let value = event
+    value = value.replace(/^\d{0}[0-9]/, '')
+    return value
+}
+
+function birthday(event) {
     let value = event
     value = value.replace(/\D/g, '')
     value = value.replace(/^(\d{2})(\d)/, '$1/$2')
@@ -16,7 +22,7 @@ export function birthday(event){
     return value
 }
 
-export function phone(event) {
+function phone(event) {
     let value = event
     value = value.replace(/\D/g, '')
     value = value.replace(/^(\d{2})(\d)/, '($1)$2')
@@ -24,10 +30,12 @@ export function phone(event) {
     return value
 }
 
-export function time(event){
+function time(event) {
     let value = event
-    value = value.replace(/\D/,'')
-    value = value.replace(/\d([2][4]|[3-9][0-9][0-9][0-9])/,'00:00')
+    value = value.replace(/\D/, '')
+    value = value.replace(/\d([2][4]|[3-9][0-9][0-9][0-9])/, '00:00')
     value = value.replace(/([0][0-9]|[1][0-9]|[2][0-3])([0-5][0-9])/, '$1:$2')
     return value
 }
+
+export default { birthday, cpf, name, phone, time }
