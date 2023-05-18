@@ -38,7 +38,7 @@ export default function Insert(props) {
         let params = []
         for (let id in data.times) {
             params.push({
-                barber_id: data.barber_id,
+                barber_id: props.route.params.barber_id,
                 weekday: id,
                 start_time: timeValues.start_time,
                 end_time: timeValues.end_time,
@@ -59,7 +59,7 @@ export default function Insert(props) {
         if (response.status != 201) {
             alert(json.message)
         } else {
-            props.navigation.navigate('MyEmployeesTimes',{barber_id: data?.barber_id})
+            props.navigation.navigate('MyEmployees')
         }
 
     }

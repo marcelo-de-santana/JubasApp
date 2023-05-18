@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Alert, Keyboard, Pressable, ScrollView, StyleSheet, Switch, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import TextAlert from "../../components/TextAlert";
 import env from "../../../env.json";
-import validations from "../../utils/inputValidations";
-import * as regx from "../../utils/regularExpressions";
+import mask from "../../utils/mask";
+import regx from "../../utils/validation";
 
 export default function Edit(props) {
     const [data, setData] = useState(props.route.params)
@@ -58,12 +58,13 @@ export default function Edit(props) {
                 time_id: data.time_id,
                 times: timeValues,
                 status: statusButton
-            })
-            
+            })    
         })
+        let json = await response.json()
+
         if(response.status == 200){
-            Alert.alert(response.message)
-            props.navigation.navigate('MyEmployeesTimes',{barber_id: data?.barber_id})
+            Alert.alert(json.message)
+            props.navigation.navigate('MyEmployees')
         } else {
             Alert.alert(response.message)
         }
@@ -79,9 +80,11 @@ export default function Edit(props) {
                 time_id: data.time_id
             })
         })
+        let json = await response.json()
+
         if(response.status == 200){
-            Alert.alert('Registro excluído com sucesso')
-            props.navigation.navigate('MyEmployeesTimes',{barber_id: data?.barber_id})
+            Alert.alert(json.message)
+            props.navigation.navigate('MyEmployees')
         } else {
             Alert.alert(response.message)
         }
@@ -106,7 +109,7 @@ export default function Edit(props) {
                             placeholder="07:00"
                             maxLength={5}
                             value={timeValues['start_time']}
-                            onChangeText={value => { setTimeValues(prev => ({ ...prev, start_time: validations.time(value) })) }}
+                            onChangeText={value => { setTimeValues(prev => ({ ...prev, start_time: mask.time(value) })) }}
                         />
                         {(!statusTime?.start_time) ? <TextAlert error={'*Campo obrigatório'} /> : ''}
 
@@ -117,7 +120,7 @@ export default function Edit(props) {
                             placeholder="11:00"
                             maxLength={5}
                             value={timeValues['start_interval']}
-                            onChangeText={value => { setTimeValues(prev => ({ ...prev, start_interval: validations.time(value) })) }}
+                            onChangeText={value => { setTimeValues(prev => ({ ...prev, start_interval: mask.time(value) })) }}
                         />
                         {(!statusTime?.start_interval) ? <TextAlert error={'*Campo obrigatório'} /> : ''}
 
@@ -128,7 +131,7 @@ export default function Edit(props) {
                             placeholder="12:00"
                             maxLength={5}
                             value={timeValues['end_interval']}
-                            onChangeText={value => setTimeValues(prev => ({ ...prev, end_interval: validations.time(value) }))}
+                            onChangeText={value => setTimeValues(prev => ({ ...prev, end_interval: mask.time(value) }))}
                         />
                         {(!statusTime?.end_interval) ? <TextAlert error={'*Campo obrigatório'} /> : ''}
 
@@ -139,7 +142,7 @@ export default function Edit(props) {
                             placeholder="16:00"
                             maxLength={5}
                             value={timeValues['end_time']}
-                            onChangeText={value => setTimeValues(prev => ({ ...prev, end_time: validations.time(value) }))}
+                            onChangeText={value => setTimeValues(prev => ({ ...prev, end_time: mask.time(value) }))}
                         />
                         {(!statusTime?.end_time) ? <TextAlert error={'*Campo obrigatório'} /> : ''}
 

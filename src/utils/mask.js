@@ -38,4 +38,4 @@ function time(event) {
     return value
 }
 
-export default { cpf, date, name, phone }
+export default { cpf, date, name, phone, time }

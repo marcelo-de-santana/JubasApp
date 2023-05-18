@@ -25,7 +25,7 @@ export default function Form(props) {
                     <Switch
                         value={statusTimeButton[item.id]}
                         onChange={() => { setStatusTimeButton(prevState => ({ ...prevState, [item.id]: !statusTimeButton[item.id] })) }}
-                        disabled={(data.times.find(value => (item.day == value.weekday))) ? true : false}
+                        disabled={(data.times?.find(value => (item.day == value.weekday))) ? true : false}
                     />
 
                 </View>
@@ -48,7 +48,7 @@ export default function Form(props) {
                             <LoadingScreen />
                         }
 
-                        <TouchableOpacity style={styles.button} onPress={() => { props.navigation.push('DailyForm', { barber_id: data['barber_id'], times: statusTimeButton },) }}>
+                        <TouchableOpacity style={styles.button} onPress={() => { props.navigation.push('DailyForm', { barber_id: props.route.params.barber_id, times: statusTimeButton },) }}>
                             <Text style={styles.textButton}>Confirmar</Text>
                         </TouchableOpacity>
 

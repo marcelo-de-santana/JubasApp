@@ -6,6 +6,8 @@ import LoadScreen from "../components/LoadingScreen"
 export default function MyEmployees({ navigation }) {
     const [data, setData] = useState(null);
 
+    console.log(data)
+
     useEffect(() => {
         fetch(`${env.host}/barber/`)
             .then(response => response.json())

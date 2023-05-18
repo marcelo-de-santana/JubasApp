@@ -10,7 +10,7 @@ export default function Times(props) {
             .then(response => response.json())
             .then(json => setData(json))
             .catch(error => console.log(error))
-    }, [])
+    },[]);
 
     if (data != null) {
         return (
@@ -61,7 +61,7 @@ export default function Times(props) {
 
                 </ScrollView>
                 <TouchableOpacity style={styles.insertButton}
-                    onPress={() => { props.navigation.push('TimeForm', { barber_id: data[0]?.barber_id, times: data[0]?.times }) }}>
+                    onPress={() => { props.navigation.push('TimeForm', { barber_id: props.route.params.barber_id, times: data[0]?.times }) }}>
                     <Text style={styles.textInsertButton}>Inserir</Text>
                 </TouchableOpacity>
             </View>
@@ -70,7 +70,7 @@ export default function Times(props) {
 
     return (
         <LoadignScreen />
-    )
+    );
 }
 
 const styles = StyleSheet.create({

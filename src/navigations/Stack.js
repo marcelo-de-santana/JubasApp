@@ -11,6 +11,7 @@ import Times from '../pages/MyEmploy/Times';
 import Form from '../pages/MyEmploy/Form';
 import Insert from '../pages/MyEmploy/Insert';
 import Edit from '../pages/MyEmploy/Edit';
+import MyEmployees from '../pages/MyEmployees';
 
 const Stack = createStackNavigator();
 
@@ -47,6 +48,16 @@ export default function StackScreens() {
 						headerTintColor: '#ffffff'
 					}}
 				/>
+				<Stack.Screen name="MyEmployees" component={MyEmployees}
+					options={{
+						title: 'Horários de atendimento',
+						headerStyle: {
+							backgroundColor: "#3c4659"
+						},
+						headerTintColor: '#ffffff'
+					}}
+				/>
+
 				<Stack.Screen name="About" component={About} />
 
 				<Stack.Screen name="MyEmployeesTimes" component={Times}
@@ -83,8 +94,7 @@ export default function StackScreens() {
 							backgroundColor: "#3c4659"
 						},
 						headerTintColor: '#ffffff'
-					}}>
-				</Stack.Screen>
+					}}/>
 
 			</Stack.Navigator>
 
