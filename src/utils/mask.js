@@ -13,7 +13,7 @@ function name(event) {
     return value
 }
 
-function birthday(event) {
+function date(event) {
     let value = event
     value = value.replace(/\D/g, '')
     value = value.replace(/^(\d{2})(\d)/, '$1/$2')
@@ -38,4 +38,4 @@ function time(event) {
     return value
 }
 
-export default { birthday, cpf, name, phone, time }
+export default { cpf, date, name, phone }

@@ -5,7 +5,7 @@ import env from "../../env.json"
 import regx from "../utils/validation";
 import mask from "../utils/mask"
 
-export default function MyAccount({ navigation }) {
+export default function SignUp({ navigation }) {
     /**
      * Método responsável por realizar o cadastro do cliente
      */
@@ -32,7 +32,6 @@ export default function MyAccount({ navigation }) {
 
 
     function validateForm() {
-
         if (!regx.cpf.test(user.cpf)) {
             setErrors(prevState => ({ ...prevState, cpf: true }))
         } else {
@@ -58,34 +57,33 @@ export default function MyAccount({ navigation }) {
         } else {
             setErrors(prevState => ({ ...prevState, phoneNumber: false }))
         }
-        if (user.password != user.checkPass || user.password  == '' || user.checkPass == '') {
+        if (user.password != user.checkPass || user.password == '' || user.checkPass == '') {
             setErrors(prevState => ({ ...prevState, password: true, checkPass: true }))
         } else {
             setErrors(prevState => ({ ...prevState, password: false, checkPass: false }))
         }
-        //VALIDAÇÃO DE TODOS OS CAMPOS
-        if (!Object.values(errors).includes(true)) {
-            sendForm()
-        }
-    };
+        sendForm()
+    }
 
     async function sendForm() {
-        const response = await fetch(`${env.host}/client/sign-up`, {
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(user)
-        })
-        const json = await response.json();
-        if (response.status === 201) {
-            alert(json.message)
-            navigation.navigate("Login")
-        } else {
-            alert(json.message)
+        //VERIFICAÇÃO DE INPUTS
+        if (Object.values(errors).includes(true) === false) {
+            const response = await fetch(`${env.host}/users/sign-up`, {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(user)
+            })
+            const json = await response.json();
+            if (response.status === 201) {
+                alert(json.message)
+                navigation.navigate("Login")
+            } else {
+                alert(json.message)
+            }
         }
-
     }
 
 
@@ -138,7 +136,7 @@ export default function MyAccount({ navigation }) {
                             placeholderTextColor="#161c2660"
                             maxLength={10}
                             value={user.birthday}
-                            onChangeText={value => setUser(prevState => ({ ...prevState, birthday: mask.birthday(value) }))}
+                            onChangeText={value => setUser(prevState => ({ ...prevState, birthday: mask.date(value) }))}
                         />
                         {errors.birthday ? <TextAlert error={message} /> : ''}
 

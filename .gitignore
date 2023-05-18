@@ -68,3 +68,6 @@ env.json
 
 # database
 *.sql
+
+# vscode
+.vscode
