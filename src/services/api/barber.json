@@ -1,0 +1,140 @@
+[
+    {
+        "time_id": 10,
+        "barber_id": 4,
+        "barber_name": "Gabriel Navalha",
+        "times": [
+            {
+                "weekday": "Terça",
+                "start_time": "11:03:00",
+                "end_time": "20:30:00",
+                "start_interval": "16:00:00",
+                "end_interval": "17:00:00",
+                "status": 1
+            },
+            {
+                "weekday": "Quarta",
+                "start_time": "07:00:00",
+                "end_time": "17:00:00",
+                "start_interval": "11:00:00",
+                "end_interval": "12:00:00",
+                "status": 1
+            }
+        ]
+    },
+    {
+        "time_id": 46,
+        "barber_id": 2,
+        "barber_name": "Gerson de Castro",
+        "times": [
+            {
+                "weekday": "Domingo",
+                "start_time": "07:00:00",
+                "end_time": "17:00:00",
+                "start_interval": "11:00:00",
+                "end_interval": "12:00:00",
+                "status": 1
+            },
+            {
+                "weekday": "Terça",
+                "start_time": "07:00:00",
+                "end_time": "17:00:00",
+                "start_interval": "11:00:00",
+                "end_interval": "12:00:00",
+                "status": 1
+            }
+        ]
+    },
+    {
+        "time_id": 23,
+        "barber_id": 5,
+        "barber_name": "João Marcos",
+        "times": [
+            {
+                "weekday": "Sábado",
+                "start_time": "07:00:00",
+                "end_time": "17:00:00",
+                "start_interval": "11:00:00",
+                "end_interval": "12:00:00",
+                "status": 1
+            }
+        ]
+    },
+    {
+        "time_id": 1,
+        "barber_id": 1,
+        "barber_name": "Juba de Leão",
+        "times": [
+            {
+                "weekday": "Terça",
+                "start_time": "14:00:00",
+                "end_time": "20:30:00",
+                "start_interval": "16:00:00",
+                "end_interval": "17:00:00",
+                "status": 1
+            },
+            {
+                "weekday": "Quarta",
+                "start_time": "11:00:00",
+                "end_time": "20:30:00",
+                "start_interval": "16:00:00",
+                "end_interval": "17:00:00",
+                "status": 1
+            }
+        ]
+    },
+    {
+        "time_id": 29,
+        "barber_id": 6,
+        "barber_name": "Reis Melo",
+        "times": [
+            {
+                "weekday": "Sexta",
+                "start_time": "07:01:00",
+                "end_time": "17:00:00",
+                "start_interval": "11:00:00",
+                "end_interval": "12:00:00",
+                "status": 1
+            },
+            {
+                "weekday": "Sábado",
+                "start_time": "07:00:00",
+                "end_time": "17:00:00",
+                "start_interval": "11:00:00",
+                "end_interval": "12:00:00",
+                "status": 1
+            }
+        ]
+    },
+    {
+        "time_id": 39,
+        "barber_id": 3,
+        "barber_name": "Ulysses Guimaraes",
+        "times": [
+            {
+                "weekday": "Domingo",
+                "start_time": "07:01:00",
+                "end_time": "17:00:00",
+                "start_interval": "11:00:00",
+                "end_interval": "12:00:00",
+                "status": 1
+            },
+            {
+                "weekday": "Sexta",
+                "start_time": "07:01:00",
+                "end_time": "17:00:00",
+                "start_interval": "11:00:00",
+                "end_interval": "12:00:00",
+                "status": 1
+            },
+            {
+                "weekday": "Sábado",
+                "start_time": "07:00:00",
+                "end_time": "17:00:00",
+                "start_interval": "11:00:00",
+                "end_interval": "12:00:00",
+                "status": 1
+            }
+        ]
+    }
+]

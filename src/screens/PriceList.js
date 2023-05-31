@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import env from "../../env.json";
 import LoadingScreen from "../components/LoadingScreen";
-import SwitchButton from "../components/SwitchButton";
+import SwitchButton from "../components/buttons/SwitchButton";
 import UnderConstruction from "./UnderConstruction"
 
 export default function PriceList() {

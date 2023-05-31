@@ -1,0 +1,197 @@
+[
+    {
+        "category_id": 1,
+        "category_name": "Corte de cabelo masculino",
+        "services": [
+            {
+                "service_id": 1,
+                "service_name": "Corte clássico com tesoura",
+                "price": 0,
+                "duration": "00:40:00",
+                "providers": []
+            },
+            {
+                "service_id": 2,
+                "service_name": "Corte moderno com máquina",
+                "price": 0,
+                "duration": "00:20:00",
+                "providers": []
+            },
+            {
+                "service_id": 3,
+                "service_name": "Corte degradê com máquina",
+                "price": 0,
+                "duration": "00:40:00",
+                "providers": [
+                    {
+                        "barber_id": 2,
+                        "barber_name": "Gerson de Castro"
+                    }
+                ]
+            },
+            {
+                "service_id": 4,
+                "service_name": "Corte com tesoura e navalha",
+                "price": 0,
+                "duration": "00:50:00",
+                "providers": []
+            }
+        ]
+    },
+    {
+        "category_id": 2,
+        "category_name": "Serviços de barba",
+        "services": [
+            {
+                "service_id": 5,
+                "service_name": "Barba completa com tesoura e navalha",
+                "price": 0,
+                "duration": "00:30:00",
+                "providers": []
+            },
+            {
+                "service_id": 6,
+                "service_name": "Barba com máquina",
+                "price": 0,
+                "duration": "00:05:00",
+                "providers": []
+            },
+            {
+                "service_id": 7,
+                "service_name": "Aparar barba",
+                "price": 0,
+                "duration": "00:10:00",
+                "providers": []
+            },
+            {
+                "service_id": 8,
+                "service_name": "Modelar barba",
+                "price": 0,
+                "duration": "00:15:00",
+                "providers": []
+            }
+        ]
+    },
+    {
+        "category_id": 3,
+        "category_name": "Tratamentos capilares",
+        "services": [
+            {
+                "service_id": 9,
+                "service_name": "Lavagem de cabelo",
+                "price": 0,
+                "duration": "00:10:00",
+                "providers": []
+            },
+            {
+                "service_id": 10,
+                "service_name": "Hidratação capilar",
+                "price": 0,
+                "duration": "00:20:00",
+                "providers": []
+            },
+            {
+                "service_id": 11,
+                "service_name": "Tratamento para queda de cabelo",
+                "price": 0,
+                "duration": "00:30:00",
+                "providers": []
+            },
+            {
+                "service_id": 12,
+                "service_name": "Tratamento para cabelos oleosos",
+                "price": 0,
+                "duration": "00:20:00",
+                "providers": []
+            },
+            {
+                "service_id": 13,
+                "service_name": "Tratamento para cabelos ressecados",
+                "price": 0,
+                "duration": "00:30:00",
+                "providers": []
+            }
+        ]
+    },
+    {
+        "category_id": 4,
+        "category_name": "Depilação",
+        "services": [
+            {
+                "service_id": 14,
+                "service_name": "Depilação facial com cera",
+                "price": 0,
+                "duration": "00:15:00",
+                "providers": []
+            },
+            {
+                "service_id": 15,
+                "service_name": "Depilação corporal com cera",
+                "price": 0,
+                "duration": "01:00:00",
+                "providers": []
+            },
+            {
+                "service_id": 16,
+                "service_name": "Depilação íntima masculina",
+                "price": 0,
+                "duration": "01:00:00",
+                "providers": []
+            }
+        ]
+    },
+    {
+        "category_id": 5,
+        "category_name": "Cuidados com a pele",
+        "services": [
+            {
+                "service_id": 17,
+                "service_name": "Limpeza facial",
+                "price": 0,
+                "duration": "00:30:00",
+                "providers": []
+            },
+            {
+                "service_id": 18,
+                "service_name": "Massagem facial",
+                "price": 0,
+                "duration": "00:30:00",
+                "providers": []
+            }
+        ]
+    },
+    {
+        "category_id": 6,
+        "category_name": "Outros serviços",
+        "services": [
+            {
+                "service_id": 19,
+                "service_name": "Manicure masculina",
+                "price": 0,
+                "duration": "00:20:00",
+                "providers": []
+            },
+            {
+                "service_id": 20,
+                "service_name": "Pedicure masculina",
+                "price": 0,
+                "duration": "00:20:00",
+                "providers": []
+            },
+            {
+                "service_id": 21,
+                "service_name": "Design de sobrancelha",
+                "price": 0,
+                "duration": "00:20:00",
+                "providers": []
+            },
+            {
+                "service_id": 22,
+                "service_name": "Coloração de cabelo",
+                "price": 0,
+                "duration": "00:45:00",
+                "providers": []
+            }
+        ]
+    }
+]

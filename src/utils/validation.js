@@ -14,6 +14,7 @@ const name = /^(\d)/;
 const phone = /^\((\d{2})\)(\d{4,5})-(\d{4})$/;
 
 //REGEX PARA 24 HORAS
-const time = /^(([0-1][0-9])|([2][0-3])):([0-5][0-9])$/
+const time = /^([01]\d|2[0-3]):([0-5]\d)$/;
+//const time = /^([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$/
 
 export default { birthday, cpf, email, name, phone, time }
