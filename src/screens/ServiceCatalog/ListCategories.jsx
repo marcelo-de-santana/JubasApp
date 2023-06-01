@@ -24,12 +24,18 @@ export default function ListCategories({ navigation }) {
             <ScrollView style={{ height: '94%' }}>
                 <Text style={global.textHeader}>Lista de categorias</Text>
                 {specialties.map((item, index) => (
-                    <TouchableOpacity key={item.category_id} style={global.blueBoxItems} onPress={() => changeScreen('ListServices', [index])}>
-                        <Text style={global.whiteTextMiddle}>{item.category_name}</Text>
-                    </TouchableOpacity>
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between'}} key={item.category_id} >
+                    	<TouchableOpacity style={global.blueBoxItems} onPress={() => changeScreen('ListServices', [index])}>
+                        	<Text style={global.whiteTextMiddle}>{item.category_name}</Text>
+                    	</TouchableOpacity>
+                    	<TouchableOpacity onPress={() => navigation.push('CategoryEditForm')}>
+	                    	<Text style={global.blackTextSmall}>Editar</Text>
+                    	</TouchableOpacity>
+                    </View>
+                    
                 ))}
             </ScrollView>
-            <TouchableOpacity style={global.button}>
+            <TouchableOpacity style={global.button} onPress={() => navigation.navigate('CategoryEntryForm')}>
                 <Text style={global.textButton}>Adicionar Categoria</Text>
             </TouchableOpacity>
         </View>

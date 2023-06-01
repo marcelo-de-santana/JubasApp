@@ -12,7 +12,7 @@ import LoadingScreen from '../components/LoadingScreen';
 import d from '../services/api/schedule.json'
 
 export default function Schedule({ navigation }) {
-  const [scheduleData, setScheduleData] = useState([])
+  const [scheduleData, setScheduleData] = useState(d)
 
   useEffect(() => searchSchedule(), [])
 

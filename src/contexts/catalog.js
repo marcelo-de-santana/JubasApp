@@ -1,10 +1,11 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import env from "../../env.json";
+import d from "../services/api/scheduleSpecialties.json";
 
 const CatalogContext = createContext();
 
 export default function CatalogProvider({ children }) {
-    const [specialties, setSpecialties] = useState([]);
+    const [specialties, setSpecialties] = useState(d);
     const [categoryIndex, setCategoryIndex] = useState(null);
 
     useEffect(() => {

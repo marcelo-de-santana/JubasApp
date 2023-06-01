@@ -18,7 +18,7 @@ export default function ListServices({ navigation, route }) {
                 </View>
             ))}
             </ScrollView>
-            <TouchableOpacity style={global.button}>
+            <TouchableOpacity style={global.button} onPress={() => navigation.push('ServiceEntryForm')}>
                 <Text style={global.textButton}>Adicionar Serviço</Text>
             </TouchableOpacity>
         </View>
