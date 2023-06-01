@@ -4,8 +4,9 @@ import Schedule from '../screens/Schedule';
 import About from '../screens/About';
 import MyShopping from '../screens/MyShopping';
 import UnderConstruction from '../screens/UnderConstruction';
-import PriceList from '../screens/PriceList';
 import { EmployeesScreen } from './EmployeesScreens';
+import { CatalogScreen } from './CatalogScreens';
+
 
 const Drawer = createDrawerNavigator();
 
@@ -30,7 +31,7 @@ export default function DrawerScreens() {
 			<Drawer.Screen name="Minha conta" component={UnderConstruction} />
 			<Drawer.Screen name="Minhas compras" component={MyShopping} />
 			<Drawer.Screen name="Promoções" component={UnderConstruction} />
-			<Drawer.Screen name="Tabela de preços" component={PriceList} />
+			<Drawer.Screen name="Catálogo de serviços" component={CatalogScreen} />
 			<Drawer.Screen name="Gerenciar agenda" component={UnderConstruction} />
 			<Drawer.Screen name="Gerenciar barbeiros" component={EmployeesScreen} />
 			<Drawer.Screen name="Gerenciar pagamentos" component={UnderConstruction} />

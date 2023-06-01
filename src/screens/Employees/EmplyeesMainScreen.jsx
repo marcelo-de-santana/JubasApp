@@ -13,7 +13,7 @@ export default function ({ navigation }) {
 
                 <TouchableOpacity
                     style={global.blueBoxItems} onPress={() => navigation.navigate('AllEmployees')}>
-                    <Text style={global.whiteTextMiddle}>Todos os funcionários</Text>
+                    <Text style={global.whiteTextMiddle}>Status dos funcionários</Text>
                 </TouchableOpacity>
                 
                 <TouchableOpacity

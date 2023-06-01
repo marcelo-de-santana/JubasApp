@@ -119,6 +119,20 @@ const global = StyleSheet.create({
         height: 40,
         justifyContent: "center",
     },
+    buttonSelectionInactive: {
+        backgroundColor: "#CCCED9",
+        borderRadius: 6,
+        marginVertical: 5,
+        padding: 10,
+        width: "30%",
+    },
+    buttonSelectionActive: {
+        backgroundColor: "#3C4659",
+        borderRadius: 6,
+        marginVertical: 5,
+        padding: 10,
+        width: "30%",
+    },
     textButton: {
         textAlign: 'center',
         color: "#fff",

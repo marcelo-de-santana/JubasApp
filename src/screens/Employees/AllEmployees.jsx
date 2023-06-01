@@ -1,9 +1,9 @@
-import { useEmployee } from "../../../contexts/employee";
-import LoadScreen from "../../../components/LoadingScreen";
+import { useEmployee } from "../../contexts/employee";
+import LoadScreen from "../../components/LoadingScreen";
 import { Alert, Text, TouchableOpacity, ScrollView, View } from "react-native";
-import { global } from "../../../components/styles/global";
+import { global } from "../../components/styles/global";
 import { useEffect, useState } from "react";
-import env from "../../../../env.json";
+import env from "../../../env.json";
 
 export default function InactiveEmployees() {
     const [loading, setLoading] = useState(true);

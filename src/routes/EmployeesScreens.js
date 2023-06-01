@@ -5,7 +5,7 @@ import ActiveEmployees from '../screens/Employees/Active/ActiveEmployees';
 import EmployeeOverview from '../screens/Employees/EmployeeOverview';
 import SpecialtiesEmployee from '../screens/Employees/Specialties/SpecialtiesEmployee';
 import RegisterEmployee from '../screens/Employees/RegisterEmployee';
-import AllEmployees from '../screens/Employees/All/AllEmployees';
+import AllEmployees from '../screens/Employees/AllEmployees';
 import EmployeeTimeList from '../screens/Employees/Active/EmployeeTimeList';
 import TimeEditForm from '../screens/Employees/Active/TimeEditForm';
 import DaysEntryForm from '../screens/Employees/Active/DaysEntryForm';

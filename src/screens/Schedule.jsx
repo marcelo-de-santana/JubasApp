@@ -20,7 +20,7 @@ export default function Schedule({ navigation }) {
     fetch(`${env.host}/schedule/`)
       .then(response => response.json())
       .then(json => setScheduleData(json))
-      .catch(err =>	console.log(err))
+      .catch(err => console.log(err))
   }
 
 
@@ -35,10 +35,14 @@ export default function Schedule({ navigation }) {
       <View style={global.container}>
 
         <ScrollView style={{ height: '90%' }}>
-          <TouchableOpacity style={global.greyBoxItems}><Text style={global.whiteTextMiddle}>Terça</Text></TouchableOpacity>
+          <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+            <TouchableOpacity style={global.buttonSelectionInactive}><Text style={global.whiteTextSmallCenter}>Hoje</Text></TouchableOpacity>
+            <TouchableOpacity style={global.buttonSelectionActive}><Text style={global.whiteTextSmallCenter}>Amanhã</Text></TouchableOpacity>
+            <TouchableOpacity style={global.buttonSelectionActive}><Text style={global.whiteTextSmallCenter}>Quinta</Text></TouchableOpacity>
+          </View>
           {scheduleData.map((item) => (
             <View key={item.barber_id}>
-              <Text  style={global.textHeader}>{item.barber_name}</Text>
+              <Text style={global.textHeader}>{item.barber_name}</Text>
               <View style={styles.timesBox}>
 
                 {item.available_times.map((aTimes) => {
@@ -83,7 +87,7 @@ export default function Schedule({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     marginVertical: 10,
-    marginHorizontal:10,
+    marginHorizontal: 10,
     backgroundColor: "#f2f2f2",
   },
   boxHeader: {
@@ -117,9 +121,9 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   scrollInfo: {
-    textAlign:'center',
+    textAlign: 'center',
     color: '#3c4659',
-    marginBottom:10,
+    marginBottom: 10,
   },
   button: {
     backgroundColor: "#3c4659",
