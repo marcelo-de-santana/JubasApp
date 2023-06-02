@@ -41,6 +41,12 @@ const global = StyleSheet.create({
         marginVertical: 5,
         padding: 10,
     },
+    greyBoxItemsSmall: {
+        backgroundColor: "#CCCED9",
+        borderRadius: 6,
+        marginVertical: 2.5,
+        padding: 5,
+    },
     switchBox: {
         flexDirection: 'row',
         flexWrap: "wrap",
@@ -118,6 +124,7 @@ const global = StyleSheet.create({
         borderRadius: 6,
         height: 40,
         justifyContent: "center",
+        marginTop:5
     },
     buttonSelectionInactive: {
         backgroundColor: "#CCCED9",
