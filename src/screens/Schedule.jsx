@@ -23,11 +23,9 @@ export default function Schedule({ navigation }) {
       .catch(err => console.log(err))
   }
 
-
-
   function timeResponse(id, barber_name, time) {
     alert(`Deseja marcar um atendimento com ${barber_name} às ${new Date(time).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}h?`)
-    navigation.navigate('ScheduleServices')
+    navigation.navigate('ServiceBook')
   };
 
   if (scheduleData?.length > 0) {
