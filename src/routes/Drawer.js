@@ -6,6 +6,7 @@ import MyShopping from '../screens/MyShopping';
 import UnderConstruction from '../screens/UnderConstruction';
 import { EmployeesScreen } from './EmployeesScreens';
 import { CatalogScreen } from './CatalogScreens';
+import ServiceBookScreens from './ServiceBookScreens';
 
 
 const Drawer = createDrawerNavigator();
@@ -28,16 +29,20 @@ export default function DrawerScreens() {
 			}}
 		>
 			<Drawer.Screen name="Home" component={Schedule} options={{ headerTitle: 'Jubas Barbearia', headerTitleAlign: 'center' }} />
-			<Drawer.Screen name="Minha conta" component={UnderConstruction} />
-			<Drawer.Screen name="Minhas compras" component={MyShopping} />
-			<Drawer.Screen name="Promoções" component={UnderConstruction} />
 			<Drawer.Screen name="Catálogo de serviços" component={CatalogScreen} />
-			<Drawer.Screen name="Gerenciar agenda" component={UnderConstruction} />
 			<Drawer.Screen name="Gerenciar barbeiros" component={EmployeesScreen} />
+
+			{/* <Drawer.Screen name="Minha conta" component={UnderConstruction} />
+			<Drawer.Screen name="Minhas compras" component={MyShopping} />
+			<Drawer.Screen name="Promoções" component={UnderConstruction} /> 
+			<Drawer.Screen name="Gerenciar agenda" component={UnderConstruction} />
+
 			<Drawer.Screen name="Gerenciar pagamentos" component={UnderConstruction} />
 			<Drawer.Screen name="Gerenciar estoque" component={UnderConstruction} />
 			<Drawer.Screen name="Acompanhar devolução" component={UnderConstruction} />
 			<Drawer.Screen name="Sobre" component={About} />
+			*/}
+
 		</Drawer.Navigator>
 	)
 }

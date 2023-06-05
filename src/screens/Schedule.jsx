@@ -3,7 +3,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
+  TouchableOpacity, TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import { global } from '../components/styles/global'
@@ -12,7 +12,9 @@ import LoadingScreen from '../components/LoadingScreen';
 import d from '../services/api/schedule.json'
 
 export default function Schedule({ navigation }) {
-  const [scheduleData, setScheduleData] = useState(d)
+  const [scheduleData, setScheduleData] = useState([]);
+  const currentDay = new Date().getDay();
+  const [dayIndex, setDayIndex] = useState(currentDay);
 
   useEffect(() => searchSchedule(), [])
 
@@ -24,61 +26,70 @@ export default function Schedule({ navigation }) {
   }
 
   function timeResponse(id, barber_name, time) {
-    alert(`Deseja marcar um atendimento com ${barber_name} às ${new Date(time).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}h?`)
+    alert(`Deseja marcar um atendimento com ${barber_name} às ${time}h?`)
     navigation.navigate('ServiceBook')
   };
 
-  if (scheduleData?.length > 0) {
-    return (
-      <View style={global.container}>
-
-        <ScrollView style={{ height: '90%' }}>
-          <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-            <TouchableOpacity style={global.buttonSelectionInactive}><Text style={global.whiteTextSmallCenter}>Hoje</Text></TouchableOpacity>
-            <TouchableOpacity style={global.buttonSelectionActive}><Text style={global.whiteTextSmallCenter}>Amanhã</Text></TouchableOpacity>
-            <TouchableOpacity style={global.buttonSelectionActive}><Text style={global.whiteTextSmallCenter}>Quinta</Text></TouchableOpacity>
-          </View>
-          {scheduleData.map((item) => (
-            <View key={item.barber_id}>
-              <Text style={global.textHeader}>{item.barber_name}</Text>
-              <View style={styles.timesBox}>
-
-                {item.available_times.map((aTimes) => {
-                  const isTimeUnavailable = item.unavailable_times.includes(aTimes)
-                  const textStyle = isTimeUnavailable ? styles.textUnATimes : styles.textATimes
-                  const key = isTimeUnavailable ? aTimes : `${item.barber_id}-${aTimes}`
-
-                  return (
-                    <TouchableOpacity
-                      key={key}
-                      onPress={() => timeResponse(item.barber_id, item.barber_name, aTimes)}
-                      disabled={isTimeUnavailable}
-                    >
-                      <Text style={textStyle}>{new Date(aTimes).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</Text>
-                    </TouchableOpacity>
-                  )
-
-                })}
-
-              </View>
-            </View>
-          ))}
-
-        </ScrollView>
-        <View style={styles.footerBox}>
-          <Text style={styles.scrollInfo}>Role para visualizar mais horários</Text>
-          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('ServiceBook')}>
-            <Text style={styles.textButton}>Marcar atendimento</Text>
-          </TouchableOpacity>
-        </View>
-
-      </View>
-    )
-  } else {
+  if (scheduleData.length === 0) {
     return (
       <LoadingScreen />
     )
   }
+  
+  return (
+    <View style={global.container}>
+
+      <ScrollView style={{ height: '90%' }}>
+
+        <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+          {scheduleData.map((item, index) => (
+            (index >= currentDay && index <= currentDay + 2) &&
+            <TouchableWithoutFeedback key={item.day_id} disabled={(dayIndex === index)} onPress={() => setDayIndex(index)}>
+              <View style={(dayIndex === index) ? global.buttonSelectionInactive : global.buttonSelectionActive} >
+                <Text style={global.whiteTextSmallCenter}>{(index == currentDay) ? 'Hoje' : item.day_name}</Text>
+              </View>
+            </TouchableWithoutFeedback>
+          ))}
+        </View>
+
+
+        {scheduleData[dayIndex].daily_schedule.map(item => (
+          <View key={item.barber_id}>
+            <Text style={global.textHeader}>{item.barber_name}</Text>
+            <View style={styles.timesBox}>
+
+              {item.available_times.map((time) => {
+                const isTimeUnavailable = item.unavailable_times.includes(time)
+                const textStyle = isTimeUnavailable ? styles.textUnATimes : styles.textATimes
+                const key = isTimeUnavailable ? time : `${item.barber_id}-${time}`
+
+                return (
+                  <TouchableOpacity
+                    key={key}
+                    onPress={() => timeResponse(item.barber_id, item.barber_name, time)}
+                    disabled={isTimeUnavailable}
+                  >
+                    <Text style={textStyle}>{time}</Text>
+                  </TouchableOpacity>
+                )
+
+              })}
+
+            </View>
+          </View>
+        ))}
+
+      </ScrollView >
+      <View style={styles.footerBox}>
+        <Text style={styles.scrollInfo}>Role para visualizar mais horários</Text>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('ServiceBook')}>
+          <Text style={styles.textButton}>Marcar atendimento</Text>
+        </TouchableOpacity>
+      </View>
+
+    </View >
+  )
+
 
 }
 

@@ -41,11 +41,13 @@ const global = StyleSheet.create({
         marginVertical: 5,
         padding: 10,
     },
-    greyBoxItemsSmall: {
+    greyBoxItemsFlex: {
         backgroundColor: "#CCCED9",
         borderRadius: 6,
-        marginVertical: 2.5,
-        padding: 5,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginVertical: 5,
+        padding: 10,
     },
     switchBox: {
         flexDirection: 'row',
@@ -65,6 +67,11 @@ const global = StyleSheet.create({
     whiteTextSmall: {
         color: "white",
         fontSize: 16,
+    },
+    whiteTextSmallVeryCenter: {
+        color: "white",
+        fontSize: 14,
+        textAlign: 'center'
     },
     whiteTextSmallCenter: {
         color: '#fff',
@@ -93,6 +100,10 @@ const global = StyleSheet.create({
         fontSize: 20,
         textAlign: 'center'
     },
+    darkBlueTextSmall: {
+        color: "#161c26",
+        fontSize: 14,
+    },
     redText: {
         color: "red",
         fontSize: 20,
@@ -103,13 +114,12 @@ const global = StyleSheet.create({
         paddingTop: 5
     },
     input: {
-        backgroundColor: '#ccced9',
+        backgroundColor: '#CCCED9',
         borderRadius: 6,
         borderWidth: 1,
         color: '#000000',
         height: 40,
         paddingLeft: 10,
-
     },
     footerBox: {
         paddingBottom: 10,
@@ -124,7 +134,7 @@ const global = StyleSheet.create({
         borderRadius: 6,
         height: 40,
         justifyContent: "center",
-        marginTop:5
+        marginTop: 5
     },
     buttonSelectionInactive: {
         backgroundColor: "#CCCED9",
@@ -155,4 +165,49 @@ const global = StyleSheet.create({
     }
 })
 
-export { global };
+const modal = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    pressable: {
+        flex: 1,
+        backgroundColor:'black',
+        opacity:0.9
+    },
+    boxItems: {
+        backgroundColor: 'black',
+        paddingHorizontal: 10,
+        paddingTop: 20,
+        paddingBottom: 8,
+        opacity:0.9
+    },
+    boxForm: {
+        backgroundColor: '#CCCED9',
+        borderRadius: 6,
+        padding: 10,
+        marginBottom: 10,
+    },
+    input: {
+        backgroundColor: '#F2F2F2',
+        borderRadius: 6,
+        borderWidth: 1,
+        color: '#161C26',
+        height: 40,
+        paddingLeft: 10,
+    },
+    button: {
+        backgroundColor: "#3C4659",
+        borderRadius: 6,
+        height: 40,
+        justifyContent: "center",
+        marginTop: 5
+    },
+    textButton: {
+        textAlign: 'center',
+        color: "#FFF",
+        fontSize: 18
+    },
+
+});
+
+export { global, modal };

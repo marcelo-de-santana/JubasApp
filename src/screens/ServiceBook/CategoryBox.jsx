@@ -16,18 +16,6 @@ export default function CategoryBox({ navigation }) {
         navigation.navigate('Services', { categoryIndex: index })
     }
 
-    
-
-    function MyCartButtom() {
-        return (
-            <View style={global.cart}>
-                <TouchableOpacity onPress={() => navigation.push('Cart')}>
-                    <Text style={global.blackTextSmall}>Meu carrinho</Text>
-                </TouchableOpacity>
-            </View>
-        );
-    }
-
     if (loading) {
         return (
             <LoadingScreen />
@@ -35,9 +23,9 @@ export default function CategoryBox({ navigation }) {
     } else {
         return (
             <View style={global.container}>
-                <ScrollView>
+                <ScrollView style={{height:'94%'}}>
                     <View style={global.boxHeader}>
-                        <MyCartButtom />
+                        
                         <Text style={global.textHeader}>
                             Selecione uma categoria
                         </Text>
@@ -53,6 +41,9 @@ export default function CategoryBox({ navigation }) {
                         }
                     </View>
                 </ScrollView>
+                <TouchableOpacity style={global.button} onPress={() => navigation.push('Cart')}>
+                    <Text style={global.textButton}>Ver carrinho</Text>
+                </TouchableOpacity>
             </View>
         );
                     }
