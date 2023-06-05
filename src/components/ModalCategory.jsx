@@ -1,21 +1,33 @@
-import { useState } from "react";
 import { useCatalog } from "../contexts/catalog";
 import { Alert, Modal, Pressable, TextInput, TouchableOpacity, Text, View } from "react-native";
 import { global, modal } from "./styles/global";
 import env from "../../env.json";
 
-function RegisterCategory({ modalVisible, setModalVisible }) {
+function ModalCategory({ modalParams, setModalParams }) {
 	const { refreshPage } = useCatalog();
-	const [categoryName, setCategoryName] = useState();
+	
+	function closeModal() {
+		setModalParams(prev => ({ ...prev, visible: false, data: {} }))
+	}
 
-	async function addCategory() {
+	function handleTextInput(key, value) {
+		setModalParams(
+			prev => ({
+				...prev, data: {
+					...prev.data,
+					[key]: value
+				}
+			})
+		)
+	}
+	async function sendData() {
 		const response = await fetch(`${env.host}/schedule/category`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				category_name: categoryName
+				category_name: 'categoryName'
 			})
 		})
 		const json = await response.json()
@@ -23,8 +35,7 @@ function RegisterCategory({ modalVisible, setModalVisible }) {
 		if (response.status == 200) {
 			Alert.alert('', json.message)
 			refreshPage()
-			setCategoryName('')
-			setModalVisible(false)
+			closeModal()
 
 		} else {
 			Alert.alert('', json.message)
@@ -35,12 +46,12 @@ function RegisterCategory({ modalVisible, setModalVisible }) {
 		<Modal
 			animationType="fade"
 			transparent={true}
-			visible={modalVisible}
-			onRequestClose={() => setModalVisible(false)}
+			visible={modalParams.visible}
+			onRequestClose={() => closeModal()}
 		>
 			<View style={modal.container}>
 				<Pressable style={modal.pressable}
-					onPressIn={() => setModalVisible(false)}>
+					onPress={() => closeModal()}>
 				</Pressable>
 				<View style={modal.boxItems}>
 
@@ -50,52 +61,19 @@ function RegisterCategory({ modalVisible, setModalVisible }) {
 							keyboardType="default"
 							placeholderTextColor="#161C26"
 							placeholder="Corte de cabelo feminino"
-							value={categoryName}
-							onChangeText={setCategoryName}
+							value={modalParams.data?.categoryName}
+							onChangeText={text => handleTextInput('categoryName',text)}
 						/>
 
 					</View>
 
-					<TouchableOpacity style={modal.button} onPress={() => addCategory()}>
+					<TouchableOpacity style={modal.button} onPress={() => sendData()}>
 						<Text style={modal.textButton}>Cadastrar categoria</Text>
 					</TouchableOpacity>
 				</View>
 			</View>
-		</Modal>
+		</ Modal>
 	);
 }
 
-
-function EditCategory() {
-	return (
-		<Modal
-			animationType="slide"
-			transparent={true}
-			visible={modalVisible}
-		>
-			<View style={modal.container} >
-				<Pressable style={modal.pressable} onPress={() => setModalVisible(!modalVisible)}>
-				</Pressable>
-				<View style={modal.boxItems}>
-					<Text style={global.label}>Nome</Text>
-					<TextInput style={global.input}
-						maxLength={30}
-						keyboardType="default"
-
-						placeholderTextColor="#161C26"
-						placeholder="Corte de cabelo feminino"
-						value={categoryName}
-						onChangeText={text => setCategoryName(text)}
-					/>
-					<TouchableOpacity style={global.button} onPress={() => setModalVisible(true)}>
-						<Text style={global.textButton}>Cadastrar categoria</Text>
-					</TouchableOpacity>
-				</View>
-
-
-			</View>
-		</Modal>
-	);
-}
-
-export { RegisterCategory, EditCategory }
+export { ModalCategory }

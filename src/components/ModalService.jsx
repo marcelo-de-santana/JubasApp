@@ -1,35 +1,14 @@
 import { useCatalog } from "../contexts/catalog";
-import { useState } from "react";
-import { Modal, Pressable, TextInput, TouchableOpacity, Text, View } from "react-native";
+import { Alert, Modal, Pressable, TextInput, TouchableOpacity, Text, View } from "react-native";
 import { global, modal } from "./styles/global";
 import env from "../../env.json"
 
 export function ModalService({ modalParams, setModalParams }) {
 	const { refreshPage } = useCatalog();
-	const serviceId = modalParams.serviceParams?.serviceId;
+	const serviceId = modalParams.serviceParams.serviceId ?? false;
 
-	async function sendService() {
-		const response = await fetch(`${env.host}/schedule/service`, {
-			method: (serviceId == null ? 'POST' : 'PUT'),
-			headers: {
-				'Content-Type': 'applicattion/json'
-			},
-			body: JSON.stringify({
-				service_id: (serviceId != null ? modalParams.serviceParams?.serviceId : ''),
-				service_name: modalParams.serviceParams?.serviceName,
-				duration: modalParams.serviceParams?.duration,
-				price: modalParams.serviceParams?.price
-			})
-		})
-		const json = await response.json()
-
-		if (response.status === 200) {
-			setModalParams(false)
-			Alert.alert('', json.message)
-			refreshPage()
-		} else {
-			Alert.alert('', json.message)
-		}
+	function closeModal() {
+		setModalParams(prev => ({ modalVisible: false, serviceParams: {} }))
 	}
 
 	function handleTextInput(key, value) {
@@ -43,14 +22,39 @@ export function ModalService({ modalParams, setModalParams }) {
 		)
 	}
 
+	async function sendData() {
+		const response = await fetch(`${env.host}/schedule/service`, {
+			method: (serviceId ? 'PUT' : 'POST'),
+			headers: {
+				'Content-Type': 'applicattion/json'
+			},
+			body: JSON.stringify({
+				service_id: serviceId,
+				service_name: modalParams.serviceParams?.serviceName,
+				duration: modalParams.serviceParams?.duration,
+				price: modalParams.serviceParams?.price
+			})
+		})
+		const json = await response.json()
+
+		if (response.status === 200) {
+			closeModal()
+			Alert.alert('', json.message)
+			refreshPage()
+		} else {
+			Alert.alert('', json.message)
+		}
+	}
+
 	return (
 		<Modal
 			animationType="fade"
 			transparent={true}
-			visible={modalParams.editService}
+			visible={modalParams.modalVisible}
+			onRequestClose={() => closeModal()}
 		>
 			<View style={modal.container} >
-				<Pressable style={modal.pressable} onPress={() => setModalParams(prev => ({ editService: false, serviceParams: {} }))}>
+				<Pressable style={modal.pressable} onPress={() => closeModal()}>
 				</Pressable>
 				<View style={modal.boxItems}>
 					<View style={modal.boxForm}>
@@ -82,8 +86,8 @@ export function ModalService({ modalParams, setModalParams }) {
 							onChangeText={text => handleTextInput('price', text)}
 						/>
 					</View>
-					<TouchableOpacity style={modal.button} onPress={() => sendService()}>
-						<Text style={modal.textButton}>Cadastrar serviço</Text>
+					<TouchableOpacity style={modal.button} onPress={() => sendData()}>
+						<Text style={modal.textButton}>{serviceId ? 'Editar' : 'Cadastrar'} serviço</Text>
 					</TouchableOpacity>
 				</View>
 			</View>

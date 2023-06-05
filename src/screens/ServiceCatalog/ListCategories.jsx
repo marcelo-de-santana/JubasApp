@@ -1,13 +1,17 @@
+import { useCatalog } from "../../contexts/catalog";
 import { useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
-import LoadingScreen from "../../components/LoadingScreen";
 import { global } from "../../components/styles/global";
-import { useCatalog } from "../../contexts/catalog";
-import { RegisterCategory } from "../../components/ModalCategory";
+import LoadingScreen from "../../components/LoadingScreen";
+import { ModalCategory } from "../../components/ModalCategory";
 
 export default function ListCategories({ navigation }) {
     const { specialties, setCategoryIndex, refreshPage } = useCatalog();
-    const [modalVisible, setModalVisible] = useState(false);
+
+    const [modalParams, setModalParams] = useState({
+        visible: false,
+        data: {}
+    });
 
     function changeScreen(routerName, arrayIndex) {
         setCategoryIndex(arrayIndex)
@@ -20,9 +24,13 @@ export default function ListCategories({ navigation }) {
         );
     }
 
+    function openModal(category) {
+        setModalParams(prev => ({ ...prev, visible: true, data: category }))
+    }
+
     return (
         <View style={global.container}>
-            <RegisterCategory modalVisible={modalVisible} setModalVisible={setModalVisible} />
+            <ModalCategory modalParams={modalParams} setModalParams={setModalParams} />
             <View style={{ height: '94%' }}>
                 {specialties.length === 0 ?
                     <View style={global.blueBoxItems}>
@@ -36,14 +44,14 @@ export default function ListCategories({ navigation }) {
 
                                 <View style={global.boxFlexRow}>
                                     <Text style={global.whiteTextSmall}>{item.category_name}</Text>
-                                    <TouchableOpacity onPress={() => changeScreen('CategoryEditForm', [index])}>
+                                    <TouchableOpacity onPress={() => openModal({ categoryName: item.category_name })}>
                                         <Text style={global.whiteTextSmall}>Editar</Text>
                                     </TouchableOpacity>
                                 </View>
                                 <View style={global.greyBoxItemsFlex} >
                                     <View>
                                         {item.services.map(serviceItem => (
-                                            <Text key={serviceItem.service_id} style={global.darkBlueTextSmall}>{(serviceItem.service_id) ? serviceItem.service_name : 'Nenhum serviço'}</Text>
+                                            <Text key={serviceItem.service_id} style={global.darkBlueTextSmall}>{serviceItem.service_name ?? 'Nenhum serviço'}</Text>
                                         ))}
                                     </View>
                                 </View>
@@ -55,7 +63,7 @@ export default function ListCategories({ navigation }) {
                     </ScrollView>
                 }
             </View>
-            <TouchableOpacity style={global.button} onPress={() => setModalVisible(true)}>
+            <TouchableOpacity style={global.button} onPress={() => openModal({})}>
                 <Text style={global.textButton}>Adicionar Categoria</Text>
             </TouchableOpacity>
         </View>
