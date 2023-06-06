@@ -6,23 +6,24 @@ import { ModalService } from "../../components/ModalService";
 
 export default function ListServices({ navigation, route }) {
     const { specialties, categoryIndex } = useCatalog();
+    const parentCategoryId = specialties[categoryIndex].category_id
     const [modalParams, setModalParams] = useState({
-        modalVisible: false,
-        serviceParams: {}
+        visible: false,
+        data: {}
     });
 
-    function openModal(services) {
-        setModalParams(prev => ({ ...prev, modalVisible: true, serviceParams: services }))
+    function openModal(service) {
+        setModalParams(prev => ({ ...prev, visible: true, data: service }))
     }
 
     return (
         <View style={global.container}>
-            <ModalService modalParams={modalParams} setModalParams={setModalParams} />
+            <ModalService modalParams={modalParams} setModalParams={setModalParams} parentCategoryId={parentCategoryId} />
 
             <ScrollView style={{ height: '94%' }}>
                 <Text style={global.textHeader}>Serviços</Text>
 
-                {specialties?.[categoryIndex]?.services.map((item, index) => (
+                {specialties?.[categoryIndex]?.services.map((item) => (
                     <View key={item.service_id} style={global.blueBoxItems}>
                         <View style={global.boxFlexRow}>
 

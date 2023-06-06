@@ -3,35 +3,56 @@ import { Alert, Modal, Pressable, TextInput, TouchableOpacity, Text, View } from
 import { global, modal } from "./styles/global";
 import env from "../../env.json"
 
-export function ModalService({ modalParams, setModalParams }) {
+export function ModalService({ modalParams, setModalParams, parentCategoryId }) {
 	const { refreshPage } = useCatalog();
-	const serviceId = modalParams.serviceParams.serviceId ?? false;
+	const serviceId = modalParams.data.serviceId ?? false;
 
 	function closeModal() {
-		setModalParams(prev => ({ modalVisible: false, serviceParams: {} }))
+		setModalParams(({ visible: false, data: {} }))
 	}
 
 	function handleTextInput(key, value) {
 		setModalParams(
 			prev => ({
-				...prev, serviceParams: {
-					...prev.serviceParams,
+				...prev, data: {
+					...prev.data,
 					[key]: value
 				}
 			})
 		)
+	}
+	async function deleteService() {
+		const response = await fetch(`${env.host}/schedule/service`, {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				service_id: serviceId,
+			})
+		})
+		const json = await response.json()
+
+		if (response.status === 200) {
+			closeModal()
+			Alert.alert('', json.message)
+			refreshPage()
+		} else {
+			Alert.alert('', json.message)
+		}
 	}
 
 	async function sendData() {
 		const response = await fetch(`${env.host}/schedule/service`, {
 			method: (serviceId ? 'PUT' : 'POST'),
 			headers: {
-				'Content-Type': 'applicattion/json'
+				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
+				category_id: parentCategoryId,
 				service_id: serviceId,
-				service_name: modalParams.serviceParams?.serviceName,
-				duration: modalParams.serviceParams?.duration,
+				service_name: modalParams.data?.serviceName,
+				duration: modalParams.data?.duration,
 				price: modalParams.serviceParams?.price
 			})
 		})
@@ -50,7 +71,7 @@ export function ModalService({ modalParams, setModalParams }) {
 		<Modal
 			animationType="fade"
 			transparent={true}
-			visible={modalParams.modalVisible}
+			visible={modalParams.visible}
 			onRequestClose={() => closeModal()}
 		>
 			<View style={modal.container} >
@@ -58,31 +79,39 @@ export function ModalService({ modalParams, setModalParams }) {
 				</Pressable>
 				<View style={modal.boxItems}>
 					<View style={modal.boxForm}>
-						<Text style={global.label}>Nome do serviço</Text>
+						<View style={global.boxFlexRow}>
+							<Text style={global.textHeader}>Nome do serviço</Text>
+							{//BOTÃO DE EXCLUIR CATEGORIA
+								serviceId &&
+								<TouchableOpacity onPress={() => deleteService()}>
+									<Text style={global.textHeader}>Excluir categoria</Text>
+								</TouchableOpacity>
+							}
+						</View>
 						<TextInput style={modal.input}
 							keyboardType="default"
 							placeholderTextColor="#161c2660"
 							placeholder="Corte de cabelo na tesoura"
 							maxLength={40}
-							value={modalParams.serviceParams?.serviceName ?? ''}
+							value={modalParams.data?.serviceName ?? ''}
 							onChangeText={text => handleTextInput('serviceName', text)}
 						/>
-						<Text style={global.label}>Duração</Text>
+						<Text style={global.textHeader}>Duração</Text>
 						<TextInput style={modal.input}
 							keyboardType="default"
 							placeholderTextColor="#161c2660"
-							placeholder="00:20"
+							placeholder="HH:MM:SS"
 							maxLength={20}
-							value={modalParams.serviceParams?.duration ?? ''}
+							value={modalParams.data?.duration ?? ''}
 							onChangeText={text => handleTextInput('duration', text)}
 						/>
-						<Text style={global.label}>Preço</Text>
+						<Text style={global.textHeader}>Preço</Text>
 						<TextInput style={modal.input}
 							keyboardType="numeric"
 							placeholderTextColor="#161c2660"
 							placeholder="10,00"
 							maxLength={20}
-							value={modalParams.serviceParams?.price ?? ''}
+							value={modalParams.data?.price ?? ''}
 							onChangeText={text => handleTextInput('price', text)}
 						/>
 					</View>

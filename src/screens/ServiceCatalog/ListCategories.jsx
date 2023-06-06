@@ -15,7 +15,7 @@ export default function ListCategories({ navigation }) {
 
     function changeScreen(routerName, arrayIndex) {
         setCategoryIndex(arrayIndex)
-        navigation.push(routerName, arrayIndex)
+        navigation.push(routerName)
     }
 
     if (specialties.length === 0) {
@@ -25,7 +25,7 @@ export default function ListCategories({ navigation }) {
     }
 
     function openModal(category) {
-        setModalParams(prev => ({ ...prev, visible: true, data: category }))
+        setModalParams(prev => ({...prev, visible: true, data: category }))
     }
 
     return (
@@ -44,7 +44,10 @@ export default function ListCategories({ navigation }) {
 
                                 <View style={global.boxFlexRow}>
                                     <Text style={global.whiteTextSmall}>{item.category_name}</Text>
-                                    <TouchableOpacity onPress={() => openModal({ categoryName: item.category_name })}>
+                                    <TouchableOpacity onPress={() => openModal({
+                                        categoryId: item.category_id,
+                                        categoryName: item.category_name
+                                    })}>
                                         <Text style={global.whiteTextSmall}>Editar</Text>
                                     </TouchableOpacity>
                                 </View>

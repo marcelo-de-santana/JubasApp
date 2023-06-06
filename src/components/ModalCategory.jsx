@@ -5,9 +5,10 @@ import env from "../../env.json";
 
 function ModalCategory({ modalParams, setModalParams }) {
 	const { refreshPage } = useCatalog();
-	
+	const categoryId = modalParams.data.categoryId ?? false;
+
 	function closeModal() {
-		setModalParams(prev => ({ ...prev, visible: false, data: {} }))
+		setModalParams(({ visible: false, data: {} }))
 	}
 
 	function handleTextInput(key, value) {
@@ -20,23 +21,43 @@ function ModalCategory({ modalParams, setModalParams }) {
 			})
 		)
 	}
-	async function sendData() {
+	async function deleteCategory() {
 		const response = await fetch(`${env.host}/schedule/category`, {
-			method: 'POST',
+			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				category_name: 'categoryName'
+				category_id: categoryId
+			})
+		})
+		const json = await response.json()
+		if (response.status == 200) {
+			Alert.alert('', json.message)
+			refreshPage()
+			closeModal()
+		} else {
+			Alert.alert('', json.message)
+		}
+	}
+
+	async function sendData() {
+		const response = await fetch(`${env.host}/schedule/category`, {
+			method: (categoryId ? 'PUT' : 'POST'),
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				category_id: categoryId,
+				category_name: modalParams.data.categoryName
 			})
 		})
 		const json = await response.json()
 
 		if (response.status == 200) {
+			closeModal()
 			Alert.alert('', json.message)
 			refreshPage()
-			closeModal()
-
 		} else {
 			Alert.alert('', json.message)
 		}
@@ -56,19 +77,27 @@ function ModalCategory({ modalParams, setModalParams }) {
 				<View style={modal.boxItems}>
 
 					<View style={modal.boxForm}>
-						<Text style={global.textHeader}>Nome</Text>
+						<View style={global.boxFlexRow}>
+							<Text style={global.textHeader}>Nome</Text>
+							{//BOTÃO DE EXCLUIR CATEGORIA
+								categoryId &&
+								<TouchableOpacity onPress={() => deleteCategory()}>
+									<Text style={global.textHeader}>Excluir categoria</Text>
+								</TouchableOpacity>
+							}
+						</View>
 						<TextInput style={modal.input}
 							keyboardType="default"
 							placeholderTextColor="#161C26"
 							placeholder="Corte de cabelo feminino"
 							value={modalParams.data?.categoryName}
-							onChangeText={text => handleTextInput('categoryName',text)}
+							onChangeText={text => handleTextInput('categoryName', text)}
 						/>
 
 					</View>
 
 					<TouchableOpacity style={modal.button} onPress={() => sendData()}>
-						<Text style={modal.textButton}>Cadastrar categoria</Text>
+						<Text style={modal.textButton}>{categoryId ? 'Editar' : 'Cadastrar'} categoria</Text>
 					</TouchableOpacity>
 				</View>
 			</View>
