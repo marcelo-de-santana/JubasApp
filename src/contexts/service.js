@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import LoadingScreen from "../components/LoadingScreen";
 import env from "../../env.json";
 import d from "../services/api/barberServices.json";
 
@@ -11,6 +12,7 @@ export default function ServiceProvider({ children }) {
     const [switchState, setSwitchState] = useState({})
     const [loading, setLoading] = useState(true)
 
+    //ALTERAR ROTA PARA /barber/:id/specialties
     useEffect(() => {
         fetch(`${env.host}/schedule/services`)
             .then(response => response.json())
@@ -20,6 +22,12 @@ export default function ServiceProvider({ children }) {
             })
             .catch(error => console.log(error))
     }, [])
+
+    if(loading){
+        return(
+            <LoadingScreen />
+        );
+    }
 
     return (
         <ServiceContext.Provider value={{

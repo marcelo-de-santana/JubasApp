@@ -4,12 +4,12 @@ import { ScrollView, Switch, Text, TouchableOpacity, View } from 'react-native';
 import { global } from '../../components/styles/global';
 
 export default function ServiceBox(props) {
-	const [dataIndex, setDataIndex] = useState(props.route.params.categoryIndex)
+	const [dataIndex, setDataIndex] = useState(props.route.params.categoryIndex);
 	const {
 		serviceData,
 		setShoppingCart,
 		switchState, setSwitchState
-	} = useService()
+	} = useService();
 
 	function handlePagination() {
 		setShoppingCart(Object.keys(switchState).filter(key => switchState[key].statusButton))
@@ -24,7 +24,7 @@ export default function ServiceBox(props) {
 			<ScrollView style={{ height: '90%' }}>
 				<View style={global.blueBoxItems}>
 
-					{serviceData[dataIndex]['name_services'].map((item, index) => (
+					{serviceData[dataIndex]['services'].map((item, index) => (
 						<View style={global.switchBox} key={index}>
 							<Text key={index} style={global.whiteTextSmall}>{item.service_name}</Text>
 							<Switch
