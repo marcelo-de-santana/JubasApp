@@ -136,14 +136,14 @@ const global = StyleSheet.create({
         justifyContent: "center",
         marginTop: 5
     },
-    buttonSelectionInactive: {
+    inactiveButton: {
         backgroundColor: "#CCCED9",
         borderRadius: 6,
         marginVertical: 5,
         padding: 10,
         width: "30%",
     },
-    buttonSelectionActive: {
+    activeButton: {
         backgroundColor: "#3C4659",
         borderRadius: 6,
         marginVertical: 5,
@@ -161,6 +161,7 @@ const global = StyleSheet.create({
     },
     boxFlexRow: {
         flexDirection: 'row',
+        flexWrap: 'wrap',
         justifyContent: 'space-between'
     }
 })

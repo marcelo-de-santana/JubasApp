@@ -96,7 +96,7 @@ export default function Login({ navigation }) {
 
                     <View style={styles.footer}>
 
-                        <TouchableOpacity onPress={() => navigation.navigate('Schedule')}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Main')}>
                             <Text style={styles.textButtonPassword}>Esqueci minha senha</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>

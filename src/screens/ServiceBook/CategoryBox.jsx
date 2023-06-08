@@ -2,12 +2,11 @@ import { useService } from '../../contexts/service';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { global } from '../../components/styles/global';
 import LoadingScreen from '../../components/LoadingScreen';
-import { useNavigation } from '@react-navigation/native';
 import { useEffect } from 'react';
 
-export default function CategoryBox({ navigation }) {
-    const { serviceData, loading } = useService()
-
+export default function CategoryBox({ navigation, route }) {
+    const { serviceData, loading } = useService();
+    
     useEffect(()=>{
         navigation.setOptions({headerShown:true})
     },[navigation])

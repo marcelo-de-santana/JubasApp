@@ -5,7 +5,7 @@ import d from "../services/api/barberServices.json";
 const ServiceContext = createContext()
 
 export default function ServiceProvider({ children }) {
-    const [serviceData, setServiceData] = useState([])
+    const [serviceData, setServiceData] = useState(d)
     const [dataIndex, setDataIndex] = useState([])
     const [shoppingCart, setShoppingCart] = useState([])
     const [switchState, setSwitchState] = useState({})

@@ -18,7 +18,7 @@ export default function Cart({ navigation }) {
     const json = await response.json()
         
         console.log(json)
-        navigation.navigate('ListAvailableTimes')
+        navigation.navigate('Schedule')
     }
 
     function EmptyCart() {

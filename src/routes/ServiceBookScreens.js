@@ -1,26 +1,28 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import { headerStack } from '../components/styles/headerNavigation';
 import ServiceProvider from '../contexts/service';
+import Schedule from '../screens/Schedule';
 import CategoryBox from '../screens/ServiceBook/CategoryBox';
 import ServiceBox from '../screens/ServiceBook/ServiceBox';
 import Cart from '../screens/ServiceBook/Cart';
-import ListAvailableTimes from '../screens/ServiceBook/ListAvailableTimes';
+import MainScreen from '../screens/MainScreen';
+
 
 const Stack = createStackNavigator();
 
 export default function ServiceBookScreens() {
 	return (
 		<ServiceProvider>
-			<Stack.Navigator initialRouteName="Categories" screenOptions={{
+			<Stack.Navigator initialRouteName="MainScreen" screenOptions={{
 				headerStyle: {
 					backgroundColor: "#3c4659"
 				},
 				headerTintColor: '#fff'
 			}}>
-				<Stack.Screen name="Categories" component={CategoryBox} options={{title:'Marcar atendimento'}} />
-				<Stack.Screen name="Services" component={ServiceBox} options={{title:'Marcar atendimento'}} />
-				<Stack.Screen name="Cart" component={Cart} options={{title:'Minhas compras'}} />
-				<Stack.Screen name="ListAvailableTimes" component={ListAvailableTimes} options={{title:'Minhas compras'}} />
+				<Stack.Screen name="MainScreen" component={MainScreen} options={{ headerShown: false }} />
+				<Stack.Screen name="Schedule" component={Schedule} options={{ headerTitle: 'Jubas Barbearia', headerTitleAlign: 'center' }} />
+				<Stack.Screen name="Categories" component={CategoryBox} options={{ title: 'Marcar atendimento' }} />
+				<Stack.Screen name="Services" component={ServiceBox} options={{ title: 'Marcar atendimento' }} />
+				<Stack.Screen name="Cart" component={Cart} options={{ title: 'Minhas compras' }} />
 			</Stack.Navigator>
 		</ServiceProvider>
 	)

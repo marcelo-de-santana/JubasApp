@@ -7,6 +7,7 @@ import UnderConstruction from '../screens/UnderConstruction';
 import { EmployeesScreen } from './EmployeesScreens';
 import { CatalogScreen } from './CatalogScreens';
 import ServiceBookScreens from './ServiceBookScreens';
+import MainScreen from '../screens/MainScreen';
 
 
 const Drawer = createDrawerNavigator();
@@ -26,9 +27,9 @@ export default function DrawerScreens() {
 				headerStyle: {
 					backgroundColor: '#3c4659',
 				},
-			}}
-		>
-			<Drawer.Screen name="Home" component={Schedule} options={{ headerTitle: 'Jubas Barbearia', headerTitleAlign: 'center' }} />
+			}}>
+			
+			<Drawer.Screen name="ScheduleBook" component={ServiceBookScreens} options={{ headerShown: false }} />
 			<Drawer.Screen name="Catálogo de serviços" component={CatalogScreen} />
 			<Drawer.Screen name="Gerenciar barbeiros" component={EmployeesScreen} />
 
