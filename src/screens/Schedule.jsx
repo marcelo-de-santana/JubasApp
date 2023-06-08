@@ -19,7 +19,7 @@ export default function Schedule({ navigation }) {
   }, [])
 
   function changeScreen(dayParams) {
-    navigation.push('Categories', dayParams)
+    navigation.push('CategoryBox', dayParams)
   };
 
   if (scheduleData.length === 0) {
@@ -58,8 +58,8 @@ export default function Schedule({ navigation }) {
                 const textStyle = isTimeUnavailable ? global.redText : global.whiteTextLarge
                 return (
                   <TouchableOpacity onPress={() => changeScreen({
-                    barber_id: item.barber_id,
-                    barber_name: item.barber_name,
+                    barberId: item.barber_id,
+                    barberName: item.barber_name,
                     time: time,
                     dayId: scheduleData[dayIndex].day_id
                   })}

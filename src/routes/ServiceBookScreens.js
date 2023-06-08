@@ -20,8 +20,8 @@ export default function ServiceBookScreens() {
 			}}>
 				<Stack.Screen name="MainScreen" component={MainScreen} options={{ headerShown: false }} />
 				<Stack.Screen name="Schedule" component={Schedule} options={{ headerTitle: 'Jubas Barbearia', headerTitleAlign: 'center' }} />
-				<Stack.Screen name="Categories" component={CategoryBox} options={{ title: 'Marcar atendimento' }} />
-				<Stack.Screen name="Services" component={ServiceBox} options={{ title: 'Marcar atendimento' }} />
+				<Stack.Screen name="CategoryBox" component={CategoryBox} options={{ title: 'Marcar atendimento' }} />
+				<Stack.Screen name="ServiceBox" component={ServiceBox} options={{ title: 'Marcar atendimento' }} />
 				<Stack.Screen name="Cart" component={Cart} options={{ title: 'Minhas compras' }} />
 			</Stack.Navigator>
 		</ServiceProvider>
