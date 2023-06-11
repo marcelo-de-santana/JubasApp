@@ -1,18 +1,15 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 
-export const AuthContext = createContext()
+const AuthContext = createContext()
 
 export default function AuthProvider({ children }) {
     const [user, setUser] = useState({})
     const navigation = useNavigation();
 
-    function openSession(cpf, userLevel) {
-        setUser({
-            CPF: cpf,
-            LEVEL: userLevel
-        })
-        navigation.navigate('Schedule')
+    function openSession(credentials) {
+        setUser(credentials)
+        navigation.navigate('Main')
     }
 
     return (
@@ -20,4 +17,8 @@ export default function AuthProvider({ children }) {
             {children}
         </AuthContext.Provider>
     );
+}
+
+export function useAuth() {
+    return useContext(AuthContext);
 }

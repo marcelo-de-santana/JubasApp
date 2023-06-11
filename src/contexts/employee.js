@@ -6,10 +6,11 @@ import d from "../services/api/barber.json";
 const EmployeeContext = createContext({})
 
 export default function EmployeeProvider({ children }) {
-    const [data, setData] = useState([]);
-    const [week, setWeek] = useState([]);
+    const [barbersData, setBarbersData] = useState([]);
     const [indexButton, setIndexButton] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [week, setWeek] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [refresh, setRefresh] = useState(0);
     const [pagination, setPagination] = useState(0)
     const navigation = useNavigation();
 
@@ -17,26 +18,31 @@ export default function EmployeeProvider({ children }) {
         fetch(`${env.host}/barber/service-hour`)
             .then(response => response.json())
             .then(json => {
-                setData(json)
+                setBarbersData(json)
                 setLoading(false)
             })
             .catch(error => console.log(error))
-    }, [pagination])
+    }, [refresh])
 
-    useEffect(() => {
+    // useEffect(() => {
+    //     setLoading(true)
+    //     fetch(`${env.host}/schedule/week`)
+    //         .then(response => response.json())
+    //         .then(json => {
+    //             setWeek(json)
+    //             setLoading(false)
+    //         })
+    // }, [])
+
+    function refreshPage(){
         setLoading(true)
-        fetch(`${env.host}/schedule/week`)
-            .then(response => response.json())
-            .then(json => {
-                setWeek(json)
-                setLoading(false)
-            })
-    }, [])
+        setRefresh(refresh+1)
+    }
 
-	function handleBarberTimes(index){
+    function changePage(routeName, index){
 		setIndexButton(index)
-		navigation.push('EmployeeOverview')
-	}
+		navigation.push(routeName)
+    }
 
     function handlePagination(routeName){
         setLoading(true)
@@ -46,9 +52,10 @@ export default function EmployeeProvider({ children }) {
 
     return (
         <EmployeeContext.Provider value={{
-            data, week, pagination, 
-            indexButton, handleBarberTimes,
+            barbersData, week, pagination,
+            indexButton, changePage,
             loading, setLoading, handlePagination,
+            refreshPage,
         }}>
             {children}
         </EmployeeContext.Provider>

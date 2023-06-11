@@ -1,10 +1,10 @@
-import { useEmployee } from "../../../contexts/employee";
-import { global } from "../../../components/styles/global";
+import { useEmployee } from "../../contexts/employee";
+import { global } from "../../components/styles/global";
 import { StyleSheet, View, Text, TouchableOpacity, ScrollView } from "react-native";
-import LoadingScreen from "../../../components/LoadingScreen";
+import LoadingScreen from "../../components/LoadingScreen";
 
-export default function EmployeeTimeList({ navigation }) {
-    const { data, indexButton, loading } = useEmployee()
+export default function EmployeeTimetable({ navigation }) {
+    const { barbersData, indexButton, loading } = useEmployee();
 
     if (loading) {
         return (
@@ -16,11 +16,11 @@ export default function EmployeeTimeList({ navigation }) {
             <ScrollView style={styles.scroll}>
 
                 <Text style={global.textHeaderMiddle}>
-                    {data[indexButton].barber_name}
+                    {barbersData[indexButton].barber_name}
                 </Text>
                 {//VERIFICA SE O BARBEIRO POSSUI ALGUM HORÁRIO CADASTRADO PARA EXIBIR
-                    (!Object.values(data[indexButton].times[0]).includes(null)) ?
-                        data[indexButton].times?.map((item, index) => (
+                    (!Object.values(barbersData[indexButton].times[0]).includes(null)) ?
+                        barbersData[indexButton].times?.map((item, index) => (
                             <View style={styles.boxTimes} key={item.weekday}>
                                 <View style={styles.boxHeader}>
                                     <Text style={styles.textHeader}>{item.weekday}</Text>
@@ -68,7 +68,7 @@ export default function EmployeeTimeList({ navigation }) {
             <TouchableOpacity style={styles.insertButton}
                 onPress={() => {
                     navigation.push('EmployeesDaysEntryForm', {
-                        times: data[0]?.times
+                        times: barbersData[0]?.times
                     })
                 }}>
                 <Text style={styles.textInsertButton}>Inserir</Text>

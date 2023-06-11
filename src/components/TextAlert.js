@@ -1,9 +1,10 @@
 import React from "react";
-import {Text} from "react-native";
+import { Text } from "react-native";
 
-export default function TextAlert({error}){
-    return(
-        <Text style={{fontSize:12, width:'80%',textAlign:'left',color:'red'}}>
+export default function TextAlert({ error }) {
+    return (
+        <Text style={{ fontSize: 12, color: 'red' }}>
             {error}
         </Text>
-)}
+    )
+}

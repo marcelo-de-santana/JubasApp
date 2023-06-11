@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { ScrollView, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
-import { global } from '../components/styles/global'
-import env from "../../env.json";
-import LoadingScreen from '../components/LoadingScreen';
-import d from '../services/api/schedule.json'
+import { global } from '../../components/styles/global'
+import env from "../../../env.json";
+import LoadingScreen from '../../components/LoadingScreen';
+import d from '../../services/api/schedule.json'
 
 export default function Schedule({ navigation }) {
   const [scheduleData, setScheduleData] = useState([]);
