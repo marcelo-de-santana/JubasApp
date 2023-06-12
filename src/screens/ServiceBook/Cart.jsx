@@ -1,23 +1,30 @@
 import { useService } from '../../contexts/service';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { global } from '../../components/styles/global';
 import env from '../../../env.json';
+import { useAuth } from '../../contexts/auth';
 
 export default function Cart({ navigation }) {
-    const { switchState, shoppingCart } = useService()
+    const { user } = useAuth();
+    const { switchState, shoppingCart, serviceParams } = useService();
+    const { barberId, dayId, time } = serviceParams;
 
     async function sendShoppingCart() {
-        const response = await fetch(`${env.host}/schedule/available-times`, {
+        const response = await fetch(`${env.host}/schedule/register-service`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ servicesId: shoppingCart })
+            body: JSON.stringify({
+                user_id: user.ID,
+                barber_id: barberId,
+                services_id: shoppingCart,
+                day_id: dayId,
+                time: time
+            })
         })
-
-    const json = await response.json()
-        
-        console.log(json)
+        const json = await response.json()
+        Alert.alert('', json.message)
         navigation.navigate('Schedule')
     }
 
@@ -45,7 +52,7 @@ export default function Cart({ navigation }) {
                     </ScrollView>
                     <TouchableOpacity style={global.button} onPress={() => sendShoppingCart()}>
                         <Text style={global.textButton}>
-                            Ver horários disponíveis
+                            Finalizar agendamento
                         </Text>
                     </TouchableOpacity>
                 </>

@@ -4,8 +4,10 @@ import { global } from '../../components/styles/global'
 import env from "../../../env.json";
 import LoadingScreen from '../../components/LoadingScreen';
 import d from '../../services/api/schedule.json'
+import { useService } from '../../contexts/service';
 
 export default function Schedule({ navigation }) {
+  const { setServiceParams} = useService();
   const [scheduleData, setScheduleData] = useState([]);
   const currentDay = new Date().getDay();
   const lastDay = currentDay + 2;
@@ -19,7 +21,8 @@ export default function Schedule({ navigation }) {
   }, [])
 
   function changeScreen(dayParams) {
-    navigation.push('CategoryBox', dayParams)
+    setServiceParams(dayParams)
+    navigation.push('CategoryBox')
   };
 
   if (scheduleData.length === 0) {
