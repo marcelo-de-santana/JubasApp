@@ -22,7 +22,6 @@ export default function ListServices({ navigation, route }) {
 
             <ScrollView style={{ height: '94%' }}>
                 <Text style={global.textHeader}>Serviços</Text>
-
                 {specialties?.[categoryIndex]?.services.map((item) => (
                     <View key={item.service_id} style={global.blueBoxItems}>
                         <View style={global.boxFlexRow}>
@@ -42,7 +41,7 @@ export default function ListServices({ navigation, route }) {
                         </View>
                         <View style={global.greyBoxItemsFlex}>
                             <Text style={global.darkBlueTextSmall}>Duração: {item.duration}</Text>
-                            <Text style={global.darkBlueTextSmall}>Preço: R${item.price},00</Text>
+                            <Text style={global.darkBlueTextSmall}>Preço: {(item?.price ?? 0).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</Text>
                         </View>
                     </View>
                 ))}

@@ -79,16 +79,10 @@ function ModalCategory({ modalParams, setModalParams }) {
 					<View style={modal.boxForm}>
 						<View style={global.boxFlexRow}>
 							<Text style={global.textHeader}>Nome</Text>
-							{//BOTÃO DE EXCLUIR CATEGORIA
-								categoryId &&
-								<TouchableOpacity onPress={() => deleteCategory()}>
-									<Text style={global.textHeader}>Excluir categoria</Text>
-								</TouchableOpacity>
-							}
 						</View>
 						<TextInput style={modal.input}
 							keyboardType="default"
-							placeholderTextColor="#161C26"
+							placeholderTextColor="#161C2660"
 							placeholder="Corte de cabelo feminino"
 							value={modalParams.data?.categoryName}
 							onChangeText={text => handleTextInput('categoryName', text)}
@@ -97,8 +91,12 @@ function ModalCategory({ modalParams, setModalParams }) {
 					</View>
 
 					<TouchableOpacity style={modal.button} onPress={() => sendData()}>
-						<Text style={modal.textButton}>{categoryId ? 'Editar' : 'Cadastrar'} categoria</Text>
+						<Text style={modal.textButton}>{categoryId ? 'Editar' : 'Cadastrar'}</Text>
 					</TouchableOpacity>
+					{categoryId &&
+						<TouchableOpacity style={modal.redButton} onPress={() => deleteCategory()}>
+							<Text style={modal.textButton}>Excluir</Text>
+						</TouchableOpacity>}
 				</View>
 			</View>
 		</ Modal>

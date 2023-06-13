@@ -5,12 +5,18 @@ import ListServices from "../screens/ServiceCatalog/ListServices";
 
 const Stack = createStackNavigator();
 
-export function CatalogScreen() {
+export default function CatalogScreen() {
     return (
         <CatalogProvider>
-            <Stack.Navigator>
-                <Stack.Screen name='ListCategories' component={ListCategories} options={{ headerShown: false }} />
-                <Stack.Screen name='ListServices' component={ListServices} options={{ headerShown: false }} />
+            <Stack.Navigator screenOptions={{
+				headerTitle: 'Catálogo de serviços',
+				headerTintColor: '#fff',
+				headerStyle: {
+					backgroundColor: "#3C4659"
+				}
+            }}>
+                <Stack.Screen name='ListCategories' component={ListCategories} options={{ title: 'Catálogo de serviços' }} />
+                <Stack.Screen name='ListServices' component={ListServices} />
             </Stack.Navigator>
         </CatalogProvider>
     );

@@ -6,20 +6,19 @@ import LoadingScreen from '../../components/LoadingScreen';
 import { global } from '../../components/styles/global';
 
 
-export default function CategoryBox({ navigation, route }) {
-    const { serviceData, setServiceData } = useService();
+export default function CategoryBox({ navigation }) {
+    const { serviceData, setServiceData, serviceParams } = useService();
     const [loading, setLoading] = useState(true);
-    const dayParams = route.params;
 
     useEffect(() => {
-        fetch(`${env.host}/barber/${dayParams.barberId}/specialties`)
+        fetch(`${env.host}/barber/${serviceParams.barberId}/specialties`)
             .then(response => response.json())
             .then(json => {
                 setServiceData(json)
                 setLoading(false)
             })
             .catch(error => console.log(error))
-    }, [dayParams])
+    }, [serviceParams])
 
     function handlePagination(index) {
         navigation.navigate('ServiceBox', { categoryIndex: index })

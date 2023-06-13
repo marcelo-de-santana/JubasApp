@@ -2,6 +2,7 @@ import { StyleSheet } from "react-native";
 
 const global = StyleSheet.create({
     container: {
+        flex: 1,
         paddingVertical: 10,
         paddingHorizontal: 10,
         backgroundColor: "#F2F2F2",
@@ -11,6 +12,28 @@ const global = StyleSheet.create({
     },
     boxHeader: {
         marginBottom: 10,
+    },
+    horizontalMargins: {
+        paddingHorizontal: 30,
+    },
+    logo: {
+        backgroundColor: "#CCCED9",
+        borderRadius: 4,
+        marginTop: 20,
+        height: 150,
+        width: 120,
+    },
+    boxMenu: {
+        backgroundColor: '#9BA7BF',
+        borderRadius: 6,
+        height: 60,
+        justifyContent: 'center',
+        margin: 5,
+        width: '45%'
+    },
+    textMenu: {
+        color: 'white',
+        textAlign: 'center'
     },
     textHeader: {
         color: "#000",
@@ -32,6 +55,15 @@ const global = StyleSheet.create({
     blueBoxItems: {
         backgroundColor: "#9BA7BF",
         borderRadius: 6,
+        marginVertical: 5,
+        padding: 10,
+    },
+    greyBox: {
+        backgroundColor: "#CCCED9",
+        borderRadius: 6,
+        flexDirection: "row",
+        flexWrap: "wrap",
+        justifyContent: 'space-between',
         marginVertical: 5,
         padding: 10,
     },
@@ -104,6 +136,11 @@ const global = StyleSheet.create({
         color: "#161c26",
         fontSize: 14,
     },
+    darkBlueTextSmallCenter: {
+        color: "#161c26",
+        fontSize: 14,
+        textAlign: 'center',
+    },
     redText: {
         color: "red",
         fontSize: 20,
@@ -163,6 +200,22 @@ const global = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'space-between'
+    },
+    boxFlexRowSwitch: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        paddingVertical:10
+    },
+    boxFooter: {
+        height: 230,
+        marginVertical: 20
+    },
+    footerBottom: {
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0
     }
 })
 
@@ -172,15 +225,15 @@ const modal = StyleSheet.create({
     },
     pressable: {
         flex: 1,
-        backgroundColor:'black',
-        opacity:0.9
+        backgroundColor: 'black',
+        opacity: 0.9
     },
     boxItems: {
         backgroundColor: 'black',
         paddingHorizontal: 10,
         paddingTop: 20,
         paddingBottom: 8,
-        opacity:0.9
+        opacity: 0.9
     },
     boxForm: {
         backgroundColor: '#CCCED9',
@@ -203,10 +256,29 @@ const modal = StyleSheet.create({
         justifyContent: "center",
         marginTop: 5
     },
+    whiteButton: {
+        backgroundColor: "#FFF",
+        borderRadius: 6,
+        height: 40,
+        justifyContent: "center",
+        marginTop: 5
+    },
+    redButton: {
+        backgroundColor: "red",
+        borderRadius: 6,
+        height: 40,
+        justifyContent: "center",
+        marginTop: 5
+    },
     textButton: {
         textAlign: 'center',
         color: "#FFF",
         fontSize: 18
+    },
+    blackTextButton: {
+        color: "#000",
+        fontSize: 18,
+        textAlign: 'center'
     },
 
 });

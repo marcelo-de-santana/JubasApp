@@ -38,4 +38,12 @@ function time(event) {
     return value
 }
 
-export default { cpf, date, name, phone, time }
+function fullTime(event) {
+    let value = event
+    value = value.replace(/\D/g, '')
+    value = value.replace(/(\d{2})(\d{1})/, '$1:$2')
+    value = value.replace(/(\d{2}:\d{2})(\d)/, '$1:$2')
+    return value
+}
+
+export default { cpf, date, name, phone, time, fullTime }

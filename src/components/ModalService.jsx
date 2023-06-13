@@ -1,7 +1,8 @@
 import { useCatalog } from "../contexts/catalog";
 import { Alert, Modal, Pressable, TextInput, TouchableOpacity, Text, View } from "react-native";
 import { global, modal } from "./styles/global";
-import env from "../../env.json"
+import mask from "../utils/mask";
+import env from "../../env.json";
 
 export function ModalService({ modalParams, setModalParams, parentCategoryId }) {
 	const { refreshPage } = useCatalog();
@@ -53,7 +54,7 @@ export function ModalService({ modalParams, setModalParams, parentCategoryId }) 
 				service_id: serviceId,
 				service_name: modalParams.data?.serviceName,
 				duration: modalParams.data?.duration,
-				price: modalParams.serviceParams?.price
+				price: modalParams.data?.price
 			})
 		})
 		const json = await response.json()
@@ -79,15 +80,7 @@ export function ModalService({ modalParams, setModalParams, parentCategoryId }) 
 				</Pressable>
 				<View style={modal.boxItems}>
 					<View style={modal.boxForm}>
-						<View style={global.boxFlexRow}>
-							<Text style={global.textHeader}>Nome do serviço</Text>
-							{//BOTÃO DE EXCLUIR CATEGORIA
-								serviceId &&
-								<TouchableOpacity onPress={() => deleteService()}>
-									<Text style={global.textHeader}>Excluir categoria</Text>
-								</TouchableOpacity>
-							}
-						</View>
+						<Text style={global.textHeader}>Nome do serviço</Text>
 						<TextInput style={modal.input}
 							keyboardType="default"
 							placeholderTextColor="#161c2660"
@@ -98,26 +91,30 @@ export function ModalService({ modalParams, setModalParams, parentCategoryId }) 
 						/>
 						<Text style={global.textHeader}>Duração</Text>
 						<TextInput style={modal.input}
-							keyboardType="default"
+							keyboardType="numeric"
 							placeholderTextColor="#161c2660"
 							placeholder="HH:MM:SS"
-							maxLength={20}
+							maxLength={8}
 							value={modalParams.data?.duration ?? ''}
-							onChangeText={text => handleTextInput('duration', text)}
+							onChangeText={text => handleTextInput('duration', mask.fullTime(text))}
 						/>
 						<Text style={global.textHeader}>Preço</Text>
 						<TextInput style={modal.input}
 							keyboardType="numeric"
 							placeholderTextColor="#161c2660"
-							placeholder="10,00"
-							maxLength={20}
+							placeholder="10.00"
+							maxLength={7}
 							value={modalParams.data?.price ?? ''}
 							onChangeText={text => handleTextInput('price', text)}
 						/>
 					</View>
 					<TouchableOpacity style={modal.button} onPress={() => sendData()}>
-						<Text style={modal.textButton}>{serviceId ? 'Editar' : 'Cadastrar'} serviço</Text>
+						<Text style={modal.textButton}>{serviceId ? 'Editar' : 'Cadastrar'}</Text>
 					</TouchableOpacity>
+					{serviceId &&
+						<TouchableOpacity style={modal.redButton} onPress={() => deleteService()}>
+							<Text style={modal.textButton}>Excluir</Text>
+						</TouchableOpacity>}
 				</View>
 			</View>
 		</Modal>
