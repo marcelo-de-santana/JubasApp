@@ -32,7 +32,7 @@ export default function MainScreen({ navigation }) {
                     <TouchableOpacity style={global.boxMenu}>
                         <Text style={global.textMenu}>Minha conta</Text>
                     </TouchableOpacity>
-                    {user.LEVEL === 1 && <AdminModules />}
+                    {user.LEVEL === 1 || <AdminModules />}
                     <TouchableOpacity style={global.boxMenu}>
                         <Text style={global.textMenu}>Minhas compras</Text>
                     </TouchableOpacity>

@@ -1,11 +1,19 @@
 import { useEmployee } from "../../contexts/employee";
 import { global } from "../../components/styles/global";
 import { StyleSheet, View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { ModalTimetable } from "../../components/ModalEmployeeTimetable";
 import LoadingScreen from "../../components/LoadingScreen";
+import { useState } from "react";
 
-export default function EmployeeTimetable({ navigation }) {
+export default function EmployeeTimetable() {
     const { barbersData, indexButton, loading } = useEmployee();
+    const [modalParams, setModalParams] = useState({
+        visible: false
+    });
 
+    function openModal(times) {
+        setModalParams((prev) => ({ ...prev, visible: true, data: times, }));
+    }
     if (loading) {
         return (
             <LoadingScreen />
@@ -13,69 +21,71 @@ export default function EmployeeTimetable({ navigation }) {
     }
     return (
         <View style={styles.container}>
+            <ModalTimetable
+                modalParams={modalParams}
+                setModalParams={setModalParams}
+            />
             <ScrollView style={styles.scroll}>
-
                 <Text style={global.textHeaderMiddle}>
                     {barbersData[indexButton].barber_name}
                 </Text>
-                {//VERIFICA SE O BARBEIRO POSSUI ALGUM HORÁRIO CADASTRADO PARA EXIBIR
-                    (!Object.values(barbersData[indexButton].times[0]).includes(null)) ?
+                {
+                    //VERIFICA SE O BARBEIRO POSSUI ALGUM HORÁRIO CADASTRADO PARA EXIBIR
+                    !Object.values(barbersData[indexButton].times[0]).includes(null) ? (
                         barbersData[indexButton].times?.map((item, index) => (
                             <View style={styles.boxTimes} key={item.weekday}>
                                 <View style={styles.boxHeader}>
                                     <Text style={styles.textHeader}>{item.weekday}</Text>
-                                    <TouchableOpacity onPress={() => {
-                                        navigation.push('EmployeesTimeEditForm', { timeIndex: index })
-                                    }}>
+                                    <TouchableOpacity
+                                        onPress={() =>
+                                            openModal(barbersData[indexButton].times[index])
+                                        }
+                                    >
                                         <Text style={styles.textHeader}>Editar</Text>
                                     </TouchableOpacity>
                                 </View>
 
                                 <View style={styles.boxDetails}>
                                     <Text style={styles.textDetails}>
-                                        Entrada{'\n'}
+                                        Entrada{"\n"}
                                         {item.start_time.slice(0, -3)}
                                     </Text>
                                     <Text style={styles.textDetails}>
-                                        E. Inter.{'\n'}
+                                        E. Inter.{"\n"}
                                         {item.start_interval.slice(0, -3)}
                                     </Text>
                                     <Text style={styles.textDetails}>
-                                        R. Inter.{'\n'}
+                                        R. Inter.{"\n"}
                                         {item.end_interval.slice(0, -3)}
                                     </Text>
                                     <Text style={styles.textDetails}>
-                                        Saída{'\n'}
+                                        Saída{"\n"}
                                         {item.end_time.slice(0, -3)}
                                     </Text>
                                     <Text style={styles.textDetails}>
-                                        Status{'\n'}
-                                        {item.status == 1 ? 'Ativo' : 'Inativo'}
+                                        Status{"\n"}
+                                        {item.status == 1 ? "Ativo" : "Inativo"}
                                     </Text>
                                 </View>
-
                             </View>
-
                         ))
-                        :
+                    ) : (
                         <View style={global.blueBoxItems}>
-                            <Text style={global.whiteTextSmallCenter}>Lista de horários vazia</Text>
+                            <Text style={global.whiteTextSmallCenter}>
+                                Lista de horários vazia
+                            </Text>
                         </View>
+                    )
                 }
-
-
             </ScrollView>
-            <TouchableOpacity style={styles.insertButton}
-                onPress={() => {
-                    navigation.push('EmployeesDaysEntryForm', {
-                        times: barbersData[0]?.times
-                    })
-                }}>
+            <TouchableOpacity
+                style={styles.insertButton}
+                onPress={() => openModal({ week: true })}
+            >
                 <Text style={styles.textInsertButton}>Inserir</Text>
             </TouchableOpacity>
         </View>
     );
-
 }
 
 const styles = StyleSheet.create({

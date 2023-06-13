@@ -201,6 +201,12 @@ const global = StyleSheet.create({
         flexWrap: 'wrap',
         justifyContent: 'space-between'
     },
+    boxFlexRowSwitch: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        paddingVertical:10
+    },
     boxFooter: {
         height: 230,
         marginVertical: 20
