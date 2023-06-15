@@ -52,4 +52,23 @@ function authFormSchema() {
     );
 }
 
-export { authFormSchema, registerFormSchema }
+function recoverPassSchema() {
+    return (
+        Yup.object().shape({
+            cpf: Yup.string()
+                .matches(validation.cpf, '*Campo obrigatório')
+                .min(14, '*Campo obrigatório')
+                .max(14, '*Campo obrigatório')
+                .required('*Campo obrigatório'),
+            password: Yup.string()
+                .min(8, ({ min }) => `Mínimo de ${min} caracteres`)
+                .max(20, ({ max }) => `No máximo ${max} caracteres`)
+                .required('*Campo obrigatório'),
+            checkPass: Yup.string()
+                .oneOf([Yup.ref('password'), null], '*As senhas devem ser iguais')
+                .required('*Campo obrigatório')
+        })
+    );
+}
+
+export { authFormSchema, registerFormSchema, recoverPassSchema }

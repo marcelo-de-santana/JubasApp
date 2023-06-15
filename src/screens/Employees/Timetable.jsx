@@ -19,6 +19,7 @@ export default function EmployeeTimetable() {
             <LoadingScreen />
         )
     }
+    
     return (
         <View style={styles.container}>
             <ModalTimetable
@@ -31,8 +32,8 @@ export default function EmployeeTimetable() {
                 </Text>
                 {
                     //VERIFICA SE O BARBEIRO POSSUI ALGUM HORÁRIO CADASTRADO PARA EXIBIR
-                    !Object.values(barbersData[indexButton].times[0]).includes(null) ? (
-                        barbersData[indexButton].times?.map((item, index) => (
+                    (barbersData[indexButton].times[0].start_time) ? (
+                        barbersData[indexButton].times.map((item, index) => (
                             <View style={styles.boxTimes} key={item.weekday}>
                                 <View style={styles.boxHeader}>
                                     <Text style={styles.textHeader}>{item.weekday}</Text>

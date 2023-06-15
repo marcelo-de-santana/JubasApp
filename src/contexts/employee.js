@@ -24,16 +24,6 @@ export default function EmployeeProvider({ children }) {
             .catch(error => console.log(error))
     }, [refresh])
 
-    // useEffect(() => {
-    //     setLoading(true)
-    //     fetch(`${env.host}/schedule/week`)
-    //         .then(response => response.json())
-    //         .then(json => {
-    //             setWeek(json)
-    //             setLoading(false)
-    //         })
-    // }, [])
-
     function refreshPage(){
         setLoading(true)
         setRefresh(refresh+1)

@@ -21,6 +21,13 @@ function ModalEmployee({ modalParams, setModalParams }) {
     }
 
     function alterBarber() {
+        Alert.alert('', 'Deseja alterar o nome do barbeiro?', [{
+            text: 'Cancelar',
+            style: 'cancel',
+        }, {
+            text: 'Confirmar',
+            onPress: () => alterBarberName()
+        }])
         //MÉTODO RESPONSÁVEL POR ALTERAR O NOME DO BARBEIRO
         async function alterBarberName() {
             const response = await fetch(`${env.host}/barber/update/`, {
@@ -35,19 +42,21 @@ function ModalEmployee({ modalParams, setModalParams }) {
             refreshPage()
             closeModal()
         }
-        Alert.alert('', 'Deseja alterar o nome do barbeiro?', [{
-            text: 'Cancelar',
-            style: 'cancel',
-        }, {
-            text: 'Confirmar',
-            onPress: () => alterBarberName()
-        }])
     }
 
     function disableBarber() {
+        Alert.alert('', `Deseja ${modalParams.data.barberStatus ? 'desativar' : 'ativar'} o barbeiro?`, [{
+            text: 'Cancelar',
+            style: 'cancel',
+        },
+        {
+            text: 'Confirmar',
+            onPress: () => disableBarberStatus()
+        }
+        ])
         //MÉTODO RESPONSÁVEL POR ALTERAR O ESTADO DO CADASTRO DO BARBEIRO
         async function disableBarberStatus() {
-            const response = await fetch(`${env.host}/users/register-status`, {
+            const response = await fetch(`${env.host}/user/register-status`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -62,18 +71,17 @@ function ModalEmployee({ modalParams, setModalParams }) {
             refreshPage()
             closeModal()
         }
-        Alert.alert('', `Deseja ${modalParams.data.barberStatus ? 'desativar' : 'ativar'} o barbeiro?`, [{
+    }
+
+    function deleteBarber() {
+        Alert.alert('', 'Deseja EXCLUIR o barbeiro, o cadastro ainda ficará disponível na lista de usuários?', [{
             text: 'Cancelar',
             style: 'cancel',
         },
         {
             text: 'Confirmar',
-            onPress: () => disableBarberStatus()
-        }
-        ])
-    }
-
-    function deleteBarber() {
+            onPress: () => sendDeleteBarber()
+        }])
         async function sendDeleteBarber() {
             const response = await fetch(`${env.host}/barber/delete`, {
                 method: 'DELETE',
@@ -87,14 +95,6 @@ function ModalEmployee({ modalParams, setModalParams }) {
             refreshPage()
             closeModal()
         }
-        Alert.alert('', 'Deseja EXCLUIR o barbeiro, o cadastro ainda ficará disponível na lista de usuários?', [{
-            text: 'Cancelar',
-            style: 'cancel',
-        },
-        {
-            text: 'Confirmar',
-            onPress: () => sendDeleteBarber()
-        }])
     }
 
     return (

@@ -71,7 +71,7 @@ export default function Login({ navigation }) {
                         </View>
                     </Pressable>
                     <View style={global.boxFooter}>
-                        <TouchableOpacity onPress={() => navigation.navigate('Main')}>
+                        <TouchableOpacity onPress={() => navigation.navigate('RecoverPassword')}>
                             <Text style={global.darkBlueTextSmallCenter}>Esqueci minha senha</Text>
                         </TouchableOpacity>
 

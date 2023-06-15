@@ -22,49 +22,69 @@ export function ModalService({ modalParams, setModalParams, parentCategoryId }) 
 			})
 		)
 	}
-	async function deleteService() {
-		const response = await fetch(`${env.host}/schedule/service`, {
-			method: 'DELETE',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				service_id: serviceId,
-			})
-		})
-		const json = await response.json()
 
-		if (response.status === 200) {
-			closeModal()
-			Alert.alert('', json.message)
-			refreshPage()
-		} else {
-			Alert.alert('', json.message)
+	function deleteService() {
+		Alert.alert('', "Deseja deletar o registro?", [{
+			text: 'Cancelar',
+			style: "cancel"
+		}, {
+			text: "Confirmar",
+			onPress: () => sendDeleteService()
+		}])
+
+		async function sendDeleteService() {
+			const response = await fetch(`${env.host}/schedule/service`, {
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					service_id: serviceId,
+				})
+			})
+			const json = await response.json()
+
+			if (response.status === 200) {
+				closeModal()
+				Alert.alert('', json.message)
+				refreshPage()
+			} else {
+				Alert.alert('', json.message)
+			}
 		}
 	}
 
-	async function sendData() {
-		const response = await fetch(`${env.host}/schedule/service`, {
-			method: (serviceId ? 'PUT' : 'POST'),
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				category_id: parentCategoryId,
-				service_id: serviceId,
-				service_name: modalParams.data?.serviceName,
-				duration: modalParams.data?.duration,
-				price: modalParams.data?.price
+	function sendData() {
+		Alert.alert('', "Deseja gravar o registro?", [{
+			text: 'Cancelar',
+			style: "cancel"
+		}, {
+			text: "Confirmar",
+			onPress: () => sendService()
+		}])
+		async function sendService() {
+			const response = await fetch(`${env.host}/schedule/service`, {
+				method: (serviceId ? 'PUT' : 'POST'),
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					category_id: parentCategoryId,
+					service_id: serviceId,
+					service_name: modalParams.data?.serviceName,
+					duration: modalParams.data?.duration,
+					price: modalParams.data?.price
+				})
 			})
-		})
-		const json = await response.json()
+			const json = await response.json()
 
-		if (response.status === 200) {
-			closeModal()
-			Alert.alert('', json.message)
-			refreshPage()
-		} else {
-			Alert.alert('', json.message)
+			if (response.status === 200) {
+				closeModal()
+				Alert.alert('', json.message)
+				refreshPage()
+			} else {
+				Alert.alert('', json.message)
+			}
 		}
 	}
 
