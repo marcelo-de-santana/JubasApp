@@ -32,7 +32,6 @@ export default function ServiceBox(props) {
 								onChange={() => {
 									setSwitchState((prevState) => (
 										{
-											...prevState,
 											[item.service_id]: {
 												"statusButton": !switchState[item.service_id]?.statusButton,
 												"serviceId": item.service_id,

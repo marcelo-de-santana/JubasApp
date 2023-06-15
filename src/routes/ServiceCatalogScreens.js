@@ -5,7 +5,7 @@ import ListServices from "../screens/ServiceCatalog/ListServices";
 
 const Stack = createStackNavigator();
 
-export default function CatalogScreen() {
+export default function ServiceCatalogScreens() {
     return (
         <CatalogProvider>
             <Stack.Navigator screenOptions={{

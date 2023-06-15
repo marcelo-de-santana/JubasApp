@@ -47,7 +47,7 @@ function ModalEmployee({ modalParams, setModalParams }) {
     function disableBarber() {
         //MÉTODO RESPONSÁVEL POR ALTERAR O ESTADO DO CADASTRO DO BARBEIRO
         async function disableBarberStatus() {
-            const response = await fetch(`${env.host}/users/register-status`, {
+            const response = await fetch(`${env.host}/user/register-status`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'

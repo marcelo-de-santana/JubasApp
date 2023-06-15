@@ -4,27 +4,52 @@ import { global, modal } from "./styles/global";
 import { WeekDaysForm } from "./WeekDaysForm";
 import mask from "../utils/mask";
 import env from "../../env.json";
+import { useEmployee } from "../contexts/employee";
 
 export function ModalTimetable({ modalParams, setModalParams }) {
+    const { barbersData, indexButton, refreshPage } = useEmployee();
     const [statusButton, setStatusButton] = useState({})
-    
-    async function registerTimeWeek(){
-        const response = await fetch(`${env.host}/barber/service-hour`,{
-            method: 'POST',
+    const registerForm = modalParams.data?.week
+    const barberId = barbersData[indexButton].barber_id
+
+    async function sendTimeWeek() {
+        const response = await fetch(`${env.host}/barber/service-hour`, {
+            method: (registerForm ? 'POST' : 'PUT'),
             headers: {
-                'Content-Type':'application/json'
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify(modalParams.data,statusButton)
+            body: JSON.stringify({
+                data: modalParams.data,
+                barber_id: barberId,
+                statusButton
+            })
         })
         const json = await response.json()
         Alert.alert('', json.message)
+        refreshPage()
+        closeModal()
+    }
+    async function deleteTimeWeek() {
+        const response = await fetch(`${env.host}/barber/service-hour`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                data: modalParams.data,
+            })
+        })
+        const json = await response.json()
+        Alert.alert('', json.message)
+        refreshPage()
         closeModal()
     }
 
     function closeModal() {
         setModalParams((prev) => ({ ...prev, visible: false, data: {} }));
+        setStatusButton({})
     }
-    
+
     function handleTextInput(key, value) {
         setModalParams((prev) => ({
             ...prev,
@@ -37,7 +62,7 @@ export function ModalTimetable({ modalParams, setModalParams }) {
             <View style={modal.container}>
                 <Pressable style={modal.pressable} onPress={() => closeModal()} />
                 <Pressable onPress={Keyboard.dismiss}>
-                    {modalParams.data?.week && <WeekDaysForm statusButton={statusButton} setStatusButton={setStatusButton} />}
+                    {registerForm && <WeekDaysForm statusButton={statusButton} setStatusButton={setStatusButton} />}
 
                     <View style={modal.boxItems}>
 
@@ -49,11 +74,10 @@ export function ModalTimetable({ modalParams, setModalParams }) {
                                 keyboardType="decimal-pad"
                                 placeholderTextColor="#161c2660"
                                 placeholder="07:00:00"
-                                maxLength={5}
+                                maxLength={8}
                                 value={modalParams.data?.start_time}
-                                onChangeText={(text) => handleTextInput("start_time", mask(text))}
+                                onChangeText={(text) => handleTextInput("start_time", mask.fullTime(text))}
                             />
-                            {/*(inputErrorStatus.start_time && <TextAlert error={'*Campo obrigatório'} />)*/}
 
                             <Text style={modal.label}>Entrada Intervalo</Text>
 
@@ -62,11 +86,10 @@ export function ModalTimetable({ modalParams, setModalParams }) {
                                 keyboardType="decimal-pad"
                                 placeholderTextColor="#161c2660"
                                 placeholder="11:00:00"
-                                maxLength={5}
+                                maxLength={8}
                                 value={modalParams.data?.start_interval}
-                            // onChangeText={value => { setTimeInputValues(prev => ({ ...prev, start_interval: mask.time(value) })) }}
+                                onChangeText={(text) => handleTextInput("start_interval", mask.fullTime(text))}
                             />
-                            {/*(inputErrorStatus.start_interval && <TextAlert error={'*Campo obrigatório'} />)*/}
 
                             <Text style={modal.label}>Retorno Intervalo</Text>
                             <TextInput
@@ -74,11 +97,10 @@ export function ModalTimetable({ modalParams, setModalParams }) {
                                 keyboardType="decimal-pad"
                                 placeholderTextColor="#161c2660"
                                 placeholder="12:00:00"
-                                maxLength={5}
+                                maxLength={8}
                                 value={modalParams.data?.end_interval}
-                            //                      onChangeText={value => setTimeInputValues(prev => ({ ...prev, end_interval: mask.time(value) }))}
+                                onChangeText={(text) => handleTextInput("end_interval", mask.fullTime(text))}
                             />
-                            {/*(inputErrorStatus.end_interval && <TextAlert error={'*Campo obrigatório'} />)*/}
 
                             <Text style={modal.label}>Saída</Text>
                             <TextInput
@@ -86,23 +108,22 @@ export function ModalTimetable({ modalParams, setModalParams }) {
                                 keyboardType="decimal-pad"
                                 placeholderTextColor="#161c2660"
                                 placeholder="16:00:00"
-                                maxLength={5}
+                                maxLength={8}
                                 value={modalParams.data?.end_time}
-                            //                      onChangeText={value => setTimeInputValues(prev => ({ ...prev, end_time: mask.time(value) }))}
+                                onChangeText={(text) => handleTextInput("end_time", mask.fullTime(text))}
                             />
-                            {/*(inputErrorStatus.end_time && <TextAlert error={'*Campo obrigatório'} />)*/}
 
                             <View style={global.boxFlexRowSwitch}>
                                 <Text style={modal.label}>Status</Text>
                                 <Switch value={Boolean(modalParams.data?.status)} onValueChange={value => handleTextInput('status', value)} />
                             </View>
-                            <TouchableOpacity style={modal.button} onPress={() => registerTimeWeek()}>
+                            <TouchableOpacity style={modal.button} onPress={() => sendTimeWeek()}>
                                 <Text style={modal.textButton}>Confirmar</Text>
                             </TouchableOpacity>
                         </View>
-                        <TouchableOpacity style={modal.redButton} onPress={() => closeModal()}>
+                        {!registerForm && <TouchableOpacity style={modal.redButton} onPress={() => deleteTimeWeek()}>
                             <Text style={modal.textButton}>Excluir horário</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity>}
                     </View>
                 </Pressable>
             </View>

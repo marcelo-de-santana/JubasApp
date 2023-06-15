@@ -1,10 +1,12 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from '../screens/Login';
 import SignUp from '../screens/SignUp';
-import MainScreen from '../screens/Main';
+import Main from '../screens/Main';
+import RecoverPassword from '../screens/RecoverPassword';
+import EmployeesScreens from './EmployeesScreens';
 import ServiceBookScreens from './ServiceBookScreens';
-import CatalogScreen from './CatalogScreens';
-import EmployeesScreen from './EmployeesScreens';
+import ServiceCatalogScreens from './ServiceCatalogScreens';
+import UsersScreens from './UsersScreens';
 
 const Stack = createStackNavigator();
 
@@ -18,10 +20,13 @@ export default function StackScreens() {
 		}}>
 			<Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
 			<Stack.Screen name="SignUp" component={SignUp} options={{ title: 'Cadastre-se' }} />
-			<Stack.Screen name="Main" component={MainScreen} options={{ headerTitle: 'Jubas Barbearia', headerTitleAlign: 'center', headerLeft: false }} />
-			<Stack.Screen name="ServiceBook" component={ServiceBookScreens} options={{ headerShown: false }} />
-			<Stack.Screen name="CatalogScreen" component={CatalogScreen} options={{ headerShown: false }} />
-			<Stack.Screen name="EmployeesScreen" component={EmployeesScreen} options={{ headerShown: false }} />
+			<Stack.Screen name="Main" component={Main} options={{ headerTitle: 'Jubas Barbearia', headerTitleAlign: 'center', headerLeft: false }} />
+			<Stack.Screen name="RecoverPassword" component={RecoverPassword} options={{ headerTitle: 'Recuperar acesso'}} />
+			<Stack.Screen name="ServiceBookScreens" component={ServiceBookScreens} options={{ headerShown: false }} />
+			<Stack.Screen name="EmployeesScreens" component={EmployeesScreens} options={{ headerShown: false }} />
+			<Stack.Screen name="ServiceCatalogScreens" component={ServiceCatalogScreens} options={{ headerShown: false }} />
+			<Stack.Screen name="UsersScreens" component={UsersScreens} options={{ headerShown: false }} />
+			<Stack.Screen name="Promotions" component={Main} />
 		</Stack.Navigator>
 
 	);
