@@ -97,9 +97,9 @@ export default function MyAccount({ navigation }) {
                     <TextInput
                         style={global.input}
                         keyboardType="number-pad"
-                        placeholder="(61) 99999-9999"
+                        placeholder="(61)99999-9999"
                         placeholderTextColor="#161c2660"
-                        maxLength={15}
+                        maxLength={14}
                         onChangeText={text => handleTextInput('phoneNumber', mask.phone(text))}
                         value={mask.phone(values.phoneNumber)}
                     />

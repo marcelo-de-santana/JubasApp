@@ -1,1 +1,79 @@
-[{"id_usuario":8,"cpf":"000.000.000-02","nome":"Eduardo Teste","nivel_acesso":2,"status_cadastro":0},{"id_usuario":4,"cpf":"000,000,001,01","nome":"Gabriel Navalha","nivel_acesso":2,"status_cadastro":1},{"id_usuario":2,"cpf":"000.000.000-11","nome":"Gerson de Castro","nivel_acesso":2,"status_cadastro":1},{"id_usuario":5,"cpf":"000,000,001.11","nome":"João Marcos","nivel_acesso":2,"status_cadastro":1},{"id_usuario":1,"cpf":"000.000.000-00","nome":"Juba de Leão","nivel_acesso":1,"status_cadastro":1},{"id_usuario":7,"cpf":"100.002.000-00","nome":"Marcelo Software Tester","nivel_acesso":3,"status_cadastro":1},{"id_usuario":6,"cpf":"000,000,001.10","nome":"Reis Melo","nivel_acesso":2,"status_cadastro":1},{"id_usuario":3,"cpf":"000.000.000,01","nome":"Ulysses Guimaraes","nivel_acesso":2,"status_cadastro":1}]
+[
+    {
+        "cpf": "000.000.000-02",
+        "level": 3,
+        "name": "Eduardo Teste",
+        "status_registration": 1,
+        "user_id": 8
+    },
+    {
+        "cpf": "000,000,001,01",
+        "level": 2,
+        "name": "Gabriel Navalha",
+        "status_registration": 1,
+        "user_id": 4
+    },
+    {
+        "cpf": "000.000.000-11",
+        "level": 2,
+        "name": "Gerson de Castro",
+        "status_registration": 1,
+        "user_id": 2
+    },
+    {
+        "cpf": "000,000,001.11",
+        "level": 2,
+        "name": "João Marcos",
+        "status_registration": 1,
+        "user_id": 5
+    },
+    {
+        "cpf": "000.000.000-00",
+        "level": 1,
+        "name": "Juba de Leão",
+        "status_registration": 1,
+        "user_id": 1
+    },
+    {
+        "cpf": "999.999.999-99",
+        "level": 3,
+        "name": "LUCAS EDUARDO ",
+        "status_registration": 1,
+        "user_id": 13
+    },
+    {
+        "cpf": "100.002.000-00",
+        "level": 3,
+        "name": "Marcelo Software Tester",
+        "status_registration": 1,
+        "user_id": 7
+    },
+    {
+        "cpf": "000,000,001.10",
+        "level": 2,
+        "name": "Reis Melo",
+        "status_registration": 1,
+        "user_id": 6
+    },
+    {
+        "cpf": "000.000.000,01",
+        "level": 2,
+        "name": "Ulysses Guimarães ",
+        "status_registration": 0,
+        "user_id": 3
+    },
+    {
+        "cpf": "000.000.000-33",
+        "level": 3,
+        "name": "Zé da mangA",
+        "status_registration": 0,
+        "user_id": 10
+    },
+    {
+        "cpf": "000.000.000-34",
+        "level": 3,
+        "name": "Zé da Manga",
+        "status_registration": 1,
+        "user_id": 11
+    }
+]

@@ -8,6 +8,9 @@ export default function Main({ navigation }) {
     function AdminModules() {
         return (
             <>
+                <TouchableOpacity style={global.boxMenu} onPress={() => alert('Módulo em construção')}>
+                    <Text style={global.textMenu}>Gerenciar agenda</Text>
+                </TouchableOpacity>
                 <TouchableOpacity style={global.boxMenu} onPress={() => navigation.navigate('ServiceCatalogScreens')}>
                     <Text style={global.textMenu}>Gerenciar catálogo</Text>
                 </TouchableOpacity>
@@ -17,6 +20,9 @@ export default function Main({ navigation }) {
                 <TouchableOpacity style={global.boxMenu} onPress={() => navigation.navigate('UsersScreens')}>
                     <Text style={global.textMenu}>Gerenciar usuários</Text>
                 </TouchableOpacity>
+                <TouchableOpacity style={global.boxMenu} onPress={()=> alert('Módulo em construção')}>
+                        <Text style={global.textMenu}>Gerenciar pagamentos</Text>
+                    </TouchableOpacity>
             </>
         );
     }
@@ -29,7 +35,7 @@ export default function Main({ navigation }) {
                     <TouchableOpacity style={global.boxMenu} onPress={() => navigation.navigate('ServiceBookScreens')}>
                         <Text style={global.textMenu}>Ver agenda</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={global.boxMenu}>
+                    <TouchableOpacity style={global.boxMenu} onPress={() => navigation.navigate('MyAccount')}>
                         <Text style={global.textMenu}>Minha conta</Text>
                     </TouchableOpacity>
                     {user.LEVEL === 1 && <AdminModules />}
@@ -44,7 +50,3 @@ export default function Main({ navigation }) {
         </View>
     );
 }
-
-styles = StyleSheet.create({
-
-})

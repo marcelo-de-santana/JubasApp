@@ -280,7 +280,20 @@ const modal = StyleSheet.create({
         fontSize: 18,
         textAlign: 'center'
     },
-
+    textHeader: {
+        color: "#000",
+        fontSize: 16,
+        paddingLeft: 5,
+        paddingVertical: 4,
+    },
+    switchBox: {
+        flexDirection: 'row',
+        flexWrap: "wrap",
+        justifyContent: 'space-between',
+        marginVertical: 5,
+    },
 });
 
-export { global, modal };
+const placeHolderColorTextInput = "#161c2660"
+
+export { global, modal, placeHolderColorTextInput };
