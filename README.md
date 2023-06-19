@@ -36,11 +36,11 @@ npm run ios
 ### Screen Prototypes
 The latest updates are available on [Figma](https://www.figma.com/file/5ilvDi7rBbEM8hG74pETXk/Barber-App).
 
-Platform | **IOS** & **Android**
-:--- | :---: 
-Login       | <img src="https://github.com/marcelo-de-santana/jubas-app/blob/master/src/documents/images/Login.png?raw=true" height="700"/> 
-Sing-up     | <img src="https://github.com/marcelo-de-santana/jubas-app/blob/master/src/documents/images/Sing-up.png?raw=true" height="700"/>
-Schedule    | <img src="https://github.com/marcelo-de-santana/jubas-app/blob/master/src/documents/images/Schedule.png?raw=true" height="700"/>
+ Screen | **Android** | Screen | **Android**
+:--- | :---: | :---: | :---:
+Login           | <img src="https://github.com/marcelo-de-santana/jubas-app/blob/master/src/documents/images/Login.png?raw=true" height="600"/> |Sing-up         | <img src="https://github.com/marcelo-de-santana/jubas-app/blob/master/src/documents/images/Sing-up.png?raw=true" height="600"/>
+Schedule        | <img src="https://github.com/marcelo-de-santana/jubas-app/blob/master/src/documents/images/Schedule.png?raw=true" height="600"/> |ServiceCatalog  | <img src="https://github.com/marcelo-de-santana/jubas-app/blob/master/src/documents/images/ServiceCatalog.png?raw=true" height="600"/>
+ServiceBook     | <img src="https://github.com/marcelo-de-santana/jubas-app/blob/master/src/documents/images/ServiceBook.png?raw=true" height="600"/>|EmployeeTimes   | <img src="https://github.com/marcelo-de-santana/jubas-app/blob/master/src/documents/images/EmployeeTimes.png?raw=true" height="600"/>
 
 ### About
 This project was completed as part of the coursework for the Information Systems Graduation program.
