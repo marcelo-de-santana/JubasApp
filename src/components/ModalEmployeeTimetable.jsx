@@ -64,6 +64,7 @@ export function ModalTimetable({ modalParams, setModalParams }) {
             refreshPage()
             closeModal()
         }
+
     }
 
     function closeModal() {

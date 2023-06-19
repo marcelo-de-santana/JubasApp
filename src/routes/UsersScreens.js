@@ -13,7 +13,6 @@ export default function UsersScreens() {
             }
         }}>
             <Stack.Screen name='UsersMainScreen' component={UsersMainScreen} options={{ title: 'Gerenciar de usuários' }} />
-
         </Stack.Navigator>
     );
 }

@@ -99,3 +99,4 @@ function updateMyAccountFormSchema() {
 }
 
 export { authFormSchema, registerFormSchema, recoverPassSchema, updateMyAccountFormSchema }
+
