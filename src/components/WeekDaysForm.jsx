@@ -3,7 +3,6 @@ import { Switch, Text, View } from "react-native";
 import { global, modal } from "./styles/global";
 import env from "../../env.json";
 import LoadingScreen from "../components/LoadingScreen";
-import d from "../services/api/barberWeek.json";
 
 export function WeekDaysForm({statusButton, setStatusButton}) {
     const [weekDays, setWeekDays] = useState([])

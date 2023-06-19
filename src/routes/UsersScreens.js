@@ -1,5 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import UsersList from "../screens/Users/UsersList";
+import UsersMainScreen from "../screens/Users/UsersMainScreen";
 
 const Stack = createStackNavigator();
 
@@ -12,8 +12,7 @@ export default function UsersScreens() {
                 backgroundColor: "#3C4659"
             }
         }}>
-            <Stack.Screen name='UsersList' component={UsersList} options={{ title: 'Gerenciar de usuários' }} />
-
+            <Stack.Screen name='UsersMainScreen' component={UsersMainScreen} options={{ title: 'Gerenciar de usuários' }} />
         </Stack.Navigator>
     );
 }

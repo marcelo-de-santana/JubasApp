@@ -7,7 +7,6 @@ export default function ServiceProvider({ children }) {
     const [switchState, setSwitchState] = useState({})
     const [serviceParams, setServiceParams] = useState({})
 
-
     return (
         <ServiceContext.Provider value={{
             serviceData, setServiceData,

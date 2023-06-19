@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import env from "../../env.json";
-import d from "../services/api/scheduleSpecialties.json";
 
 const CatalogContext = createContext();
 

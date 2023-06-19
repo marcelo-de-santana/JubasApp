@@ -12,37 +12,59 @@ export function ModalTimetable({ modalParams, setModalParams }) {
     const registerForm = modalParams.data?.week
     const barberId = barbersData[indexButton].barber_id
 
-    async function sendTimeWeek() {
-        const response = await fetch(`${env.host}/barber/service-hour`, {
-            method: (registerForm ? 'POST' : 'PUT'),
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                data: modalParams.data,
-                barber_id: barberId,
-                statusButton
+    function sendTimeWeek() {
+        Alert.alert('', 'Deseja gravar o registro?', [{
+            text: 'Cancelar',
+            style: 'cancel',
+        },
+        {
+            text: 'Confirmar',
+            onPress: () => sendTimeWeekData()
+        }])
+        async function sendTimeWeekData() {
+            const response = await fetch(`${env.host}/barber/service-hour`, {
+                method: (registerForm ? 'POST' : 'PUT'),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data: modalParams.data,
+                    barber_id: barberId,
+                    statusButton
+                })
             })
-        })
-        const json = await response.json()
-        Alert.alert('', json.message)
-        refreshPage()
-        closeModal()
+            const json = await response.json()
+            Alert.alert('', json.message)
+            refreshPage()
+            closeModal()
+        }
     }
-    async function deleteTimeWeek() {
-        const response = await fetch(`${env.host}/barber/service-hour`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                data: modalParams.data,
+
+    function deleteTimeWeek() {
+        Alert.alert('', 'Deseja gravar o registro?', [{
+            text: 'Cancelar',
+            style: 'cancel',
+        },
+        {
+            text: 'Confirmar',
+            onPress: () => sendDeleteTimeWeek()
+        }])
+        async function sendDeleteTimeWeek() {
+            const response = await fetch(`${env.host}/barber/service-hour`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data: modalParams.data,
+                })
             })
-        })
-        const json = await response.json()
-        Alert.alert('', json.message)
-        refreshPage()
-        closeModal()
+            const json = await response.json()
+            Alert.alert('', json.message)
+            refreshPage()
+            closeModal()
+        }
+
     }
 
     function closeModal() {
