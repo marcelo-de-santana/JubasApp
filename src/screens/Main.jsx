@@ -8,7 +8,7 @@ export default function Main({ navigation }) {
     function AdminModules() {
         return (
             <>
-                <TouchableOpacity style={global.boxMenu} onPress={() => alert('Módulo em construção')}>
+                <TouchableOpacity style={global.boxMenu} onPress={() => navigation.navigate('ScheduleManagement')}>
                     <Text style={global.textMenu}>Gerenciar agenda</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={global.boxMenu} onPress={() => navigation.navigate('ServiceCatalogScreens')}>

@@ -71,4 +71,31 @@ function recoverPassSchema() {
     );
 }
 
-export { authFormSchema, registerFormSchema, recoverPassSchema }
+function updateMyAccountFormSchema() {
+    return (
+        Yup.object().shape({
+            NAME: Yup.string()
+                .min(7, '*Campo obrigatório')
+                .max(50, ({ max }) => `Máximo de ${max} caracteres`)
+                .required('*Campo obrigatório'),
+            EMAIL: Yup.string()
+                .email('*Campo obrigatório')
+                .max(50, ({ max }) => `Máximo de ${max} caracteres`)
+                .required('*Campo obrigatório'),
+            PHONE: Yup.string()
+                .matches(validation.phone, "*Campo obrigatório")
+                .min(14, "*Campo obrigatório")
+                .max(15, '*Campo obrigatório')
+                .required('*Campo obrigatório'),
+            PASSWORD: Yup.string()
+                .min(8, ({ min }) => `Mínimo de ${min} caracteres`)
+                .max(20, ({ max }) => `No máximo ${max} caracteres`)
+                .required('*Campo obrigatório'),
+            CHECKPASS: Yup.string()
+                .oneOf([Yup.ref('PASSWORD'), null], '*As senhas devem ser iguais')
+                .required('*Campo obrigatório')
+        })
+    );
+}
+
+export { authFormSchema, registerFormSchema, recoverPassSchema, updateMyAccountFormSchema }

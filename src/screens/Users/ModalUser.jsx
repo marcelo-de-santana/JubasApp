@@ -4,7 +4,7 @@ import { global, modal, placeHolderColorTextInput } from "../../components/style
 import env from "../../../env.json";
 import mask from "../../utils/mask";
 
-export default function ModalUser({ modalParams, setModalParams }) {
+export default function ModalUser({ modalParams, setModalParams, refreshPage }) {
     const { visible, data } = modalParams;
 
     function closeModal() {
@@ -51,15 +51,39 @@ export default function ModalUser({ modalParams, setModalParams }) {
                 },
                 body: JSON.stringify(modalParams.data)
             })
-            const json = response.json()
+            const json = await response.json()
             Alert.alert('', json.message)
             closeModal()
+            refreshPage()
+        }
+    }
+
+    function removeUser() {
+        Alert.alert('', 'Deseja excluir o usuário?', [{
+            text: 'Cancelar',
+            style: "cancel"
+        }, {
+            text: 'Confirmar',
+            onPress: () => sendRemoveUser()
+        }])
+        async function sendRemoveUser() {
+            const response = await fetch(`${env.host}/user/delete`, {
+                method: 'DELETE',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+            const json = await response.json()
+            Alert.alert('',json.message)
+            closeModal()
+            refreshPage()
         }
     }
 
     return (
         <Modal visible={visible === true} transparent={true}>
-            <AcessLevelBox modalParams={modalParams} handleAcessLevelScreen={handleAcessLevelScreen} />
+            <AcessLevelBox modalParams={modalParams} handleAcessLevelScreen={handleAcessLevelScreen} refreshPage={refreshPage} />
             <View style={modal.container}>
                 <Pressable style={modal.pressable} onPress={() => closeModal()} />
                 <View style={modal.boxItems}>
@@ -123,13 +147,16 @@ export default function ModalUser({ modalParams, setModalParams }) {
                     <TouchableOpacity style={modal.whiteButton} onPress={() => handleAcessLevelScreen(true, data?.level)}>
                         <Text style={modal.blackTextButton}>Gerenciar nível de acesso</Text>
                     </TouchableOpacity>
+                    <TouchableOpacity style={modal.redButton} onPress={() => removeUser()}>
+                        <Text style={modal.textButton}>Excluir usuário</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </Modal>
     );
 }
 
-function AcessLevelBox({ modalParams, handleAcessLevelScreen }) {
+function AcessLevelBox({ modalParams, handleAcessLevelScreen, refreshPage }) {
     const [systemLevelData, setSystemLevelData] = useState([]);
     const { user_id } = modalParams?.data;
     const { visible, userLevel } = modalParams.accessLevelParams ?? '';
@@ -163,6 +190,7 @@ function AcessLevelBox({ modalParams, handleAcessLevelScreen }) {
             const json = await response.json()
             Alert.alert('', json.message)
             handleAcessLevelScreen(false)
+            refreshPage()
         }
 
     }

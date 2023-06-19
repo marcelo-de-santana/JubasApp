@@ -6,7 +6,7 @@ import TextAlert from "../components/TextAlert";
 import mask from "../utils/mask";
 import env from "../../env.json";
 
-export default function MyAccount({ navigation }) {
+export default function SingUp({ navigation }) {
     const { handleChange, handleSubmit, values, errors } = useFormik({
         validationSchema: registerFormSchema,
         initialValues: {
@@ -53,7 +53,7 @@ export default function MyAccount({ navigation }) {
                         placeholder="000.000.000-00"
                         placeholderTextColor="#161c2660"
                         maxLength={14}
-                        value={mask.cpf(values.cpf)}
+                        value={values.cpf}
                         onChangeText={text => handleTextInput('cpf', mask.cpf(text))}
                     />
                     {errors.cpf && <TextAlert error={errors.cpf} />}
@@ -88,7 +88,7 @@ export default function MyAccount({ navigation }) {
                         placeholder="01/01/2001"
                         placeholderTextColor="#161c2660"
                         maxLength={10}
-                        value={mask.date(values.birthday)}
+                        value={values.birthday}
                         onChangeText={text => handleTextInput('birthday', mask.date(text))}
                     />
                     {errors.birthday && <TextAlert error={errors.birthday} />}
@@ -100,8 +100,8 @@ export default function MyAccount({ navigation }) {
                         placeholder="(61)99999-9999"
                         placeholderTextColor="#161c2660"
                         maxLength={14}
+                        value={values.phoneNumber}
                         onChangeText={text => handleTextInput('phoneNumber', mask.phone(text))}
-                        value={mask.phone(values.phoneNumber)}
                     />
                     {errors.phoneNumber && <TextAlert error={errors.phoneNumber} />}
 

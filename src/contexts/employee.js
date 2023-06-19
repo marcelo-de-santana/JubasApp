@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import env from "../../env.json";
-import d from "../services/api/barber.json";
 
 const EmployeeContext = createContext({})
 

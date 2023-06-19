@@ -11,7 +11,7 @@ const email = /^(\d)/;
 const name = /^(\d)/;
 
 //REGEX PARA NÚMERO DE TELEFONE
-const phone = /^\((\d{2})\)(\d{4,5})-(\d{4})$/;
+const phone = /^\(\d{2}\)\d{4,5}-\d{4}$/;
 
 //REGEX PARA 24 HORAS
 const time = /^([01]\d|2[0-3]):([0-5]\d)$/;

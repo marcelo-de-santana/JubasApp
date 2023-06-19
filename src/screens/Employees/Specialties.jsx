@@ -3,7 +3,6 @@ import { global } from "../../components/styles/global";
 import { useEffect, useState } from "react";
 import LoadScreen from "../../components/LoadingScreen";
 import env from "../../../env.json"
-import d from "../../services/api/barberServices.json"
 import { useEmployee } from "../../contexts/employee";
 
 //TELA RESPONSÁVEL POR LISTAR AS ESPECIALIDADES QUE O BARBEIRO ATENDE
