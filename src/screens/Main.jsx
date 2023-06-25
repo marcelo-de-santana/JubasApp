@@ -1,6 +1,6 @@
-import { useAuth } from "../contexts/auth";
+import { useAuth } from "@contexts/auth";
 import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { global } from "../components/styles/global";
+import { global } from "@components/styles/global";
 
 export default function Main({ navigation }) {
     const { user } = useAuth();
