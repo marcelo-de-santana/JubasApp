@@ -36,11 +36,23 @@ npm run ios
 ### Screen Prototypes
 The latest updates are available on [Figma](https://www.figma.com/file/5ilvDi7rBbEM8hG74pETXk/Barber-App).
 
- Screen | **Android** | Screen | **Android**
-:--- | :---: | :---: | :---:
-Login           | <img src="https://github.com/marcelo-de-santana/jubas-app-legacy/blob/master/src/documents/images/Login.png?raw=true" height="600"/> |Sing-up         | <img src="https://github.com/marcelo-de-santana/jubas-app-legacy/blob/master/src/documents/images/Sing-up.png?raw=true" height="600"/>
-Schedule        | <img src="https://github.com/marcelo-de-santana/jubas-app-legacy/blob/master/src/documents/images/Schedule.png?raw=true" height="600"/> |ServiceCatalog  | <img src="https://github.com/marcelo-de-santana/jubas-app-legacy/blob/master/src/documents/images/ServiceCatalog.png?raw=true" height="600"/>
-ServiceBook     | <img src="https://github.com/marcelo-de-santana/jubas-app-legacy/blob/master/src/documents/images/ServiceBook.png?raw=true" height="600"/>|EmployeeTimes   | <img src="https://github.com/marcelo-de-santana/jubas-app-legacy/blob/master/src/documents/images/EmployeeTimes.png?raw=true" height="600"/>
+
+<div display: flex; flex-wrap: wrap;">
+    <p align="center">Login</p>
+    <p align="center"><img src="https://github.com/marcelo-de-santana/jubas-app-legacy/blob/master/src/documents/images/Login.png?raw=true" width="300"/></p>
+    <p align="center">Sing-up</p>
+    <p align="center"><img src="https://github.com/marcelo-de-santana/jubas-app-legacy/blob/master/src/documents/images/Sing-up.png?raw=true" width="300"/></p>
+    <p align="center">Schedule</p>
+    <p align="center"><img src="https://github.com/marcelo-de-santana/jubas-app-legacy/blob/master/src/documents/images/Schedule.png?raw=true" width="300"/></p>
+    <p align="center">ServiceBook</p>
+    <p align="center"><img src="https://github.com/marcelo-de-santana/jubas-app-legacy/blob/master/src/documents/images/ServiceBook.png?raw=true" width="300"/></p>
+    <p align="center">ServiceCatalog</p>
+    <p align="center"><img src="https://github.com/marcelo-de-santana/jubas-app-legacy/blob/master/src/documents/images/ServiceCatalog.png?raw=true" width="300"/></p>
+    <p align="center">EmployeeTimes</p>
+    <p align="center"><img src="https://github.com/marcelo-de-santana/jubas-app-legacy/blob/master/src/documents/images/EmployeeTimes.png?raw=true" width="300"/></p>
+</div>
+
+
 
 ### About
 This project was completed as part of the coursework for the Information Systems Graduation program.
